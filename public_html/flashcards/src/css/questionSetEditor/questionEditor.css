@@ -1,0 +1,90 @@
+#leftSidebar{
+    width: 216px;
+    height: 90%;
+    float: left;
+}
+
+#rightContent{
+    width: 79%;
+    height: 88%;
+    float: left;
+}
+
+div.button {
+    text-align: center;
+    background-color: #6c91bf;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+div.button:hover{
+    background-color: #5A7EAA;
+}
+
+.sideBarBtn{
+    text-align: center;
+    margin: 0 10px 10px 10px;
+}
+
+.questSelBtn{
+    width: 23px;
+    margin: 0 10px 10px 0;
+    float: left;
+}
+
+.editorPage{
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: white;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.editorPageHeader {
+    border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-bottom: 2px solid #5A7EAA;
+    background: #6c91bf;
+    padding: 6px 0px 4px 9px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 1px;
+    margin: 0;
+}
+
+.editorPageContents{
+    width: 96%;
+    height: 89%;
+    padding: 2%;
+    font-size: 18px;
+}
+
+.editorPageQuestionText{
+}
+
+.editorPageQuestionText input{
+    width: 100%;
+}
+
+input{
+    font-size: 16px;
+}
+
+.editorPageMolSearch{
+    width: 50%;
+    float: left;
+}
+
+.editorPageAnswers{
+    width: 40%;
+    float: left;
+}

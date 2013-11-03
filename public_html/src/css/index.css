@@ -1,0 +1,20 @@
+.section {
+  height: 300px;
+  min-width: 100%;
+  overflow: hidden;   
+}
+
+.section h1{
+    color: white;
+    float: left;
+    z-index: 100000;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 4em;
+    position: relative;
+    margin-left: 15px;
+    top: -85px;
+}
+
+.navbar{
+    margin-bottom: 0px; 
+}

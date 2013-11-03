@@ -1,0 +1,39 @@
+
+.molNameLabel{
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.moleculeSearchWrapper{
+    width: 400px;
+    height: 450px;
+}
+
+.molNameWrapper{
+    width: 400px;
+    height: 62px;
+    margin: 0 auto;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.loadingMsg{
+    text-align: center;
+    opacity: 0;
+    position: relative;
+    top: -54%;
+    color: white;
+    float: left;
+    width: 100%;
+}
+
+.glmol_src{
+    display: none;
+}
+
+.glmol{
+    width: 100%;
+    height: 400px;
+    background-color: black;
+    margin: 0 auto;
+}
