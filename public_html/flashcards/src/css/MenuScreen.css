@@ -1,0 +1,96 @@
+#mainMenuUI {
+    background-color: #CCCCCC;
+    font-size: 22px;
+}
+
+h1.mainMenuTitle {
+    font-size: 55px;
+    margin: 0px;
+    margin-top: 34px;
+}
+
+div.topic {
+    height: 160px;
+    cursor: pointer;
+}
+
+div.topic.selected{
+	background-color: grey;
+}
+
+img.topicImage {
+    float: left;
+    margin: 15px;
+}
+
+div.topicDescription {
+    font-size: 15px;
+}
+
+#mainMenuLeft {
+    max-width: 634px;
+    min-width: 634px;
+    float: left;
+}
+
+#mainMenuRight {
+    float: right;
+    text-align: center;
+    padding-top: 70px;
+}
+
+#topicList {
+    max-height: 400px;
+    min-height: 400px;
+    height: inherit;
+    overflow: auto;
+    margin: 25px;
+}
+
+/* High Scores */
+
+#highScores{
+    white-space: nowrap;
+    height: 200px;
+    width: 366px;
+    font-size: 16px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+#names {
+    text-align: left;
+    float: left;
+    width: 200px;
+}
+
+#scores {
+    text-align: right;
+    float: right;
+    width: 100px;
+    padding-right: 15px;
+}
+
+/*
+    Start Button
+*/
+
+.button.greenButton {
+    background-color: #6BC026;
+    width: 200px;
+    margin: auto;
+}
+
+.button.greenButton:hover {
+    background-color: #53951D;
+}
+
+/*
+    Tutorial Button
+*/
+
+#tutorialButton {
+    font-size: 26px;
+    width: 170px;
+    margin: 25px auto 0;
+}

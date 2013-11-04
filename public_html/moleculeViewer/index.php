@@ -1,5 +1,5 @@
 <?php
-    require_once("/var/www/html/src/php/template.php");
+    require_once("/var/www/ExSciTecH/public_html/src/php/template.php");
 ?>
 
 

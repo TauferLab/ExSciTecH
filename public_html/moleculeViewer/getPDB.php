@@ -1,11 +1,9 @@
 <?php
 
     /* Config */
-    require_once("/var/www/html/src/php/config.inc");
+    require_once("/var/www/ExSciTecH/public_html/src/php/config.inc");
     
-    $mysqli_gamedb = new mysqli($MYSQL_SERVER,$MYSQL_USER,$MYSQL_PASSWORD,$MYSQL_DB);
-    
-    
+    $mysqli_gamedb = new mysqli($MYSQL_SERVER,$MYSQL_USER,$MYSQL_PASSWORD,$MYSQL_DB);   
 	
 	function main(){
 	    $response_object = array();
