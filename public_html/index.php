@@ -21,8 +21,7 @@
         <link href="/src/css/index.css" rel="stylesheet" media="screen">
         
         <script type="text/javascript" src="./src/js/cookies.js"></script>
-        <script type="text/javascript" src="./src/js/md5-min.js" language="javascript"></script>
-        <script type="text/javascript" src="./src/js/LoginForm.js" language="javascript"></script>        
+        <script type="text/javascript" src="./src/js/md5-min.js" language="javascript"></script>        
     </head>
     
     <body>

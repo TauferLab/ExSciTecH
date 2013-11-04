@@ -47,6 +47,11 @@
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- Login form -->
+        <script type="text/javascript" src="/src/js/md5-min.js" language="javascript"></script>
+        <script type="text/javascript" src="/src/js/cookies.js" language="javascript"></script>
+        <script type="text/javascript" src="/src/js/LoginForm.js" language="javascript"></script>
         ';
     }
     

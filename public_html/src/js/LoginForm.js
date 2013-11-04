@@ -1,5 +1,5 @@
 LoginRegForm = function(){
-    this.loginURL = 'http://exscitech.org/flashcards/request_handler.php';
+    this.loginURL = 'http://exscitech.org/request_handler.php';
     
     var username = get_cookie('username');
 	var auth = get_cookie('auth');
@@ -100,7 +100,7 @@ LoginRegForm.prototype.writeUserInfoNav = function( username ){
                 '<li><a href="#">My Account</a></li>'+
                 '<li><a id="logoutBtn">Logout</a></li>'+
                 '</ul>'+
-                '</li>'+
+                '</li>';
     
     $('#rightNavbar').html(HTML);
     
@@ -115,3 +115,5 @@ LoginRegForm.prototype.logout = function(){
 	delete_cookie('username','/');
 	location.reload();
 }
+
+new LoginRegForm();

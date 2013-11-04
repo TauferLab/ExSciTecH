@@ -26,7 +26,7 @@
     LoginScreen.prototype.onResume = function( ) {
         enableButtons(this);
         var username = CookieManager.getCookie('username');
-        var auth = CookieManager.getCookie('authenticator');
+        var auth = CookieManager.getCookie('auth');
         if(username !== null && auth !== null) {
             UserData.username = username;
             UserData.auth = auth;
