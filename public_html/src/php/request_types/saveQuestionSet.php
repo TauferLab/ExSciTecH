@@ -57,7 +57,6 @@
             if($mysqli_gamedb->query($query)){
                 foreach($request_object["questions"] as $question){
                     if( ! updateQuestion($question, $ID) ){
-                        echo "lol";
                         return false;
                     }
                 }
@@ -69,7 +68,6 @@
             }
 	    }
 	    else{
-    	    echo "lol2";
     	    return false;
 	    } 
 	}
@@ -90,8 +88,8 @@
             $query = "UPDATE `questions` SET
                         `molID`=$molID,
                         `text`=\"$text\",
-                        `answers`=\"$answerChoices\",
-                        `answer`= 1
+                        `answers`=\"".$answerChoices["answerChoices"]."\",
+                        `answer`= ".$answerChoices["answer"]."
                     WHERE `question_id` = $questionID AND `game_id`= $questionSetID ";
                     
             return $mysqli_gamedb->query($query);
@@ -191,8 +189,8 @@
     	            $questionSetID,
     	            $molID,
     	            \"$text\",
-    	            \"$answerChoices\",
-    	            1
+    	            \"".$answerChoices["answerChoices"]."\",
+    	            ".$answerChoices["answer"]."
     	       )";
     	       
     	 if($mysqli_gamedb->query($query) ){
@@ -270,11 +268,26 @@
 	function buildAnswerChoicesString($answerArray){
 	    global $mysqli_gamedb;
 	    
-        $answerChoices = "";
+	    $retVal = array();
+        $retVal["answerChoices"] = "";
         
+        $correctAnsString = $answerArray[0];
+        $correctAns = -1;
+        
+        shuffle($answerArray);
+        
+        $i = 1;
         foreach($answerArray as $choice){
-            $answerChoices .= $mysqli_gamedb->escape_string($choice)."|";
+            if($choice == $correctAnsString){
+                $correctAns = $i;
+            }
+            $retVal["answerChoices"] .= $mysqli_gamedb->escape_string($choice)."|";
+            $i++;
         }
-        return rtrim($answerChoices,'|');
+        $retVal["answerChoices"] = rtrim($retVal["answerChoices"],'|');
+        
+        $retVal["answer"] = $correctAns;
+        
+        return $retVal;
 	}
 ?>

@@ -100,6 +100,11 @@
     	$retVal["molName"] = $molName;
     	$retVal["answerChoices"] = explode("|", $answerChoices);
     	
+    	$temp = $retVal["answerChoices"][0];
+    	$retVal["answerChoices"][0] = $retVal["answerChoices"][$answer-1];
+    	$retVal["answerChoices"][$answer-1] = $temp;
+    	
+    	
     	return $retVal;
 	}
 ?>
