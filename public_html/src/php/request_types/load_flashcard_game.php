@@ -9,15 +9,17 @@
 		global $mysqli_gamedb;
 		$response_object = array();
 
+		//Create a new Session ID
 		$response_object['game_session_id'] = uniqid();
 		$response_object['questions'] = Array();
-		//$response_object['question_id'] = Array();
 
 		$user = get_user($request_object["authenticator"]);
 		$user_id = $user->id;
 		
+		//Store new session info in database
 		store_game_session($user_id,$response_object['game_session_id'],$request_object['game_id']);
 		
+		// Pull game questions from DB
 		$result = $mysqli_gamedb->query("Select * from questions where game_id=".$mysqli_gamedb->real_escape_string($request_object["game_id"]).";");
 	
 		$temp_array = array();
@@ -26,14 +28,14 @@
 			array_push($temp_array,$row);
 		}
 	
+		//Randomize question order
 		shuffle($temp_array);
 	
 		$id=1;
 		
 		foreach($temp_array as $row){
 			$answers = explode("|", $row["answers"]);
-			array_push($response_object['questions'], build_question($id,"Question Text",$answers));
-			//array_push($response_object['question_id'], $row["answer"]);
+			array_push($response_object['questions'], build_question($id,$row["text"],$answers));
 			store_mapping($response_object['game_session_id'],$row["question_id"],$id++);
 		}
 

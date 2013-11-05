@@ -89,12 +89,6 @@
             	$row["answer"]
             );
     	}
-    	/*
-    	$retVal[] = buildLoadQuestion(1, "test test test", "testosterone", "testos|terone");
-    	$retVal[] = buildLoadQuestion(2, "test test test", "testosterone", "testos|terone");
-    	$retVal[] = buildLoadQuestion(3, "test test test", "testosterone", "testos|terone");
-    	$retVal[] = buildLoadQuestion(4, "test test test", "testosterone", "testos|terone");
-    	*/
     	return $retVal;
 	}
 
