@@ -207,7 +207,7 @@ QuestionSetEditor.prototype.saveCallback = function(data){
     
     this.ID = result.ID;
     
-    window.history.pushState("object or string", "Title", "./questionSetEditor.php?ID="+this.ID );
+    window.history.pushState("object or string", "Title", "./index.php?ID="+this.ID );
 }
 
 QuestionSetEditor.prototype.toObj = function (){
