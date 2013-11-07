@@ -17,7 +17,7 @@
         $output = $output["autocp_array"];
     
         foreach($output as $molName){
-            $URL = "http://samschlachter.com/moleculeViewer/getPDB.php?mName=".rawurlencode($molName);
+            $URL = "/moleculeViewer/getPDB.php?mName=".rawurlencode($molName);
             
             if( !file_get_contents($URL) ){
                 die("File didn't download?");
