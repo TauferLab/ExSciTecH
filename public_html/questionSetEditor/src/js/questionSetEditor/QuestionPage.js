@@ -16,7 +16,7 @@ QuestionPage = function ( preload ) {
 }
 
 QuestionPage.prototype.generateHTML = function(){
-    var HTML = '<button type="button" class="btn btn-primary" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
+    var HTML = '<button type="button" class="btn btn-primary questionBtn" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
     
     $('#questBtnWrapper').append(HTML);
     var height = 40 *11;// * Math.ceil(this.ID/4);
@@ -41,7 +41,7 @@ QuestionPage.prototype.generateHTML = function(){
     HTML += '       <div class="col-md-6"><div class="editorPageMolSearch"> </div></div>';
     HTML += "       <div class='col-md-6'>"+
             "       <div class='editorPageAnswers'>"+
-            "           <h4 style='text-align:center'>Answer Choices (Order will be random)</h4>"+
+            "           <h4 style='text-align:center'>Answer Choices</h4> <p style='text-align:center'>(Order will be randomized)</p>"+
             "           <table class='editorPageAnswersTable' id='epat_" + this.ID +"'>"+
             "               <tr>"+
             "                   <td>Correct Answer:</td>"+

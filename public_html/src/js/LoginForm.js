@@ -89,6 +89,10 @@ LoginRegForm.prototype.submitCallback = function( data ){
 LoginRegForm.prototype.handleLogin = function(username,auth){
    	set_cookie('username', username, 1, '/');
 	set_cookie('auth', auth, 1, '/');
+	
+	if(location.pathname == "/forum.php"){
+    	//location.reload();
+	}
     
     this.writeUserInfoNav(username);
 }
@@ -113,6 +117,7 @@ LoginRegForm.prototype.writeUserInfoNav = function( username ){
 LoginRegForm.prototype.logout = function(){
     delete_cookie('auth','/');
 	delete_cookie('username','/');
+	delete_cookie('Vanilla','/',".exscitech.org");
 	location.reload();
 }
 

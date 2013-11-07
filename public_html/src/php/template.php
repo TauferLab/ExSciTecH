@@ -41,7 +41,6 @@
         
         </div><!--container-->
         
-        
         <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -88,6 +87,7 @@
             <li'.( ($basename=="jobsubmission")?' class="active"':'' ).'><a href="/jobSubmission">Job Submission</a></li>
             <li'.( ($basename=="flashcards")?' class="active"':'' ).'><a href="/flashcards">Flashcards</a></li>
             <li'.( ($basename=="moleculeviewer")?' class="active"':'' ).'><a href="/moleculeViewer">Molecule Viewer</a></li>
+            <li'.( ($basename=="forum")?' class="active"':'' ).'><a href="/forum.php">Forum</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">

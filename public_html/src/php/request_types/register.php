@@ -88,9 +88,9 @@
     	}
 		
 		
-		$response_object["success"] = "true";
+		$response_object["success"] = true;
 		$response_object["username"] = $user->name;
-		$response_object["authenticator"] = $user->authenticator;
+		$response_object["auth"] = $user->authenticator;
 		
 		return $response_object;
 	}

@@ -93,13 +93,13 @@ QuestionSetEditor.prototype.generateHTML = function ( parentSelector ){
     HTML += '<div class="row">';
     HTML += '    <div class="col-md-3" id="leftSidebar">';
     HTML += '           <div class="well ">';
-    HTML += '                    <button type="button" class="btn btn-primary" id="genOptBtn">General Settings</button>';
-    
+    HTML += '                <button type="button" class="btn btn-primary settingBtn" id="genOptBtn">General Settings</button>';
+    HTML += '                <button type="button" class="btn btn-primary settingBtn" id="SaveBtn">Save</button>';
+        
     HTML += '                <h4 style="text-align:center;">Questions</h4>';
     HTML += '                <div id="questBtnWrapper"></div>';
 
-    HTML += '                <button type="button" class="btn btn-primary" id="addQuestBtn">Add Another Question... </button>';
-    HTML += '                <button type="button" class="btn btn-primary" id="SaveBtn">Save</button>';
+    HTML += '                <button type="button" class="btn btn-primary settingBtn" id="addQuestBtn">Add Another Question... </button>';
     
     HTML += '            </div>';
     HTML += '    </div>';

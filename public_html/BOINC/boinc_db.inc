@@ -17,7 +17,6 @@
 // along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
 
 $d = dirname(__FILE__);
-//require_once(__DIR__."/db_conn.inc");
 //require_once(__DIR__."/util_basic.inc");
 
 class BoincDb extends DbConn {

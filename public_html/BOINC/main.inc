@@ -1,6 +1,6 @@
 
 <?php
-
+require_once(__DIR__."/../src/php/config.inc");
 require_once(__DIR__."/db_conn.inc");
 require_once(__DIR__."/boinc_db.inc");
 require_once(__DIR__."/util_basic.inc");

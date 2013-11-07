@@ -1,0 +1,11 @@
+#leftSidebar button{
+    margin: 3.5px 3.5px;
+}
+
+#leftSidebar .settingBtn{
+    width: 100%;
+}
+
+#leftSidebar .questionBtn{
+    width: 22%;
+}
