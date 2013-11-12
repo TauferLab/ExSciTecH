@@ -141,7 +141,7 @@
         'ni': 1.63,
         'default': 1.5
     };
-
+    
     var nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
 
     function trim(text) {
@@ -156,7 +156,7 @@
     function hash(s, e) {
         return 's' + Math.min(s, e) + 'e' + Math.max(s, e);
     }
-
+    
     //note proteins cannot be rendered with sdf files
     function parseSDF(str) {
 
@@ -174,10 +174,10 @@
         var bondCount = parseInt(lines[3].substr(3, 3));
         if(lines.length < 4 + atomCount + bondCount)
             return;
-
+        
         //atoms start on line 4
         var offset = 4;
-
+        
         //parse atoms
         for(var i = 0; i < atomCount; i++) {
             var line = lines[offset];
@@ -190,7 +190,7 @@
             atoms.push([x, y, z, atomColors[e],
                 atomRadii[e], capitalize(e)]);
         }
-
+        
         //parse bonds
         for(i = 0; i < bondCount; i++) {
             var line = lines[offset];
@@ -245,20 +245,16 @@
         var lines = text.split('\n');
 
         for(var i = 0, il = lines.length; i < il; ++i) {
-
             if(lines[i].substr(0, 4) === 'ATOM' || lines[i].substr(0, 6) === 'HETATM') {
-
                 //grab position
                 var x = parseFloat(lines[i].substr(30, 7));
                 var y = parseFloat(lines[i].substr(38, 7));
                 var z = parseFloat(lines[i].substr(46, 7));
 
                 //grab element type
-                var e = trim(lines[i].substr(76, 2)).toLowerCase(); 
-
+                var e = trim(lines[i].substr(76, 2)).toLowerCase();
                 if(e === '')
-                    e = trim(lines[i].substr(12, 2))
-                            .toLowerCase();
+                    e = trim(lines[i].substr(12, 2)).toLowerCase();
 
                 //add the element
                 atoms.push([x, y, z, atomColors[e],
@@ -278,14 +274,64 @@
                 parseBond(lines[i], satom, 16, 5);
                 parseBond(lines[i], satom, 21, 5);
                 parseBond(lines[i], satom, 26, 5);
-            }
-
+            }else if (lines[i].substr(0, 5) === 'SHEET') {
+                var startChain = line.substr(21, 1);
+                var startResi = parseInt(line.substr(22, 4));
+                var endChain = line.substr(32, 1);
+                var endResi = parseInt(line.substr(33, 4));
+                protein.sheet.push([startChain, startResi, endChain, endResi]);
+            }else if (ines[i].substr(0, 5) === 'HELIX ') {
+                var startChain = line.substr(19, 1);
+                var startResi = parseInt(line.substr(21, 4));
+                var endChain = line.substr(31, 1);
+                var endResi = parseInt(line.substr(33, 4));
+                protein.helix.push([startChain, startResi, endChain, endResi]);
+            } else if (ines[i].substr(0, 6) === 'CRYST1') {
+                protein.a = parseFloat(line.substr(6, 9));
+                protein.b = parseFloat(line.substr(15, 9));
+                protein.c = parseFloat(line.substr(24, 9));
+                protein.alpha = parseFloat(line.substr(33, 7));
+                protein.beta = parseFloat(line.substr(40, 7));
+                protein.gamma = parseFloat(line.substr(47, 7));
+                protein.spacegroup = line.substr(55, 11);
+                this.defineCell();
+             } else if (ines[i].substr(0, 6) === 'REMARK') {
+                var type = parseInt(line.substr(7, 3));
+                if (type === 290 && line.substr(13, 5) === 'SMTRY') {
+                   var n = parseInt(line[18]) - 1;
+                   var m = parseInt(line.substr(21, 2));
+                   if (protein.symMat[m] === undefined) protein.symMat[m] = new THREE.Matrix4().identity();
+                   protein.symMat[m].elements[n] = parseFloat(line.substr(24, 9));
+                   protein.symMat[m].elements[n + 4] = parseFloat(line.substr(34, 9));
+                   protein.symMat[m].elements[n + 8] = parseFloat(line.substr(44, 9));
+                   protein.symMat[m].elements[n + 12] = parseFloat(line.substr(54, 10));
+                } else if (type === 350 && line.substr(13, 5) === 'BIOMT') {
+                   var n = parseInt(line[18]) - 1;
+                   var m = parseInt(line.substr(21, 2));
+                   if (protein.biomtMatrices[m] === undefined) protein.biomtMatrices[m] = new THREE.Matrix4().identity();
+                   protein.biomtMatrices[m].elements[n] = parseFloat(line.substr(24, 9));
+                   protein.biomtMatrices[m].elements[n + 4] = parseFloat(line.substr(34, 9));
+                   protein.biomtMatrices[m].elements[n + 8] = parseFloat(line.substr(44, 9));
+                   protein.biomtMatrices[m].elements[n + 12] = parseFloat(line.substr(54, 10));
+                } else if (type === 350 && line.substr(11, 11) === 'BIOMOLECULE') {
+                    protein.biomtMatrices = []; protein.biomtChains = '';
+                } else if (type === 350 && line.substr(34, 6) === 'CHAINS') {
+                    protein.biomtChains += line.substr(41, 40);
+                }
+             } else if (ines[i].substr(0, 6) === 'HEADER') {
+                protein.pdbID = line.substr(62, 4);
+             } else if (ines[i].substr(0, 5) === 'TITLE ') {
+                if (protein.title === undefined) protein.title = "";
+                   protein.title += line.substr(10, 70) + "\n";
+             }
         }
+        
 
         return {
             'ok': true,
             'atoms': atoms,
             'bonds': bonds,
+            'proteins' : protein,
             'histogram': histogram
         };
     }
@@ -306,7 +352,6 @@
         //return MoleculeGeometryBuilder.createModel (pdbJson);
 
         var pdbJson = parseSDF(data);
-        
         try {
             return createModel(pdbJson, atomScale, bondThickness, atomRenderType, bondRenderType);
         } catch ( err ) {
@@ -364,70 +409,120 @@
         }
 
         function createBondsAsLines(bonds, lineWidth, distanceApart, model) {
-            
-            function createCylinder(point1, point2, color1, color2) {
-                var direction = new THREE.Vector3().subVectors(point2, point1);
-                var arrow = new THREE.ArrowHelper(direction.clone().normalize(), point1);
-                var rotation = new THREE.Vector3().setEulerFromQuaternion(arrow.quaternion);
-
-                var edgeGeometry = new THREE.CylinderGeometry( 0.07, 0.07, direction.length(), 10, 4 );
-                edgeGeometry.colors.push(color1);
-                edgeGeometry.colors.push(color2);
-
-                var material = new THREE.MeshLambertMaterial();
-                material.vertexColors = true;
-
-                var cylinder = new THREE.Mesh(edgeGeometry, material);
-                cylinder.rotation = rotation.clone();
-                cylinder.position = new THREE.Vector3().addVectors(point1, direction.multiplyScalar(0.5));
-
-                return cylinder;
-            }
-
             var bondGeometry = new THREE.Geometry( );
             for(var i = 0; i < bonds.length; i++) {
                 var bond = bonds[ i ];
 
                 var start = bond[ 0 ];
                 var end = bond[ 1 ];
-                var num = bond[ 2 ];
-
+                var num = bond[2];
 
                 var vertex1 = bondInfo.vertices[ start ];
                 var vertex2 = bondInfo.vertices[ end ];
-
+                
                 var color1 = bondInfo.colors[ start ];
-                var color2 = bondInfo.colors[ end ];
-
-                var distVec = new THREE.Vector3(distanceApart, distanceApart, distanceApart);
+                var color2 = bondInfo.colors[ end ];               
+                
+                
                 switch(num) {
                     case 3:
-                        model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
-                                                 color1.clone(), color2.clone())
-                                 );
-                        model.add(createCylinder(vertex1.clone(), vertex2.clone(), color1.clone(), color2.clone()));
-                        model.add(createCylinder(vertex1.clone().add(distVec), vertex2.clone().add(distVec), 
-                                                 color1.clone(), color2.clone())
-                                 );
+                        bondGeometry.vertices.push(vertex1.clone());//sub
+                        bondGeometry.vertices.push(vertex2.clone());//sub
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+                        bondGeometry.vertices.push(vertex1.clone());//add
+                        bondGeometry.vertices.push(vertex2.clone());//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
                         break;
                     case 2:
-                        model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
-                                                 color1.clone(), color2.clone())
-                                 );
-                        model.add(createCylinder(vertex1.clone().add(distVec), vertex2.clone().add(distVec), 
-                                                 color1.clone(), color2.clone())
-                                 );
+                        bondGeometry.vertices.push(vertex1.clone());//sub
+                        bondGeometry.vertices.push(vertex2.clone());//sub
+                        bondGeometry.vertices.push(vertex1.clone());//add
+                        bondGeometry.vertices.push(vertex2.clone());//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
                         break;
                     default:
-                        model.add(createCylinder(vertex1.clone(), vertex2.clone(), color1.clone(), color2.clone()));
-                    }
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                }
 
+                
+
+            }
+
+            //create the lines and add them to the model
+            var lineMaterial = new THREE.LineBasicMaterial({
+                linewidth: lineWidth
+            });
+            lineMaterial.vertexColors = true;
+
+            var lineMesh = new THREE.Line(bondGeometry, lineMaterial);
+            lineMesh.type = THREE.LinePieces;
+
+            model.add(lineMesh);
+        }
+        
+        function createProteins(proteins, group) {
+            function defineCell(protein) {
+                
+                if (protein.a === undefined) return;
+
+                    protein.ax = protein.a;
+                    protein.ay = 0;
+                    protein.az = 0;
+                    protein.bx = p.b * Math.cos(Math.PI / 180.0 * protein.gamma);
+                    protein.by = p.b * Math.sin(Math.PI / 180.0 * protein.gamma);
+                    protein.bz = 0;
+                    protein.cx = p.c * Math.cos(Math.PI / 180.0 * protein.beta);
+                    protein.cy = protein.c * (Math.cos(Math.PI / 180.0 * protein.alpha) - 
+                               Math.cos(Math.PI / 180.0 * protein.gamma) 
+                             * Math.cos(Math.PI / 180.0 * protein.beta)
+                             / Math.sin(Math.PI / 180.0 * protein.gamma));
+                    protein.cz = Math.sqrt(protein.c * protein.c * Math.sin(Math.PI / 180.0 * protein.beta)
+                               * Math.sin(Math.PI / 180.0 * protein.beta) - protein.cy * protein.cy);
+            }
+            
+            function drawUnitCell() {
+                if (protein.a === undefined) return;
+
+                var vertices = [[0, 0, 0], 
+                    [protein.ax, protein.ay, protein.az], 
+                    [protein.bx, protein.by, protein.bz], 
+                    [protein.ax + protein.bx, protein.ay + protein.by, protein.az + protein.bz],
+                    [protein.cx, protein.cy, protein.cz], 
+                    [protein.cx + protein.ax, protein.cy + protein.ay,  protein.cz + protein.az], 
+                    [protein.cx + protein.bx, protein.cy + protein.by, protein.cz + protein.bz], 
+                    [protein.cx + protein.ax + protein.bx, protein.cy + protein.ay + protein.by, protein.cz + protein.az + protein.bz]];
+                var edges = [0, 1, 0, 2, 1, 3, 2, 3, 4, 5, 4, 6, 5, 7, 6, 7, 0, 4, 1, 5, 2, 6, 3, 7];    
+
+                var geo = new THREE.Geometry();
+                for (var i = 0; i < edges.length; i++) {
+                   geo.vertices.push(new TV3(vertices[edges[i]][0], vertices[edges[i]][1], vertices[edges[i]][2]));
+                }
+               var lineMaterial = new THREE.LineBasicMaterial({linewidth: 1, color: 0xcccccc});
+               var line = new THREE.Line(geo, lineMaterial);
+               line.type = THREE.LinePieces;
+               group.add(line);
             }
         }
 
         var model = new THREE.Object3D( );
         var atoms = json.atoms;
         var bonds = json.bonds;
+        var proteins = json.proteins;
         var bondInfo = undefined;
 
         switch(atomRenderType) {
@@ -440,10 +535,10 @@
 
         switch(bondRenderType) {
             case MoleculeGeometryBuilder.BONDS_LINES:
-                createBondsAsLines(bonds, bondThickness,.15, model);
+                createBondsAsLines(bonds, bondThickness, model);
                 break;
             default:
-                createBondsAsLines(bonds, bondThickness,.15, model);
+                createBondsAsLines(bonds, bondThickness, model);
         }
 
         return model;

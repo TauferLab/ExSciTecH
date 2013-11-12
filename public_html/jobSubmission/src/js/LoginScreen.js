@@ -38,7 +38,7 @@
     };
 
     LoginScreen.prototype.nextScreen = function( ) {
-        this.$element.trigger(new ScreenChangeEvent('menu'));
+        this.$element.trigger(new ScreenChangeEvent('main'));
     };
 
     LoginScreen.prototype.createDivShow = function( ) {
@@ -86,7 +86,7 @@
             .find('.button[data-logic=\'login\']')
             .on('click', function() {
                 $('#loginButton').addClass('hide');
-                FCCommunicationManager.login(
+                JSCommunicationManager.login(
                     $('#emailLogin').val(),
                     $('#passLogin').val(),
                     loginScreen.loginComplete.bind(loginScreen)
@@ -108,7 +108,7 @@
 
                 if($('#passRegister').val() == $('#passRepRegister').val()) {
                     $('#registerButton').addClass('hide');
-                    FCCommunicationManager.register(
+                    JSCommunicationManager.register(
                         $('#emailRegister').val(),
                         $('#passRegister').val(),
                         $('#usernameRegister').val(),
@@ -121,7 +121,7 @@
 
         /* TODO - Move these somewhere else? Both are buttons that can be pushed at any time. */
         $('#pageHeader').find('[data-logic=\'logout\']').on('click', function() {
-            if(confirm('Logout from Molecule Flashcards?')) {
+            if(confirm('Logout from Job Submission?')) {
                 CookieManager.deleteCookie('username', '/');
                 CookieManager.deleteCookie('auth', '/');
                 window.location.href = '';

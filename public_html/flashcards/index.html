@@ -54,6 +54,28 @@
                     .mouseup( MouseManager.onMouseUp )
                     .mousemove( MouseManager.onMouseMove );
 
+                /* Temporary touch events for demo */
+                $('#container').on('touchstart',function(e){
+                    e.button = MouseManager.LEFT_STD_BUTTON;
+                    e.screenX = e.originalEvent.touches[0].screenX;
+                    e.screenY = e.originalEvent.touches[0].screenY;
+                    e.preventDefault();
+                    MouseManager.onMouseDown(e);
+                });
+                $('#container').on('touchmove',function(e){
+                    e.screenX = e.originalEvent.touches[0].screenX;
+                    e.screenY = e.originalEvent.touches[0].screenY;
+                    e.preventDefault();
+                    MouseManager.onMouseMove(e);
+                });
+                $('#container').on('touchend',function(e){
+                    e.button = MouseManager.LEFT_STD_BUTTON;
+                    e.screenX = 400;//garbage
+                    e.screenY = 400;//garbage
+                    e.preventDefault();
+                    MouseManager.onMouseUp(e);
+                });
+
                 /* Anti-Bot-Spam Measure */
                 $('#contact').text('saschlac' + '@udel' + '.edu');
                 /* Initialize */
@@ -84,14 +106,14 @@
                 <!-- canvas goes here -->
 
                 <div id = 'pageHeader'>
-                    <a href = 'http://exscitech.org/'>
+                    <a href = 'http://gcl.cis.udel.edu/mailman/listinfo/exscitech' target = '_blank'>
                         <img class = 'headerLogo' id = 'exscitechLogo' src = 'res/media/exscitech_logo.png'>
                     </a>
                     <a href = 'http://docking.cis.udel.edu/' target = '_blank'>
                         <img class = 'headerLogo' id = 'dockingLogo' src = 'res/media/dh_logo.png'>
                     </a>
                     <div id = 'exscitechLinks'>
-                        <a class = 'headerLinks' href = 'http://exscitech.gcl.cis.udel.edu/job_submit.php'> Job Submission </a> | 
+                        <a class = 'headerLinks' href = '../jobSubmission'> Job Submission </a> | 
                         <a class = 'headerLinks' href = ''> Molecule Flashcards </a> | 
                         <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/about/project/staff.php'> Contributors </a> | 
                         <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/'> Docking@Home </a>
