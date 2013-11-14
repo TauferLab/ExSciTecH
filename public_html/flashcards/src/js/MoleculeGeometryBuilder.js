@@ -399,9 +399,10 @@
                 var color1 = bondInfo.colors[ start ];
                 var color2 = bondInfo.colors[ end ];
 
-                var distVec = new THREE.Vector3(distanceApart, distanceApart, distanceApart);
+                
                 switch(num) {
                     case 3:
+                        var distVec = new THREE.Vector3(distanceApart, distanceApart, distanceApart);
                         model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
                                                  color1.clone(), color2.clone())
                                  );
@@ -411,6 +412,7 @@
                                  );
                         break;
                     case 2:
+                        var distVec = new THREE.Vector3(distanceApart/2, distanceApart/2, distanceApart/2);
                         model.add(createCylinder(vertex1.clone().sub(distVec), vertex2.clone().sub(distVec), 
                                                  color1.clone(), color2.clone())
                                  );
@@ -432,10 +434,10 @@
 
         switch(atomRenderType) {
             case MoleculeGeometryBuilder.ATOMS_SPHERES:
-                createAtomsAsSpheres(atoms, atomScale, 16, model);
+                createAtomsAsSpheres(atoms, atomScale, 12, model);
                 break;
             default:
-                createAtomsAsSpheres(atoms, atomScale, 16, model);
+                createAtomsAsSpheres(atoms, atomScale, 12, model);
         }
 
         switch(bondRenderType) {

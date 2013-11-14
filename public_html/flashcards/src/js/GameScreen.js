@@ -20,9 +20,18 @@
         this.currentAnswer = undefined;
         this.questionIterator = undefined;
 
-        var pointLight = new THREE.PointLight(0xFFFFFF);
-        pointLight.position.set(0, 0, 130);
-        this.scene.add(pointLight);
+        var directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
+        directionalLight.position = new THREE.Vector3(0, 0, -0.4);
+        this.scene.add(directionalLight);
+        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
+        directionalLight.position = new THREE.Vector3(0, 0, 0.4);
+        this.scene.add(directionalLight);
+        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
+        directionalLight.position = new THREE.Vector3(0.4, 0.4, 0);
+        this.scene.add(directionalLight);
+        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
+        directionalLight.position = new THREE.Vector3(-0.4, -0.4, 0);
+        this.scene.add(directionalLight);
     };
 
     var BUTTON_HTML = '<div id="$refId" class="button" data-logic="$id">$text</div>';
