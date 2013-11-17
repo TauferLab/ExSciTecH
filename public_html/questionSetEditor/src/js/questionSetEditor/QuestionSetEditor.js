@@ -7,7 +7,7 @@ QuestionSetEditor = function ( parentSelector ) {
     this.questionPages = [];
     
     this.username = get_cookie('username');
-	this.auth = get_cookie('authenticator');
+	this.auth = get_cookie('auth');
 	
 	if( (this.username == null) || (this.auth == null) )
 	    console.log("Redirect");
