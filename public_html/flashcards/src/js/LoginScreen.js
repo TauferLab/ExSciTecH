@@ -18,7 +18,8 @@
     };
 
     LoginScreen.prototype.onLeave = function( ) {
-        $('#logoutButton').text('Hi, ' + UserData.username + '!');
+        $('#accountButton').text(UserData.username);
+        $('#accountButtonWrapper').addClass('in');
         $('#loginUI').removeClass('in active');
         disableButtons( );
     };

@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #EBFBFF;
+    color: black;
     font-family: Tahoma, Geneva, sans-serif;
     /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
     -webkit-user-select: none;
@@ -88,56 +89,23 @@ div.button:active {
 
 h1 {
     font-size: 72px;
+    color: black;
 }
 
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    color: black;
 }
 
 .screen h1, .screen h2 {
     text-align: center;
 }
 
-a.headerLinks:link {
-    color: white;
-    text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-a.headerLinks:visited {
-    color: white;
-    text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-a.headerLinks:hover {
-    color: #262626;
-    text-decoration: underline;
-}
-
 p.errorText {
     font-size: 22px;
     padding-left: 50px;
     padding-right: 50px;
-}
-
-#logoutButton {
-    position: absolute;
-    width: 250px;
-    margin-left: 20px;
-    text-align: right;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-#logoutButton:hover {
-    cursor: pointer;
 }
 
 /* Transition classes */

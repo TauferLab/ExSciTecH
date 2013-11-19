@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #EBFBFF;
+    color: black;
     font-family: Tahoma, Geneva, sans-serif;
     /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
     -webkit-user-select: none;
@@ -12,7 +13,6 @@ body {
 }
 
 .flashcardsGame canvas {
-    border: 2px solid #010120;
     margin: 0;
     background: #CCCCCC;
 }
@@ -28,26 +28,6 @@ div.flashcardsGame {
     width: 1004px;
     height: 604px;
     margin: auto;
-}
-
-#pageHeader {
-    background-color: #002AA8;
-    background: linear-gradient( to bottom, #29368C 5%, #37C1F0 );
-    padding-bottom: 5px;
-}
-
-#exscitechLinks {
-    color: white;
-    text-align: center;
-    font-size: 14px;
-}
-
-#dockingLogo {
-    float: right;
-}
-
-.headerLogo{
-	height: 100px;
 }
 
 /* Component Classes */
@@ -95,11 +75,13 @@ div.button:active {
 
 h1 {
     font-size: 72px;
+    color: black;
 }
 
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    color: black;
 }
 
 .screen h1, .screen h2 {

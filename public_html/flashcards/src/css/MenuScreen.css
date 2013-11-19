@@ -24,12 +24,12 @@ img.topicImage {
 }
 
 div.topicDescription {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #mainMenuLeft {
-    max-width: 634px;
-    min-width: 634px;
+    max-width: 630px;
+    min-width: 630px;
     float: left;
 }
 
@@ -40,8 +40,8 @@ div.topicDescription {
 }
 
 #topicList {
-    max-height: 400px;
-    min-height: 400px;
+    max-height: 380px;
+    min-height: 380px;
     height: inherit;
     overflow: auto;
     margin: 25px;
@@ -51,7 +51,7 @@ div.topicDescription {
 
 #highScores{
     white-space: nowrap;
-    height: 200px;
+    height: 240px;
     width: 366px;
     font-size: 16px;
     overflow: hidden;
