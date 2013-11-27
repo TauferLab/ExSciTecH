@@ -185,7 +185,7 @@
                 mainScreen.setSelected('#ssp', mainScreen.selected[2]);//then re-select
             }
 
-            $('#sidebarSecondPanel').removeClass('hidden');
+            //$('#sidebarSecondPanel').removeClass('hidden');
             /* TODO - Better way to always move 202px from current margin-left? */
             $('#sidebarSecondPanel').addClass('furtherRight');
         });
@@ -193,7 +193,7 @@
         $('#sidebarSecondPanel').on('click', '.button[data-logic]', function() {
             var selected = $(this).data('logic');
             $('#sidebarSecondPanel').removeClass('furtherRight');
-            $('#sidebarSecondPanel').addClass('hidden');
+            //$('#sidebarSecondPanel').addClass('hidden');
             $('#sidebarPanel').removeClass('right');
             mainScreen.setSelected('#ssp', selected);
             mainScreen.selected[3] = mainScreen.selected[1];//make this ligand associated with the current conformation

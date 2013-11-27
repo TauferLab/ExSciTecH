@@ -119,7 +119,7 @@
     };
 
     GameScreen.prototype.startGame = function( ) {
-        $('#beginButton').removeClass('in');
+        $('#beginButton').removeClass('active');
         $('#loadingUI').removeClass('in active');
 
         this.questionIterator = new Iterator(this.questionList);
@@ -167,7 +167,7 @@
     */
                 $('#loadingMessage').text('Ready');
                 $('#loadingMessage').addClass('readyText');
-                $('#beginButton').addClass('in');
+                $('#beginButton').addClass('active');
             }
         } else {
             /* 

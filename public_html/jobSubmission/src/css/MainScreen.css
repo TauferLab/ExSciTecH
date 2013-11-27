@@ -2,7 +2,7 @@ h2.sidebarTitle {
     padding-bottom: 15px;
     padding-top: 15px;
     margin: 0px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #54B4EB;
 }
 
 .descriptionLink {
@@ -21,10 +21,11 @@ h2.sidebarTitle {
 
 .sidebar {
     width: 200px;
-    height: 596px;
-    background-color: #CCCCCC;
+    height: 598px;
+    background-color: white;
     font-size: 24px;
-    border-right: 2px solid #010120;
+    border-right: 2px solid #54B4EB;
+    border-radius: 0px 0px 0px 5px;
     overflow-y: auto;
 }
 
@@ -36,29 +37,26 @@ h2.sidebarTitle {
 
 .button.sidebarElement {
     background-color: transparent;
+    background-image: linear-gradient(#FFFFFF, #F2F2F2 60%, #E6E6E6);
     border-radius: 0px;
     margin: 0px;
 }
 
 .button.sidebarElement.protein {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #54B4EB;
 }
 
 .selected {
-    color: white;
+    color: #167FBB;
     background-color: #002AA8 !important;
 }
 
-.hidden {
-    opacity: 0;
+.right {
+    margin-left: 200px;
 }
 
-#sidebarPanel {
-    margin-left: 0px;
-}
-
-#sidebarSecondPanel {
-    margin-left: 202px;
+.furtherRight {
+    margin-left: 400px;
 }
 
 #submitJob {

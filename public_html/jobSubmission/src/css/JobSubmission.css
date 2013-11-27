@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #EBFBFF;
+    background-color: white;
     color: black;
     font-family: Tahoma, Geneva, sans-serif;
     /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
@@ -12,75 +12,62 @@ body {
         -ms-user-select: none;
 }
 
-canvas {
-    margin-left: 200px;
+.flashcardsGame canvas {
+    margin: 0;
+    background: transparent;
 }
 
 /* Parent Div Elements */
 
-#wrapper {
+div.flashcardsGame {
+    min-width: 1004px;
+    min-height: 64px;
+}
+
+#container {
     width: 1004px;
     height: 604px;
     margin: auto;
-}
-
-#pageHeader {
-    background-color: #002AA8;
-    background: linear-gradient( to bottom, #29368C 5%, #37C1F0 );
-    padding-bottom: 5px;
-}
-
-#exscitechLinks {
-    color: white;
-    text-align: center;
-    font-size: 14px;
-}
-
-#dockingLogo {
-    float: right;
-}
-
-.headerLogo{
-    height: 100px;
 }
 
 /* Component Classes */
 
 div.button {
     text-align: center;
-    background-color: #4D4D62;
+    background-color: #DBDBDB;
+    background-image: linear-gradient(#E8E8E8, #DBDBDB 60%, #CFCFCF);
     margin: 20px;
     padding: 5px;
     border-radius: 8px;
     cursor: pointer;
-    transition-property: background-color, color;
+    opacity: 0.8;
+    transition-property: opacity;
     transition-duration: 0.3s;
     transition-delay: 0s;
 }
 
 div.button:hover {
-    background-color: #363645;
-}
-
-div.button:active {
-    background-color: #363645;
+    opacity: 1.0;
 }
 
 .button.blueButton {
-    color: #EEE;
-    background-color: #002AA8;
+    color: white;
+    background-color: #2FA4E7;
+    background-image: linear-gradient(#1D9CE5, #198ED2 60%, #167FBB);
+    opacity: 0.8;
 }
 
 .button.blueButton:hover {
-    color: #CCC;
-    background-color: #001D75;
+    opacity: 1.0;
 }
 
 .screen {
     height: 600px;
     width: 1000px;
-    border: 2px solid #010120;
-    background-color: #CCCCCC;
+    border: 2px solid #54B4EB;
+    border-radius: 0px 0px 5px 5px;
+    border-top: 0px;
+    background-color: white;
     position: absolute;
     display: block;
 }
@@ -102,28 +89,69 @@ h2 {
     text-align: center;
 }
 
+a.headerLinks:link {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:visited {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:hover {
+    color: #262626;
+    text-decoration: underline;
+}
+
 p.errorText {
     font-size: 22px;
     padding-left: 50px;
     padding-right: 50px;
 }
 
+#logoutButton {
+    position: absolute;
+    width: 250px;
+    margin-left: 20px;
+    text-align: right;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+#logoutButton:hover {
+    cursor: pointer;
+}
+
+#wrapper {
+    width: 1004px;
+    height: 604px;
+    margin: auto;
+}
+
 /* Transition classes */
 
 .fade {
-    opacity: 0;
+    opacity: 0 !important;
     transition: opacity 0.5s linear;
 }
 
 .fade.in {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .slide {
     opacity: 1;
     overflow: hidden;
     transition: all 0.3s linear;
-    transition-property: height, margin-left, padding, border;
+    transition-property: height, padding, border, margin;
 }
 
 /* TODO: May be a cleaner way to do this without using !important. */
@@ -133,14 +161,6 @@ p.errorText {
     padding-bottom: 0 !important;
     border-top-width: 0 !important;
     border-bottom-width: 0 !important;
-}
-/* TODO: Keep left here or move to MainScreen css? */
-.slide.right {
-    margin-left: 202px !important;
-}
-
-.slide.furtherRight {
-    margin-left: 404px !important;
 }
 
 .active {
