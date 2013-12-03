@@ -5,16 +5,14 @@
 
         var mainScreen = new MainScreen($('#mainUI'));
         var resultScreen = new ResultScreen($('#resultUI'));
-        var loginScreen = new LoginScreen($('#loginUI'));
 
-        Game.apply(this, [loginScreen]);
+        Game.apply(this, [mainScreen]);
 
         $(document).on('screenChange', screenChangeHandler.bind(this));
         this.addScreen('main', mainScreen);
         this.addScreen('result', resultScreen);
-        this.addScreen('login', loginScreen);
 
-        loginScreen.onResume();
+        mainScreen.onResume();
     };
 
     JobSubmission.prototype = Object.create(Game.prototype);

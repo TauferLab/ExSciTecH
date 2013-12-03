@@ -4,3 +4,9 @@
     padding-top: 200px;
     padding-bottom: 50px;
 }
+
+.errorButton {
+    margin: auto !important;
+    width: 250px;
+    font-size: 16px;
+}

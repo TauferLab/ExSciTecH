@@ -7,18 +7,16 @@
         var tutorialScreen = new TutorialScreen($('#TutorialScreenUI'));
         var menuScreen = new MenuScreen($('#mainMenuUI'));
         var scoreScreen = new HighScoreScreen($('#highScoreUI'));
-        var loginScreen = new LoginScreen($('#loginUI'));
 
-        Game.apply(this, [loginScreen]);
+        Game.apply(this, [menuScreen]);
 
         $(document).on('screenChange', screenChangeHandler.bind(this));
         this.addScreen('game', gameScreen);
         this.addScreen('tutorial', tutorialScreen);
         this.addScreen('menu', menuScreen);
         this.addScreen('score', scoreScreen);
-        this.addScreen('login', loginScreen);
 
-        loginScreen.onResume();
+        menuScreen.onResume();
     };
 
     MoleculeGame.prototype = Object.create(Game.prototype);

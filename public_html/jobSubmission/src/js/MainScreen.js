@@ -39,10 +39,16 @@
     };
 
     MainScreen.prototype.onResume = function( ) {
-        enableButtons(this);
-        $('#mainUI').addClass('in active');
-
-        JSCommunicationManager.startGame(UserData.auth, this.setInfo.bind(this));
+        UserData.username = CookieManager.getCookie('username');
+        UserData.auth = CookieManager.getCookie('auth');
+        if(UserData.username !== null && UserData.auth !== null) {
+            enableButtons(this);
+            $('#mainUI').addClass('in active');
+            $('#accountButton').text(UserData.username);
+            JSCommunicationManager.startGame(UserData.auth, this.setInfo.bind(this));
+        } else {
+            window.location = '../login#jobSubmission';
+        }
     };
 
     MainScreen.prototype.placeModel = function ( response ) {
@@ -205,6 +211,11 @@
 
             //if success
             mainScreen.$element.trigger(new ScreenChangeEvent('result'));
+        });
+
+        $('#errorMessage').find('[data-logic=\'retry\']').on('click', function() {
+            CommunicationManager.retry();
+            $('#errorMessage').removeClass('in activeTop');
         });
     }
 

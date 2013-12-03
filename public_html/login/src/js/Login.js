@@ -1,16 +1,16 @@
 function redirect() {
-    switch(location.hash) {
+    switch(window.location.hash) {
         case '#flashcards':
-            location = '../flashcards';
+            window.location = '../flashcards';
             break;
         case '#jobSubmission':
-            location = '../flashcards';
+            window.location = '../jobSubmission';
             break;
         case '#moleculeViewer':
-            location = '../moleculeViewer';
+            window.location = '../moleculeViewer';
             break;
         case '#forum':
-            location = '../forum';
+            window.location = '../forum';
             break;
         default:
             $('#loginUI').removeClass('in active');

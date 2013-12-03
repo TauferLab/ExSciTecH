@@ -32,9 +32,16 @@
     };
 
     MenuScreen.prototype.onResume = function( ) {
-        enableButtons(this);
-        $('#mainMenuUI').addClass('active in');
-        FCCommunicationManager.availableGames(UserData.auth, this.showAvailableTopics.bind(this));
+        UserData.username = CookieManager.getCookie('username');
+        UserData.auth = CookieManager.getCookie('auth');
+        if(UserData.username !== null && UserData.auth !== null) {
+            enableButtons(this);
+            $('#mainMenuUI').addClass('active in');
+            $('#accountButton').text(UserData.username);
+            FCCommunicationManager.availableGames(UserData.auth, this.showAvailableTopics.bind(this));
+        } else {
+            window.location = '../login#flashcards';
+        }
     };
 
     MenuScreen.prototype.showAvailableTopics = function(response) {
@@ -131,6 +138,11 @@
             menuScreen.updateRightPanel(menuScreen.topics[$topic.data('id')]);
             menuScreen.$currentTopic.removeClass('selected');
             menuScreen.$currentTopic = $topic.addClass('selected');
+        });
+
+        $('#errorMessage').find('[data-logic=\'retry\']').on('click', function() {
+            CommunicationManager.retry();
+            $('#errorMessage').removeClass('in activeTop');
         });
     }
 

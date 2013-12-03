@@ -8,32 +8,6 @@ FCCommunicationManager.MEDIA_PDB = 0;
 FCCommunicationManager.MEDIA_IMAGE = 1;
 FCCommunicationManager.errorCallback = undefined;
 
-FCCommunicationManager.login = function ( email, password , callback) {
-    'use strict';
-    email = email.toLowerCase ();
-    var passwordHash = hex_md5 (password + email);
-
-    var requestObject = {};
-    requestObject.request_type = 'login';
-    requestObject.email = email;
-    requestObject.hash = passwordHash;
-
-    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
-};
-
-FCCommunicationManager.register = function ( email, password , username, callback) {
-    'use strict';
-    email = email.toLowerCase ();
-
-    var requestObject = {};
-    requestObject.request_type = 'register';
-    requestObject.email = email;
-    requestObject.password = password;
-    requestObject.username = username;
-
-    CommunicationManager.post ( FCCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
-};
-
 FCCommunicationManager.availableGames = function ( auth, callback ) {
     'use strict';
     var requestObject = {};
