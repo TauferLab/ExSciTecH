@@ -19,8 +19,10 @@
 		//Store new session info in database
 		store_game_session($user_id,$response_object['game_session_id'],$request_object['game_id']);
 		
+		$game_id = $mysqli_gamedb->real_escape_string($request_object["game_id"]);
+		
 		// Pull game questions from DB
-		$result = $mysqli_gamedb->query("Select * from questions where game_id=".$mysqli_gamedb->real_escape_string($request_object["game_id"]).";");
+		$result = $mysqli_gamedb->query("Select * from questions where game_id=".$game_id.";");
 	
 		$temp_array = array();
 		
@@ -38,6 +40,16 @@
 			array_push($response_object['questions'], build_question($id,$row["text"],$answers));
 			store_mapping($response_object['game_session_id'],$row["question_id"],$id++);
 		}
+
+        $result = $mysqli_gamedb->query("SELECT * FROM questionSet WHERE id=".$game_id);
+        if($row = $result->fetch_array()){
+            $response_object['name'] = $row['name'];
+            $response_object['time_limit'] = $row['time_limit'];
+            $response_object['description'] = $row['description'];
+            $response_object['imageURL'] = $row['image'];
+        }
+        
+        $response_object['high_scores'] = get_high_scores( $game_id );
 
 		$response_object['success'] = "true";
 		

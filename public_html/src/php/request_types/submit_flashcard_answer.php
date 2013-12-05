@@ -35,6 +35,7 @@
 		
 		//calculate the score
 		$response['score'] = calculate_score($request_object["game_session_id"]);
+		$response['ansID'] = $answer;
 		
 		$response['success'] = "true";
 		return $response;

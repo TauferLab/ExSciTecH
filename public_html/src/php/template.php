@@ -84,8 +84,8 @@
 
         echo '
         <ul class="nav navbar-nav">
-            <li'.( ($basename=="jobsubmission")?' class="active"':'' ).'><a href="/jobSubmission">Job Submission</a></li>
-            <li'.( ($basename=="flashcards")?' class="active"':'' ).'><a href="/flashcards">Flashcards</a></li>
+            <li'.( ($basename=="jobsubmission")?' class="active"':'' ).'><a href="/jobSubmission/index.php">Job Submission</a></li>
+            <li'.( ($basename=="flashcards_glmol")?' class="active"':'' ).'><a href="/flashcards_glmol">Flashcards</a></li>
             <li'.( ($basename=="moleculeviewer")?' class="active"':'' ).'><a href="/moleculeViewer">Molecule Viewer</a></li>
             <li'.( ($basename=="forum")?' class="active"':'' ).'><a href="/forum.php">Forum</a></li>
             <li class="dropdown">

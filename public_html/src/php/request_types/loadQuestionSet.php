@@ -57,7 +57,7 @@
 	    $user = get_user($auth);
     	
     	$query = "SELECT * FROM `questionSet` WHERE `id` = $qSetID AND `ownerID` = ".$user->id;
-    	
+
     	$result = $mysqli_gamedb->query($query);
     	
     	if( $result && $result->num_rows > 0 ){
