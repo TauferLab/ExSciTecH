@@ -2,7 +2,7 @@
     'use strict';
 
     var TOPIC_HTML = '<div class = \'topic\' data-id = \'$uniqueID\' >' +
-            '<img class = \'topicImage\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
+            '<img class = \'topicImage img-thumbnail\' src = \'$imageSrc\' width = \'114\' height = \'94\' >' +
             '<b>$title</b>' + '<br />' +
             '<div class = \'topicDescription\'>$description</div>' +
             '</div>';
@@ -111,27 +111,22 @@
     function enableButtons(menuScreen) {
 
         $('#mainMenuUI')
-            .find('.button[data-logic=\'tutorial\']')
+            .find('[data-logic=\'tutorial\']')
             .on('click', function() {
                 $(this).trigger(new ScreenChangeEvent('tutorial'));
             })
             .end()
 
-            .find('.button[data-logic=\'scores\']')
+            .find('[data-logic=\'scores\']')
             .on('click', function() {
                 $(this).trigger(new ScreenChangeEvent('score'));
             })
             .end()
 
-            .find('.button[data-logic=\'start\']')
+            .find('[data-logic=\'start\']')
             .on('click', function() {
                 $(this).trigger(new ScreenChangeEvent('game'));
             });
-
-        $('#tutorialUI').find('.button[data-logic=\'endTutorial\']')
-                .on('click', function() {
-            menuScreen.endTutorial( );
-        });
 
         $('#topicList').on('click', '.topic[data-id]', function(e) {
             var $topic = $(this);
@@ -147,7 +142,7 @@
     }
 
     function disableButtons( ) {
-        $('#mainMenuUI, #tutorialUI').find('.button').off('click');
+        $('#mainMenuUI, #tutorialUI').off('click');
         $('#topicList').off('click');
     }
 

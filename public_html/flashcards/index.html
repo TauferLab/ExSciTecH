@@ -159,10 +159,7 @@
             <div id = 'container'>
                 <!-- canvas goes here -->
 
-                <!-- Exscitech Header -->
-                
-
-                <div id = 'errorMessage' class = 'screen fade'>
+                <div id = 'errorMessage' class = 'screen fade panel panel-primary'>
                     <h1>Oops!</h1>
                     <p class = 'errorText'>
                         Looks like an error has occurred! Make sure you are
@@ -176,22 +173,20 @@
                     <p class = 'errorText'>
                         Press the button below to try again. <span id = 'retryCount'></span>
                     </p>
-                    <div class = 'button blueButton returnMenuButton'
-                         data-logic = 'retry'>
-                        Retry Connection
-                    </div>
+                    <button type = 'button' class = 'btn btn-primary blueButton'
+                        data-logic = 'retry'>Retry Connection
+                    </button>
                 </div>
 
-                <div id = 'mainMenuUI' class = 'screen fade'>
+                <div id = 'mainMenuUI' class = 'screen fade panel panel-primary'>
                     <div id = 'mainMenuLeft'>
                         <h1 class = 'mainMenuTitle'>Select a Topic!</h1>
                         <div id = 'topicList'>
                             <!-- Topics added dynamically here -->
                         </div>
-                        <div id="tutorialButton" class = 'button blueButton'
-                             data-logic = 'tutorial'>
-                            Tutorial
-                        </div>
+                        <button type = 'button' class = 'btn btn-primary blueButton'
+                            id = 'tutorialButton' data-logic = 'tutorial'>Tutorial
+                        </button>
                     </div>
                     <div id = 'mainMenuRight'>
                         <div id = 'timeLimit'>
@@ -208,10 +203,9 @@
                                 <!-- Dynamically add scores -->
                             </div>
                         </div>
-                        <div class = 'button greenButton'
-                            data-logic = 'start'>
-                            Start
-                        </div>
+                        <button type = 'button' class = 'btn btn-success greenButton'
+                            id = 'startButton' data-logic = 'start'>Start
+                        </button>
                     </div>
                 </div>
 
@@ -219,43 +213,35 @@
                     <div id = 'loadingMessage'>
                         Loading...
                     </div>
-                    <div 
-                        class = 'button greenButton hide'
-                        id = 'beginButton'
-                        data-logic = 'begin'>
-                        Begin
-                    </div>
+                    <button type = 'button' class = 'btn btn-success greenButton hide'
+                        id = 'beginButton' data-logic = 'begin'>Begin
+                    </button>
                 </div>
 
-                <div id = 'gameUI' class = 'screen'>
+                <div id = 'gameUI' class = 'screen panel panel-primary'>
 
                     <div id = 'rightPanel' class = 'fade'>
                         <div id = 'timeAndScore'>
-                            Time Left: <div id = 'time'>2:00</div><br />
-                            Score: <div id = 'score'>0</div><br />
+                            Time Left: <div id = 'time'>2:00</div><br>
+                            Score: <div id = 'score'>0</div><br>
                         </div>
                         <h2 id='scoreChange' class="scoreChange">+25</h2>
                         <div id = 'gameButtons'>
-                            <div 
-                                class = 'button' 
-                                data-logic = '1'>
-                                Option 1
-                            </div>
-                            <div 
-                                class = 'button' 
-                                data-logic = '2'>
-                                Option 2
-                            </div>
-                            <div 
-                                class = 'button' 
-                                data-logic = '3'>
-                                Option 3
-                            </div>
-                            <div 
-                                class = 'button' 
-                                data-logic = '4'>
-                                Option 4
-                            </div>
+                            <button type = 'button' class = 'btn btn-default choiceButton'
+                                data-logic = '1'>Option 1
+                            </button>
+                            <br>
+                            <button type = 'button' class = 'btn btn-default choiceButton'
+                                data-logic = '2'>Option 2
+                            </button>
+                            <br>
+                            <button type = 'button' class = 'btn btn-default choiceButton'
+                                data-logic = '3'>Option 3
+                            </button>
+                            <br>
+                            <button type = 'button' class = 'btn btn-default choiceButton'
+                                data-logic = '4'>Option 4
+                            </button>
                         </div>
                     </div>
 
@@ -270,25 +256,23 @@
                         <div id = 'rank'>
                             <!-- Rank in leaderboards -->
                         </div>
-                        <br />
-                        <div class = 'button blueButton returnButton' 
-                             data-logic = 'return'>
-                            Return
-                        </div>
+                        <br>
+                        <button type = 'button' class = 'btn btn-primary returnButton'
+                            data-logic = 'return'>Return
+                        </button>
                     </div>
 
-                    <div id = 'tutorialUI' class = 'screen fade'>
+                    <div id = 'tutorialUI' class = 'screen fade panel panel-primary'>
                         Molecules will appear in this window. If there is a question
                         beyond identifying the molecule, it will appear at the bottom of
-                        your screen.<br /> <br />
-                        Select the correct answer from the panel on the right. <br /> <br />
+                        your screen.<br><br>
+                        Select the correct answer from the panel on the right. <br><br>
                         Multiple correct answers in a row will grant combo bonuses, while
-                        incorrect answers will cost you points, and end combos. <br /> <br />
+                        incorrect answers will cost you points, and end combos. <br><br>
                         Answer as many questions as you can in the given time!
-                        <div class = 'button blueButton returnMenuButton' 
-                             data-logic = 'endTutorial'>
-                            Return
-                        </div>
+                        <button type = 'button' class = 'btn btn-primary returnMenuButton'
+                            data-logic = 'endTutorial'>Return
+                        </button>
                     </div>
                 </div>
             </div>

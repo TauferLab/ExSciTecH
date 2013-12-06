@@ -25,12 +25,14 @@ img.topicImage {
 
 div.topicDescription {
     font-size: 13px;
+    text-align: left;
 }
 
 #mainMenuLeft {
     max-width: 630px;
     min-width: 630px;
     float: left;
+    text-align: center;
 }
 
 #mainMenuRight {
@@ -72,23 +74,24 @@ div.topicDescription {
 }
 
 /*
-    Start Button
+    Buttons
 */
 
-.button.greenButton {
-    color: black#f5f5f5;
-    background-color: #5FAA22;
-    background-image: linear-gradient(#77B300, #6EA600 60%, #669900);
+.btn.greenButton {
     width: 200px;
     margin: auto;
 }
 
-/*
-    Tutorial Button
-*/
+.btn.blueButton {
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+#startButton {
+    font-size: 22px;
+}
 
 #tutorialButton {
-    font-size: 26px;
-    width: 170px;
-    margin: 25px auto 0;
+    font-size: 22px;
 }

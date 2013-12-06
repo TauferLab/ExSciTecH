@@ -12,12 +12,13 @@
     float: right;
     font-size: 28px;
     width: 294px;
-    height: 600px;
+    height: 598px;
     border: 0px;
-    border-left: 2px;
+    border-left: 1px;
     border-color: #1D9CE5;
     border-style: solid;
     text-align: right;
+    background-color: #F5F5F5;
 }
 
 #questionPanel {
@@ -64,19 +65,29 @@
     float: right;
 }
 
+.choiceButton {
+    font-size: 22px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+#gameButtons {
+    text-align: center;
+}
+
 /* Loading UI */
 
 #loadingUI {
     position: absolute;
     min-width: 700px;
     min-height: 610px;
+    text-align: center;
 }
 
 #beginButton {
-    width: 150px;
-    margin: auto;
-    margin-top: 50px;
-    font-size: 28px;
+    font-size: 22px;
+    margin-top: 30px;
 }
 
 #loadingMessage {
@@ -136,11 +147,6 @@
     font-size: 56px;
     width: 700px;
     padding-top: 50px;
-}
-
-.button.incorrect {
-    background-color: red !important;
-    background-image: linear-gradient(red, red) !important;
 }
 
 .returnButton {

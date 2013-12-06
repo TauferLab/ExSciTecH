@@ -34,7 +34,10 @@
         this.scene.add(directionalLight);
     };
 
-    var BUTTON_HTML = '<div id="$refId" class="button" data-logic="$id">$text</div>';
+    var BUTTON_HTML =   "<button type = 'button' class = 'btn btn-default choiceButton'" +
+                            "id = '$refId' data-logic = '$id'>$text" +
+                        "</button>" +
+                        "<br>";
     var QUESTION_MOLECULE = 0;
     var QUESTION_TEXT = 1;
     var QUESTION_ID = 2;
@@ -119,7 +122,7 @@
     };
 
     GameScreen.prototype.startGame = function( ) {
-        $('#beginButton').removeClass('active');
+        $('#beginButton').addClass('hide');
         $('#loadingUI').removeClass('in active');
 
         this.questionIterator = new Iterator(this.questionList);
@@ -157,17 +160,10 @@
                         this.createPDB.bind(this));
             } else {
                 enableButtons(this);
-                /*
-                $('#loadingMessage')
-                        .text('Ready')
-                        .css({
-                    'padding-left': '0px',
-                    'text-align': 'center'
-                });
-    */
+                
                 $('#loadingMessage').text('Ready');
                 $('#loadingMessage').addClass('readyText');
-                $('#beginButton').addClass('active');
+                $('#beginButton').removeClass('hide');
             }
         } else {
             /* 
@@ -264,7 +260,9 @@
             this.nextQuestion();
         } else {
             this.scoreManager.incorrect(data.score - this.scoreManager.score);
-            $('#scoreChange, #' + this.currentAnswer).addClass('incorrect');
+            $('#scoreChange').addClass('incorrect');
+            $('#' + this.currentAnswer).removeClass('btn-default');
+            $('#' + this.currentAnswer).addClass('btn-danger');
         }
         $('#scoreChange').text(this.scoreManager.text()).addClass('flashInOut');
     };
@@ -305,11 +303,11 @@
     };
 
     function enableButtons(gameScreen) {
-        $('#gameUI').find('.button[data-logic=\'return\']').on('click', function() {
+        $('#gameUI').find('[data-logic=\'return\']').on('click', function() {
             $(this).trigger(new ScreenChangeEvent('menu'));
         });
 
-        $('#gameButtons').on('click', '.button[data-logic]', function() {
+        $('#gameButtons').on('click', '[data-logic]', function() {
             var answer = $(this).data('logic');
             if(!gameScreen.userAnswers.contains(answer)) {
                 gameScreen.pollAnswer(answer);
@@ -317,8 +315,8 @@
             }
         });
 
-        $('#loadingUI').find('.button[data-logic=\'begin\']').on('click', function() {
-            $('#loadingUI').find('.button').off('click');
+        $('#loadingUI').find('[data-logic=\'begin\']').on('click', function() {
+            $('#loadingUI').off('click');
             gameScreen.startGame( );
         });
 
@@ -329,11 +327,11 @@
 
     function disableButtons( ) {
         $('#gameButtons').off('click');
-        $('#loadingUI').find('.button').off('click');
+        $('#loadingUI').off('click');
     }
 
     function disableReturnButton( ) {
-        $('#gameUI').find('.button').off('click');
+        $('#gameUI').off('click');
     }
 
     window.GameScreen = GameScreen;

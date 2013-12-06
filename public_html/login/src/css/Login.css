@@ -54,27 +54,6 @@ h2 {
     text-align: center;
 }
 
-a.headerLinks:link {
-    color: white;
-    text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-a.headerLinks:visited {
-    color: white;
-    text-decoration: none;
-    transition-property: color;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-a.headerLinks:hover {
-    color: #262626;
-    text-decoration: underline;
-}
-
 p.errorText {
     font-size: 22px;
     padding-left: 50px;

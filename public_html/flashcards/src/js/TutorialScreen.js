@@ -31,14 +31,14 @@
     };
 
     function enableButtons(tutorialScreen) {
-        $('#tutorialUI').find('.button[data-logic=\'endTutorial\']')
+        $('#tutorialUI').find('[data-logic=\'endTutorial\']')
                 .on('click', function() {
             $(this).trigger(new ScreenChangeEvent('menu'));
         });
     }
 
     function disableButtons( ) {
-        $('#tutorialUI').find('.button').off('click');
+        $('#tutorialUI').off('click');
     }
 
     window.TutorialScreen = TutorialScreen;
