@@ -1,14 +1,14 @@
 <?php
 
 	// The mysql connection is global just to make things easier
-	$mysqli_gamedb = connect_to_mysql();
+	$mysqli_gamedb = connectToMysql();
 
 	// If there is an error connecting to the mysql database return an error
 	if ($mysqli_gamedb->connect_errno) {
 		$response_object = return_error("Failed to connect to MySQL: (" . $mysqli_gamedb->connect_errno . ") " . $mysqli_gamedb->connect_error);
 	}
 	
-	function connect_to_mysql(){
+	function connectToMysql(){
         $MYSQL_SERVER = "localhost";
         $MYSQL_USER = "exscitech";
         $MYSQL_PASSWORD = "56eLKG3HVyUTA52u";

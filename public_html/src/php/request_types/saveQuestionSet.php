@@ -37,7 +37,7 @@
 	}
 	
 	function updateQuestionSet($request_object){
-	    global $mysqli_gamedb;
+	    $mysqli_gamedb = connectToMysql();
 	
     	if( userHasPermission($request_object["settings"]["ID"], $request_object["authenticator"]) ){
     	
@@ -73,7 +73,7 @@
 	}
 	
 	function updateQuestion($question, $questionSetID){
-	    global $mysqli_gamedb;
+	    $mysqli_gamedb = connectToMysql();
 	
     	//Check if question exists
     	if( questionExists($question["ID"], $questionSetID) ){
@@ -92,18 +92,20 @@
                         `answer`= ".$answerChoices["answer"]."
                     WHERE `question_id` = $questionID AND `game_id`= $questionSetID ";
                     
+            $mysqli_gamedb->close();
             return $mysqli_gamedb->query($query);
             
     	}
     	else{
         	//insert the question
+        	$mysqli_gamedb->close();
         	return insertQuestion($question, $questionSetID);
     	}
     	
 	}
 	
 	function questionExists($questionID, $questionSetID){
-	    global $mysqli_gamedb;
+	    $mysqli_gamedb = connectToMysql();
 	
 	    $questionID = $mysqli_gamedb->escape_string($questionID);
 	    $questionSetID = $mysqli_gamedb->escape_string($questionSetID);
@@ -113,15 +115,17 @@
     	$result = $mysqli_gamedb->query($query);
     	
     	if( $result->num_rows > 0 ){
+    	    $mysqli_gamedb->close();
     	    return true;
     	}
     	else{
+        	$mysqli_gamedb->close();
         	return false;
     	}
 	}
 
 	function insertQuestionSet($request_object){
-        global $mysqli_gamedb;
+        $mysqli_gamedb = connectToMysql();
         
         $name         = $mysqli_gamedb->escape_string($request_object["settings"]["name"]);
         $desc         = $mysqli_gamedb->escape_string($request_object["settings"]["description"]);
@@ -159,15 +163,19 @@
             return false;
         
         foreach($request_object["questions"] as $question){
-            if( ! insertQuestion($question, $ID) )
+            if( ! insertQuestion($question, $ID) ){
+                $mysqli_gamedb->close();
                 return false;
+            }
+                
         }
         
+        $mysqli_gamedb->close();
         return $ID;
 	}
 	
 	function insertQuestion($question, $questionSetID){
-	    global $mysqli_gamedb;    
+	    $mysqli_gamedb = connectToMysql();
 	    
 	    $ID = $mysqli_gamedb->escape_string($question["ID"]);
 	    $molID = getMolID($question["molName"]);
@@ -194,15 +202,17 @@
     	       )";
     	       
     	 if($mysqli_gamedb->query($query) ){
+    	    $mysqli_gamedb->close();
     	    return true; 
     	 }
     	 else{
-        	 return false;
+    	    $mysqli_gamedb->close();
+        	return false;
     	 }
 	}
 	
 	function getMolID($molName){
-	    global $mysqli_gamedb;
+	    $mysqli_gamedb = connectToMysql();
 	    global $PNG_DIR;
 	    global $SDF_DIR;
 	    	    
@@ -226,8 +236,8 @@
     	    $pngFilename = $PNG_DIR.$basename.".png";
     	    $sdfFilename = $SDF_DIR.$basename.".sdf";
     	
-            $sdfURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". $molName ."/SDF?record_type=3d";
-            $pngURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". $molName ."/PNG";
+            $sdfURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/SDF?record_type=3d";
+            $pngURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/PNG";
 	    
             if( false != file_put_contents($pngFilename, fopen($pngURL, 'r')) &&
                 false != file_put_contents($sdfFilename, fopen($sdfURL, 'r')) 
@@ -243,9 +253,11 @@
                                       )";
                                       
                 if( $mysqli_gamedb->query($query) ){
+                    $mysqli_gamedb->close();
                     return $mysqli_gamedb->insert_id;
                 }
                 else{
+                    $mysqli_gamedb->close();
                     return -1;
                 }
             }
@@ -259,6 +271,7 @@
                                       )";
                                       
                 if( $mysqli_gamedb->query($query) ){
+                    $mysqli_gamedb->close();
                     return -1;
                 }
             }
@@ -266,7 +279,7 @@
 	}
 	
 	function buildAnswerChoicesString($answerArray){
-	    global $mysqli_gamedb;
+	    $mysqli_gamedb = connectToMysql();
 	    
 	    $retVal = array();
         $retVal["answerChoices"] = "";
@@ -288,6 +301,7 @@
         
         $retVal["answer"] = $correctAns;
         
+        $mysqli_gamedb->close();
         return $retVal;
 	}
 ?>

@@ -1,12 +1,12 @@
 <?php
 	//request_structure
-	$request_structures["start_flashcard_game"] = array();
-	$request_structures["start_flashcard_game"]["request_type"] = "";
-	$request_structures["start_flashcard_game"]["authenticator"] = "";
-	$request_structures["start_flashcard_game"]["game_id"] = "";
+	$request_structures["load_flashcard_game"] = array();
+	$request_structures["load_flashcard_game"]["request_type"] = "";
+	$request_structures["load_flashcard_game"]["authenticator"] = "";
+	$request_structures["load_flashcard_game"]["game_id"] = "";
 	
 	function handle_load_flashcard_game_request($request_object){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$response_object = array();
 
 		//Create a new Session ID
@@ -53,17 +53,18 @@
 
 		$response_object['success'] = "true";
 		
+		$mysqli_gamedb->close();
 		return $response_object;
 	}
 	
 	function store_mapping($session_id,$original_id,$mapped_id){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$query = "INSERT INTO `question_id_map` (`session_id`, `original_q_id`, `mapped_q_id`) VALUES ('".$session_id."', '".$original_id."', '".$mapped_id."');";
 		
 		if( ! $mysqli_gamedb->query($query)){
     		echo $mysqli_gamedb->error;
 		}
-		
+		$mysqli_gamedb->close();
 	}
 	
 	function build_question($id,$q_text,$answers){
@@ -82,13 +83,14 @@
 	}
 	
 	function store_game_session($user_id,$session_id,$game_id){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		
 		$session_id = $mysqli_gamedb->real_escape_string($session_id);
 		$user_id = $mysqli_gamedb->real_escape_string($user_id);
 		
 		$query = "INSERT INTO `game_sessions` (`session_id`, `user_id`, `game_id`, `create_time`, `expire_time`) VALUES ('".$session_id."', '".$user_id."', '".$game_id."', NOW(), NOW()+3600);";
 		$mysqli_gamedb->query($query);
+		$mysqli_gamedb->close();
 	}
 
 	function get_user($authenticator){

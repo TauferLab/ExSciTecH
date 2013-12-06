@@ -7,7 +7,7 @@
 	$request_structures["start_flashcard_game"]["game_id"] = "";
 	
 	function handle_start_flashcard_game_request($request_object){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$response_object = array();
 
 		$response_object['questions'] = Array();
@@ -24,6 +24,7 @@
 
 		$response_object['success'] = "true";
 		
+		$mysqli_gamedb->close();
 		return $response_object;
 	}
 	

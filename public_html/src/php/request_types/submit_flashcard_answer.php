@@ -9,7 +9,7 @@
 	$request_structures["submit_flashcard_answer"]["game_time"] = "";
 	
 	function handle_submit_flashcard_answer_request($request_object){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$response = Array();
 		
 		//get user id
@@ -38,11 +38,13 @@
 		$response['ansID'] = $answer;
 		
 		$response['success'] = "true";
+		
+		$mysqli_gamedb->close();
 		return $response;
 	}
 
 	function is_answer_correct($question_id,$answer,$session_id){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$query = "SELECT answer FROM questions WHERE question_id=".$question_id." AND game_id = (SELECT game_id FROM game_sessions WHERE session_id='".$session_id."')";
 		$result = $mysqli_gamedb->query($query);
 		
@@ -50,18 +52,21 @@
 		
 		if($row){
 			if( ($row[0]-1) == $answer){
+			    $mysqli_gamedb->close();
 				return true;
 			}
 			else{
+			    $mysqli_gamedb->close();
 				return false;
 			}
 		}
 		
+		$mysqli_gamedb->close();
 		return false;
 	}
 	
 	function calculate_score($game_session_id){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$query = "SELECT correct,COUNT(*) FROM `answers` WHERE `game_session_id` = '".$game_session_id."' GROUP BY correct";
 		
 		//var_dump($query);
@@ -77,11 +82,12 @@
 				$score = $score + $row[1]*(1000);
 		}
 		
+		$mysqli_gamedb->close();
 		return $score;
 	}
 	
 	function insert_answer($session_id,$mapped_q_id,$original_q_id,$answer,$game_time,$correct){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		
 		if($correct =="true")
 			$correct = 1;
@@ -106,16 +112,18 @@
 				'".$correct."');";
 				
 		$mysqli_gamedb->query($query);
+		$mysqli_gamedb->close();
 	}
 	
 	
 	function get_original_q_id($game_session_id,$mapped_q_id){
-		global $mysqli_gamedb;
+		$mysqli_gamedb = connectToMysql();
 		$query = "SELECT original_q_id from question_id_map WHERE session_id = '".$game_session_id."' AND mapped_q_id='".$mapped_q_id."'"; 
 		$result = $mysqli_gamedb->query($query);
 		
 		$row = $result->fetch_array();
 		if($row){
+		    $mysqli_gamedb->close();
 			return $row[0];
 		}
 	}

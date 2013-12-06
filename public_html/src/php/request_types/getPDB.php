@@ -32,27 +32,37 @@
 	}
 	
 	function getSDF($ID){
-    	global $mysqli_gamedb;
+    	$mysqli_gamedb = connectToMysql();
     	
-    	$query = "SELECT `sdfFile`, `unavailable` FROM `molecules` WHERE id = $ID";
+    	$query = "SELECT `sdfFile`, `unavailable` FROM `molecules` WHERE `id` = ?";
+    	$stmt = $mysqli_gamedb->prepare( $query );
+    	$stmt->bind_param("i", $ID);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($sdfFile,$unavailable);
     	
-    	$result = $mysqli_gamedb->query($query);
-    	
-    	if( $result && $result->num_rows > 0 ){
+    	if( $stmt->num_rows > 0 ){
         	
-        	$row = $result->fetch_array();
+        	$stmt->fetch();
+        	
+        	echo $stmt->error;
     	
-        	if( $row[1] == "1" ){
-            	return;
+        	if( $unavailable == "1" ){
+        	    $mysqli_gamedb->close();
+            	return -1;
         	}
         	
-        	if( file_exists($row[0]) ){
-                return file_get_contents($row[0]);	
+        	if( file_exists($sdfFile) ){
+        	    $mysqli_gamedb->close();
+                return file_get_contents($sdfFile);	
         	}
     	    else{
-        	    return;
+    	        $mysqli_gamedb->close();
+        	    return -2;
     	    }
             
         }
+        
+        
 	}
 ?>

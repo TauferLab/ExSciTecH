@@ -10,7 +10,6 @@
 	function handle_loadQuestionSet_request($request_object){
 	    $response_object = array();
 	    
-	    
 	    if( userHasPermission($request_object["qSetID"], $request_object["authenticator"]) ){
     	    $response_object["settings"] = getQsetSettings($request_object["qSetID"]);
     	    $response_object["questions"] = getQsetQuestions($request_object["qSetID"]);
@@ -19,11 +18,12 @@
     	    $response_object["success"] = false;
 	    } 
 	    
+	    $mysqli_gamedb->close();
 	    return $response_object;
 	}
 	
 	function getQsetSettings($qSetID){
-    	global $mysqli_gamedb;
+    	$mysqli_gamedb = connectToMysql();
 	    $retVal = array();
 	    
 	    $qSetID = $mysqli_gamedb->escape_string($qSetID);
@@ -43,14 +43,16 @@
         	
     	}
         else{
+            $mysqli_gamedb->close();
             return false;
         }    	
 
+        $mysqli_gamedb->close();
     	return $retVal;
 	}
 	
 	function userHasPermission($qSetID,$auth){
-    	global $mysqli_gamedb;
+    	$mysqli_gamedb = connectToMysql();
     	
     	$qSetID = $mysqli_gamedb->escape_string($qSetID);
 	    $auth = $mysqli_gamedb->escape_string($auth);
@@ -61,15 +63,17 @@
     	$result = $mysqli_gamedb->query($query);
     	
     	if( $result && $result->num_rows > 0 ){
+    	    $mysqli_gamedb->close();
     	    return true;
         }
         else{
+            $mysqli_gamedb->close();
             return false;
         }
 	}
 
 	function getQsetQuestions($qSetID){
-    	global $mysqli_gamedb;
+    	$mysqli_gamedb = connectToMysql();
     	$retVal = array();
     	
     	$query = "SELECT question_id,name,text,answers,answer FROM questions
@@ -89,6 +93,8 @@
             	$row["answer"]
             );
     	}
+    	
+    	$mysqli_gamedb->close();
     	return $retVal;
 	}
 
