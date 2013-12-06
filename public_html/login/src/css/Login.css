@@ -1,11 +1,6 @@
 /* Main Components */
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    color: black;
-    font-family: Tahoma, Geneva, sans-serif;
     /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -13,6 +8,7 @@ body {
 }
 
 /* Parent Div Elements */
+
 .login {
     min-width: 1004px;
     min-height: 64px;
@@ -26,57 +22,32 @@ body {
 
 /* Component Classes */
 
-div.button {
-    text-align: center;
-    background-color: #DBDBDB;
-    background-image: linear-gradient(#E8E8E8, #DBDBDB 60%, #CFCFCF);
-    margin: 20px;
-    padding: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition-property: opacity;
-    transition-duration: 0.3s;
-    transition-delay: 0s;
-}
-
-div.button:hover {
-    opacity: 1.0;
-}
-
-.button.blueButton {
-    color: white;
-    background-color: #2FA4E7;
-    background-image: linear-gradient(#1D9CE5, #198ED2 60%, #167FBB);
-    opacity: 0.8;
-}
-
-.button.blueButton:hover {
-    opacity: 1.0;
+.btn.blueButton {
+    width: 100px;
+    margin: 10px;
 }
 
 .screen {
     height: 600px;
     width: 1000px;
-    border: 2px solid #54B4EB;
     border-radius: 0px 0px 5px 5px;
     border-top: 0px;
-    background-color: white;
     position: absolute;
     display: block;
+    background-color: white;
 }
 
 /* Text and Headings and Links */
 
 h1 {
     font-size: 72px;
-    color: black;
+    color: #555;
 }
 
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: black;
+    color: #555;
 }
 
 .screen h1, .screen h2 {
@@ -112,15 +83,6 @@ p.errorText {
 
 /* Transition classes */
 
-.fade {
-    opacity: 0 !important;
-    transition: opacity 0.5s linear;
-}
-
-.fade.in {
-    opacity: 1 !important;
-}
-
 .slide {
     opacity: 1;
     overflow: hidden;
@@ -145,14 +107,6 @@ p.errorText {
     z-index: 2;
 }
 
-.hide {
-    display: none !important;
-}
-
-.hide.active {
-    display: block !important;
-}
-
 
 /* Login Specific */
 
@@ -161,7 +115,7 @@ p.errorText {
 }
 
 #registerBox {
-    height: 340px;
+    height: 400px;
 }
 
 .inputContainer {
@@ -174,7 +128,8 @@ p.errorText {
     height: 300px;
     padding: 10px;
     background-color: white;
-    border: 2px solid black;
+    border: 1px solid #555;
+    border-radius: 4px;
 }
 
 h1.inputContainer {
@@ -182,14 +137,7 @@ h1.inputContainer {
 }
 
 a.basicLink {
-    color: #167FBB;
-    display: inline;
     cursor: pointer;
-    text-decoration: none;
-}
-
-a.basicLink:hover {
-    text-decoration: underline;
 }
 
 span.error {
@@ -198,11 +146,6 @@ span.error {
 
 span.good {
     color: green;
-}
-
-.inputBox .button { 
-    margin: 10px auto;
-    max-width: 100px;
 }
 
 .inputBox form {
@@ -221,13 +164,14 @@ span.good {
 }
 
 .inputBox label input {
-    width: 55%;
+    width: 58%;
     margin-left: 10px;
 }
 
 .returnMenuButton {
+    display: block;
     margin: auto !important;
-    width: 200px;
+    width: 200px !important;
 }
 
 .endLogin {

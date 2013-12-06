@@ -18,7 +18,7 @@ function redirect() {
     }
 }
 
-function createDivShow() {
+function registerDivShow() {
     $('#loginBox').addClass('up');
     setTimeout(function() {
         $('#registerBox').removeClass('up');
@@ -58,7 +58,7 @@ function registerComplete(response) {
 
 function enableButtons() {
     $('#loginUI')
-        .find('.button[data-logic=\'login\']')
+        .find('[data-logic=\'login\']')
         .on('click', function() {
             $('#loginButton').addClass('hide');
             LoginCommManager.login(
@@ -69,15 +69,15 @@ function enableButtons() {
         })
         .end()
 
-        .find('[data-logic=\'showCreate\']')
-        .on('click', createDivShow)
+        .find('[data-logic=\'showRegister\']')
+        .on('click', registerDivShow)
         .end()
 
         .find('[data-logic=\'showLogin\']')
         .on('click', loginDivShow)
         .end()
 
-        .find('.button[data-logic=\'register\']')
+        .find('[data-logic=\'register\']')
         .on('click', function() {
             $('#registerMismatch, #registerFail').addClass('hide');
 
