@@ -345,7 +345,7 @@
                 radius *= atomScale;
 
                 //create the atom
-                var atomMaterial = new THREE.MeshLambertMaterial
+                var atomMaterial = new THREE.MeshPhongMaterial
                         ({
                             color: color.getHex( )
                         });
