@@ -19,18 +19,21 @@
         this.currentQuestion = undefined;
         this.currentAnswer = undefined;
         this.questionIterator = undefined;
+        
+        var lightColor = 0xFFFFFF;
+        var lightIntensity = 0.60;
 
-        var directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
-        directionalLight.position = new THREE.Vector3(0, 0, -0.4);
+        var directionalLight =  new THREE.DirectionalLight(lightColor, lightIntensity);
+        directionalLight.position = new THREE.Vector3(0, -0.5, -0.5);
         this.scene.add(directionalLight);
-        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
-        directionalLight.position = new THREE.Vector3(0, 0, 0.4);
+        directionalLight =  new THREE.DirectionalLight(lightColor, lightIntensity);
+        directionalLight.position = new THREE.Vector3(0, 0.5, 0.5);
         this.scene.add(directionalLight);
-        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
-        directionalLight.position = new THREE.Vector3(0.4, 0.4, 0);
+        directionalLight =  new THREE.DirectionalLight(lightColor, lightIntensity);
+        directionalLight.position = new THREE.Vector3(0.5, 0.5, 0);
         this.scene.add(directionalLight);
-        directionalLight =  new THREE.DirectionalLight(0xFFFFFF, 0.75);
-        directionalLight.position = new THREE.Vector3(-0.4, -0.4, 0);
+        directionalLight =  new THREE.DirectionalLight(lightColor, lightIntensity);
+        directionalLight.position = new THREE.Vector3(-0.5, -0.5, 0);
         this.scene.add(directionalLight);
     };
 
