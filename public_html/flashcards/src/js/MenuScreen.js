@@ -13,6 +13,14 @@
         Screen.apply(this, [$element]);
         this.topics = undefined;
         this.$currentTopic = undefined;
+        this.firstVisit = true;
+
+        /* Initialize only once */
+        $('#logout').on('click', function() {
+            CookieManager.deleteCookie('username', '/');
+            CookieManager.deleteCookie('auth', '/');
+            window.location = '../login#flashcards';
+        });
     };
  
     MenuScreen.prototype = Object.create(Screen.prototype);
@@ -40,13 +48,33 @@
             $('#accountButton').text(UserData.username);
             FCCommunicationManager.availableGames(UserData.auth, this.showAvailableTopics.bind(this));
         } else {
-            window.location = '../login#flashcards';
+            if(window.location.hash.indexOf('#id=') == 0) {
+                window.location = '../login#flashcards&id=' + window.location.hash.substr(4, window.location.hash.length - 4);
+            } else {
+                window.location = '../login#flashcards';
+            }
+            
         }
     };
 
     MenuScreen.prototype.showAvailableTopics = function(response) {
         var $topicList = $('#topicList').empty();
         this.topics = response.available_games;
+        if(this.firstVisit && window.location.hash.indexOf('#id=') == 0) {
+            UserData.gameID = window.location.hash.substr(4, window.location.hash.length - 4);
+            for(var i = 0; i < this.topics.length; i++) {
+                if(UserData.gameID == this.topics[i].id) {
+                    this.firstVisit = false;
+                    UserData.gameTimeLimit = this.topics[i].time_limit;
+                    $('#mainMenuUI').find('[data-logic=\'start\']').click();
+                    return;
+                }
+            }
+        } else {
+            window.location.hash = '';
+        }
+
+        this.firstVisit = false;
         UserData.gameID = this.topics[0].id;
         UserData.gameTimeLimit = this.topics[0].time_limit;
 
@@ -84,15 +112,6 @@
         UserData.gameID = topic.id;
         UserData.gameTimeLimit = topic.time_limit;
     };
-    
-    MenuScreen.prototype.selectTopic = function(topic) {
-        
-        
-        (function updateRightPanel()
-        {
-
-        })();
-    };
 
     function insertInfo(replacements, templateString, selector) {
         var result = templateString;
@@ -125,6 +144,7 @@
 
             .find('[data-logic=\'start\']')
             .on('click', function() {
+                window.location.hash = 'id=' + UserData.gameID;
                 $(this).trigger(new ScreenChangeEvent('game'));
             });
 

@@ -1,7 +1,15 @@
 function redirect() {
-    switch(window.location.hash) {
+    var redirect = window.location.hash;
+    var extra = '';
+    if(window.location.hash.indexOf('&') != -1) {
+        var extraIndex = window.location.hash.indexOf('&');
+        redirect = window.location.hash.substr(0, extraIndex);
+        extra = '#' + window.location.hash.substr(extraIndex + 1, window.location.hash.length - extraIndex);
+    }
+
+    switch(redirect) {
         case '#flashcards':
-            window.location = '../flashcards';
+            window.location = '../flashcards' + extra;
             break;
         case '#jobSubmission':
             window.location = '../jobSubmission';
