@@ -38,7 +38,7 @@
     }
 
     function disableButtons( ) {
-        $('#tutorialUI').off('click');
+        $('#tutorialUI').children().off();
     }
 
     window.TutorialScreen = TutorialScreen;

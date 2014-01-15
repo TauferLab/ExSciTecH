@@ -1,7 +1,7 @@
 (function(window) {
     'use strict';
 
-    var Application = function(game, camera, title, width, height) {
+    var Application = function(game, camera, title, width, height, containerName) {
         this.game = game;
         this.camera = camera;
         this.prevTime = Date.now( );
@@ -10,8 +10,11 @@
         });
 
         this.renderer.setSize(width, height);
+        if(containerName == undefined) {
+            containerName = '#container';
+        }
 
-        $('#container').append(this.renderer.domElement);
+        $(containerName).append(this.renderer.domElement);
     };
 
     Application.prototype = {

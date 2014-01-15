@@ -14,13 +14,13 @@
         <!-- css files -->
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MoleculeFlashcards.css'> 
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/GameScreen.css'>
-        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/HighScoreScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/MenuScreen.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'src/css/TutorialScreen.css'>
         
         <!-- js lib files -->
         <script src='../libs/three.js'></script>
         <script src='../libs/jQuery.js'></script>
+        <script src='../libs/jquery.mousewheel.js'></script>
         <script src='../libs/md5-min.js'></script>
 
         <!--js framework files-->
@@ -50,7 +50,6 @@
         <script src='src/js/GameScreen.js'></script>
         <script src='src/js/UserData.js'></script>
         <script src='src/js/MenuScreen.js'></script>
-        <script src='src/js/HighScoreScreen.js'></script>
         <script src='src/js/TutorialScreen.js'></script>
         <script src='src/js/ScoreManager.js'></script> 
         <script src='src/js/MoleculeGame.js'></script>
@@ -59,30 +58,36 @@
         <script>
             $(function( ) {
                 /* Mouse Events */
-                $('#container')
+                $('#tutorialUI')
                     .mousedown( MouseManager.onMouseDown )
                     .mouseup( MouseManager.onMouseUp )
                     .mousemove( MouseManager.onMouseMove );
 
-                /* Temporary touch events for demo */
-                $('#container').on('touchstart',function(e){
+                var firstTouch = true;
+
+                /* Touch Screen Laptops */
+                $('#tutorialUI').on('touchstart',function(e){
+                    e.preventDefault();
                     e.button = MouseManager.LEFT_STD_BUTTON;
                     e.screenX = e.originalEvent.touches[0].screenX;
                     e.screenY = e.originalEvent.touches[0].screenY;
-                    e.preventDefault();
+                    if(firstTouch) {//if they haven't touched it yet, breaks - like clicking the board without moving over it
+                        first = false;
+                        MouseManager.onMouseMove(e);
+                    }
                     MouseManager.onMouseDown(e);
                 });
-                $('#container').on('touchmove',function(e){
+                $('#tutorialUI').on('touchmove',function(e){
+                    e.preventDefault();
                     e.screenX = e.originalEvent.touches[0].screenX;
                     e.screenY = e.originalEvent.touches[0].screenY;
-                    e.preventDefault();
                     MouseManager.onMouseMove(e);
                 });
-                $('#container').on('touchend',function(e){
+                $('#tutorialUI').on('touchend',function(e){
+                    e.preventDefault();
                     e.button = MouseManager.LEFT_STD_BUTTON;
                     e.screenX = 400;//garbage
                     e.screenY = 400;//garbage
-                    e.preventDefault();
                     MouseManager.onMouseUp(e);
                 });
 
@@ -100,12 +105,12 @@
                         ASPECT,
                         NEAR,
                         FAR);
-                camera.position.y = 7;
-                camera.position.z = 5;
-                camera.position.x = 3;
+                camera.position.y = 0;
+                camera.position.z = 9;
+                camera.position.x = 0;
                 camera.lookAt(new THREE.Vector3 (0, 0, 0));
-                var game = new MoleculeGame( );
-                var application = new Application(game, camera, 'Game Test', WIDTH, HEIGHT);
+                var game = new MoleculeGame();
+                var application = new Application(game, camera, 'Molecule Flashcards', WIDTH, HEIGHT, '#canvasContainer');
                 application.performGameLoop( );
             });
         </script>
@@ -157,7 +162,9 @@
         
         <div id = 'game' class='flashcardsGame'>
             <div id = 'container'>
-                <!-- canvas goes here -->
+                <div id = 'canvasContainer'>
+                    <!-- canvas goes here -->
+                </div>
 
                 <div id = 'errorMessage' class = 'screen fade panel panel-primary'>
                     <h1>Oops!</h1>

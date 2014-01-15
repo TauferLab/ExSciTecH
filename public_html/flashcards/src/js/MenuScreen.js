@@ -142,7 +142,9 @@
     }
 
     function disableButtons( ) {
-        $('#mainMenuUI, #tutorialUI').off('click');
+        $('#mainMenuUI').find('[data-logic=\'tutorial\']').off();
+        $('#mainMenuUI').find('[data-logic=\'scores\']').off();
+        $('#mainMenuUI').find('[data-logic=\'start\']').off();
         $('#topicList').off('click');
     }
 

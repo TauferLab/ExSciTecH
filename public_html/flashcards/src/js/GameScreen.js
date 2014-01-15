@@ -19,6 +19,9 @@
         this.currentQuestion = undefined;
         this.currentAnswer = undefined;
         this.questionIterator = undefined;
+
+        this.lastXRotation = 0;
+        this.lastZRotation = 0;
         
         var lightColor = 0xFFFFFF;
         var lightIntensity = 0.60;
@@ -61,12 +64,14 @@
         $('#time').text(Timer.getDigitalRep(this.getSecondsLeft( )));
         $('#score').text(this.scoreManager.score);
 
-        if(MouseManager.leftButton.isPressed && this.currentQuestion !== undefined) {
-            this.currentQuestion[QUESTION_MOLECULE].rotation.z -=
-                    (MouseManager.currentX - MouseManager.leftButton.pressedX) / 1000;
+        if(this.currentQuestion !== undefined) {
+            if(MouseManager.leftButton.isPressed) {
+                this.lastZRotation = (MouseManager.currentX - MouseManager.leftButton.pressedX) / 2000;
+                this.lastXRotation = (MouseManager.currentY - MouseManager.leftButton.pressedY) / 2000;
+            }
 
-            this.currentQuestion[QUESTION_MOLECULE].rotation.x +=
-                    (MouseManager.currentY - MouseManager.leftButton.pressedY) / 1000;
+            this.currentQuestion[QUESTION_MOLECULE].rotation.z -= this.lastZRotation;
+            this.currentQuestion[QUESTION_MOLECULE].rotation.x += this.lastXRotation;
         }
     };
 
@@ -124,6 +129,16 @@
         return (time > 0) ? time : 0;
     };
 
+    GameScreen.prototype.adjustZoom = function(amount) {
+        if(this.currentQuestion[QUESTION_MOLECULE].position.z < 8 && this.currentQuestion[QUESTION_MOLECULE].position.z > -100) {
+            this.currentQuestion[QUESTION_MOLECULE].position.z += amount;
+        } else if(this.currentQuestion[QUESTION_MOLECULE].position.z == 8 && amount == -1) {
+            this.currentQuestion[QUESTION_MOLECULE].position.z += amount;
+        } else if(this.currentQuestion[QUESTION_MOLECULE].position.z == -100 && amount == 1) {
+            this.currentQuestion[QUESTION_MOLECULE].position.z += amount;
+        }
+    };
+
     GameScreen.prototype.startGame = function( ) {
         $('#beginButton').addClass('hide');
         $('#loadingUI').removeClass('in active');
@@ -146,7 +161,7 @@
         /* Build Molecule */
         var molecule = MoleculeGeometryBuilder.load(data, 0.25, 15, 1, 0);
         if( molecule != undefined ) {
-            molecule.position = new THREE.Vector3(-1, -1, 0);
+            molecule.position = new THREE.Vector3(-0.5, 0, 0);
             molecule.scale = new THREE.Vector3(0.5, 0.5, 0.5);
 
             this.questionList.push([molecule,
@@ -156,7 +171,6 @@
 
             this.loadingState++;
             if(this.loadingState < this.gameData.questions.length) {          
-
                 FCCommunicationManager.getMedia(this.gameData.game_session_id,
                         FCCommunicationManager.MEDIA_PDB,
                         this.gameData.questions[this.loadingState].id,
@@ -326,15 +340,22 @@
         $('#scoreChange').on('animationend webkitAnimationEnd ', function() {
             $(this).removeClass('flashInOut incorrect long');
         });
+
+        $('#tutorialUI').on('mousewheel', function(event) {
+            gameScreen.adjustZoom(event.deltaY);
+
+            return false;
+        });
     }
 
     function disableButtons( ) {
-        $('#gameButtons').off('click');
-        $('#loadingUI').off('click');
+        $('#gameButtons').off();
+        $('#loadingUI').find('[data-logic=\'begin\']').off();
+        $('#tutorialUI').off('mousewheel');
     }
 
     function disableReturnButton( ) {
-        $('#gameUI').off('click');
+        $('#gameUI').find('[data-logic=\'return\']').off();
     }
 
     window.GameScreen = GameScreen;

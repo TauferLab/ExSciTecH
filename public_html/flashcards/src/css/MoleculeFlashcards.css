@@ -25,6 +25,11 @@ div.flashcardsGame {
     margin: auto;
 }
 
+#canvasContainer {
+    position: absolute;
+    z-index: -1;
+}
+
 /* Component Classes */
 
 .screen {
