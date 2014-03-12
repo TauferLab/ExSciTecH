@@ -7,11 +7,11 @@ MoleculeSearch = function ( ) {
     this.getTopMolecules();
     
     var ID = this.ID;
-    var molSearch = this;
+    //var molSearch = this;
     
     $( "#mn_" + this.ID ).autocomplete({
         source: this.autocp,
-        select: function(event, ui){ molSearch.search( event, ui, ID ) }
+        select: function(event, ui){ this.search( event, ui, ID ) }.bind(this)
     });
     
     this.glmol = new GLmol( 'glmol_'+ this.ID );
@@ -27,7 +27,13 @@ MoleculeSearch = function ( ) {
         $("#mn_" + this.ID).val(preloadName);
     }
     
-    this.showRandomMolecule();
+    if(window.location.hash){
+        var molName = decodeURIComponent(window.location.hash.substring(1));
+        this.updateMolecule( molName );
+    }
+    else{
+        this.showRandomMolecule();    
+    }
     
 };
 
@@ -44,7 +50,7 @@ MoleculeSearch.prototype.generateHTML = function (){
     
     var ID = this.ID;
     
-    /*  
+	/*      
     ret  = "    <div class='ui-widget molNameWrapper' id='mnw_" + ID +"' type='text'>";
     ret += "       <label class='molNameLabel' for='mn_" + ID +"'>Molecule Search: </label><br>";
     ret += "       <input class='molName' id='mn_" + ID +"' />";
@@ -52,33 +58,16 @@ MoleculeSearch.prototype.generateHTML = function (){
     */
     
     ret  = "<div class=\"panel panel-primary\">";
-    ret += "    <div class=\"panel-heading\">";
-    ret += "        Molecule Search";
-    ret += "    </div>";
+    //ret += "    <div class=\"panel-heading\">";
+    //ret += "        Molecule Search";
+    //ret += "    </div>";
     ret += "    <div class=\"panel-body\">";
     ret += "        <div class='ui-widget molNameWrapper' id='mnw_" + ID +"' type='text'>";
-    ret += "            <input class='molName' id='mn_" + ID +"' />";
+    ret += "            <input class='molName form-control' id='mn_" + ID +"' placeholder='Type here to search for molecules'/>";
     ret += "        </div>";
+    ret += '        <div type="button" class="btn btn-default btn-block" onClick="MoleculeSearch.SearchArray[1].showRandomMolecule()"><img src="assets/dice9.png" height="18px"></img> Random Molecule</button>';
     ret += "    </div>";
     ret += "</div>";
-    
-    ret += "<div class=\"panel panel-primary\">";
-    ret += "    <div class=\"panel-body\">";
-    ret += "        <button type=\"button\" class=\"btn btn-default\" onClick=\"MoleculeSearch.SearchArray[1].showRandomMolecule()\">Random Molecule</button>";
-    ret += "    </div>";
-    ret += "</div>";
-    
-    ret += "<div class=\"panel panel-primary\">";
-    ret += "    <div class=\"panel-heading\">";
-    ret += "        Top Molecules";
-    ret += "    </div>";
-    ret += "    <div class=\"panel-body\">";
-    ret += "        <div class='list-group' id='topMolList'>";
-    ret += "        </div>";
-    ret += "    </div>";
-    ret += "</div>";
-    
-    
     
     $("#searchArea").append(ret);
     
@@ -114,7 +103,7 @@ MoleculeSearch.prototype.autocp = function (request, response) {
     var input = request.term;    
     var time = (new Date).getTime();
     
-    var URL = "http://pubchem.ncbi.nlm.nih.gov/pcautocp/pcautocp.cgi?callback=rem_ove&dict=pc_compoundnames&n="+MoleculeSearch.numOptions+"&q="+ input +"&_="+time;
+    var URL = "https://pubchem.ncbi.nlm.nih.gov/pcautocp/pcautocp.cgi?callback=rem_ove&dict=pc_compoundnames&n="+MoleculeSearch.numOptions+"&q="+ input +"&_="+time;
 
     if( request.term.length > 1 ){
        $.ajax(URL,{
@@ -144,18 +133,25 @@ MoleculeSearch.prototype.showRandomMolecule = function(){
     var URL = "./getRandMol.php";
     var response = $.ajax({url: URL, async : false}).responseText;
     
-    this.downloadSDF(response);
-    
+    this.updateMolecule(response);
 }
 
 MoleculeSearch.prototype.search = function ( event, ui , ID) {
-    this.downloadSDF( ui.item.value );
+    this.updateMolecule( ui.item.value );
 };
 
+MoleculeSearch.prototype.updateMolecule = function( molName ){
+    this.downloadSDF( molName );
+    this.getMolData( molName );
+    this.updateURL( molName );
+}
+
+MoleculeSearch.prototype.updateURL = function( molName ){
+    window.location.hash = encodeURIComponent( molName );
+}
+
 MoleculeSearch.prototype.downloadSDF = function ( compoundName ){
-    //var URL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + compoundName + "/SDF?record_type=3d";
     var URL = "./getPDB.php?mName=" + compoundName;
-    //var URL = "./request_handler.php";
 
     var ID = this.ID;
     
@@ -171,8 +167,6 @@ MoleculeSearch.prototype.downloadSDF = function ( compoundName ){
     reqObj.compoundName = compoundName;
     reqObj.request_type = "getPDB";
 
-
-
     $.ajax({
             url: URL,
             data:JSON.stringify(reqObj),
@@ -187,9 +181,38 @@ MoleculeSearch.prototype.downloadSDF = function ( compoundName ){
         }); 
 };
 
+MoleculeSearch.prototype.getMolData = function( molName ){
+    var URL = "./getMolInfo.php?molName="+encodeURIComponent(molName);
+
+    $("#molProp").html("<p class='molPropText'>Loading...</p>");
+    $("#molDesc").html("<p class='molPropText'>Loading...</p>");
+
+    $.get( URL,"",
+        function(data){
+        
+            if(data.hasOwnProperty('prop')){    			
+                $("#molProp").html( data.prop );
+            }
+            else{
+                $("#molProp").html( "Properties Unavailable" );
+            }
+            
+            if(data.hasOwnProperty('desc')){
+                $("#molDesc").html( data.desc );
+            }
+            
+            if(data.hasOwnProperty('citation')){
+                $("#citationPanel").html( data.citation );
+            }
+        }
+    );
+}
+
 MoleculeSearch.downloadCallbackSuccess = function (data, ID) {
     $("#lm_" + ID ).css( {display : "none"} );
     
+    // This is super counter intuitive - apparently the get pdb page will return a json string if the pdb doesn't exist.
+    // So when the the parseJSON fails we catch the exception and handle the pdb file.
     try{
         var response = jQuery.parseJSON( data );
         console.log(response);
@@ -197,9 +220,9 @@ MoleculeSearch.downloadCallbackSuccess = function (data, ID) {
         $( "#lm_" + ID ).css( {display : "block", background: "red"} );
 
     }
-    catch(err){
+    catch(nonErr){
         $("#glmol_" + ID +"_src").val(data);
-        MoleculeSearch.SearchArray[ID].glmol.loadMolecule();    
+        MoleculeSearch.SearchArray[ID].glmol.loadMolecule();
     }
 };
 

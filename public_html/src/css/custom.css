@@ -35,6 +35,10 @@
     padding: 40px;
 }
 
+#welcomeAlert{
+    margin-bottom: 5px;
+}
+
 /*
  * Sign in
  */
@@ -69,4 +73,34 @@
 
 .form-signin p{
     margin-bottom: 0px;
+}
+
+.form-control{
+    width: 250px;
+}
+
+#regWrapper .form-control{
+    width: 100%;
+}
+
+
+#forgotPass{
+	font-size: 12px;
+	text-align: right;
+	margin: 0;
+	line-height: 14px;
+}
+
+#supportWarning{
+    margin-bottom: 0px;
+}
+
+#supportWarning h3,h5{
+    margin-top: 0px;
+    color: #b94a48;
+}
+
+#dismissMsg{
+    font-size: 10px;
+    color: #8AB68A;
 }

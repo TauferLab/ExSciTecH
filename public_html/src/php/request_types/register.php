@@ -8,12 +8,6 @@
 	$request_structures["register"]["password"] = "";
 	$request_structures["register"]["email"] = "";
 	
-	//include_once("/boinc/exscitech/boinc/html/inc/boinc_db.inc");
-	//include_once("/boinc/exscitech/boinc/html/inc/util.inc");
-	//include_once("/boinc/exscitech/boinc/html/inc/email.inc");
-	//include_once("/boinc/exscitech/boinc/html/inc/user.inc");
-	//include_once("/boinc/exscitech/boinc/html/inc/recaptchalib.php");
-	
 	function handle_register_request($request_object){
 		$response_object = array();
 		

@@ -1,0 +1,168 @@
+#gameWrapper{
+    background-color: #d7d7d7;
+    min-height: 600px;
+}
+
+.questionBtn{
+    width: 95%;
+    font-size: 24px;
+    margin: 10px auto 0 auto
+}
+
+#gameStatWindow{
+    background-color: #2D2D33;    
+}
+
+#qSetTitle{
+    color: #444;
+    font-size: 48px;
+    margin-left: 12px;
+    margin-top: 4px;
+    text-align: center;
+}
+
+#gameUI{
+    display: none;
+}
+
+.gameInfoWin{
+    background-color: #2D2D33;
+    color: white;
+    width: 95%;
+    margin: 10px auto;
+}
+
+.gameInfoWin h2{
+    color: white;
+    margin:0;
+}
+
+.infoWinVal{
+    float: right;
+}
+
+#qText{
+    color:white;
+    margin: 0;
+    text-align:center;
+}
+
+#GLMolFrame{
+    height: 500px;
+}
+
+#scoreDiff{
+    margin: 0;
+    text-align: right;
+    margin-right: 32px;
+    color: green;
+    opacity: 0;
+}
+
+@media only screen and (max-width: 992px) {
+    .questionBtn{
+        font-size: 16px;
+    }
+    .gameInfoWin h2,h3{
+        font-size: 16px;
+    }
+    #scoreDiff{
+        font-size: 16px;
+    }
+    #GLMolFrame{
+        height: 250px;
+    }
+}
+
+#endUI{
+    display: none;
+}
+
+#endUI h1{
+    text-align: center;
+    color: rgb(85, 85, 85);
+}
+
+#gameStartBtn{
+    font-size: 36px;
+    margin-top: 20px;
+}
+
+#loadingContainer{
+    margin: 12px;
+}
+
+.playAgainBtn{
+    font-size: 28px;    
+    font-weight: bold;
+}
+
+#qSetImage{
+    display: block;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    max-width: 228px;
+    margin: 10px;
+    background: grey;
+}
+
+.qSetImgWrapper {
+    background: #fff;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    zoom: 1;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    margin: 0px 12px;
+}
+
+#qSetInfo label{
+    margin: 0px;
+}
+#qSetInfo{
+    margin-left: 12px;
+    height: 370px;
+}
+
+#qSetTitle button{
+    margin-bottom: 7px;
+    margin-right: 15px;
+}
+
+#infoDesc{
+    font-size: 16px;
+}
+
+#backBtn{
+    width: 75%;
+    margin: 12px;
+}
+
+#hsWrapper{
+    background: white;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    margin-right: 12px;
+}
+
+#hsWrapper h2{
+    text-align: center;
+    color: rgb(85, 85, 85);
+    margin-top:10px;
+}
+
+#hsWrapper .table-responsive{
+    margin: 0px 10px;
+}

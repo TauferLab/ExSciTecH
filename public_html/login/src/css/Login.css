@@ -1,159 +1,102 @@
-/* Main Components */
-
-body {
-    /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
+.container .jumbotron{
+    padding: 20px;
 }
 
-/* Parent Div Elements */
-
-.login {
-    min-width: 1004px;
-    min-height: 64px;
-}
-
-#container {
-    width: 1004px;
-    height: 604px;
-    margin: auto;
-}
-
-/* Component Classes */
-
-.btn.blueButton {
-    width: 100px;
-    margin: 10px;
-}
-
-.screen {
-    height: 600px;
-    width: 1000px;
-    border-radius: 0px 0px 5px 5px;
-    border-top: 0px;
-    position: absolute;
-    display: block;
-    background-color: white;
-}
-
-/* Text and Headings and Links */
-
-h1 {
-    font-size: 72px;
-    color: #555;
-}
-
-h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #555;
-}
-
-.screen h1, .screen h2 {
+#welcomeMsg{
     text-align: center;
+    font-size: 52px;
+    margin-top: 0;
 }
 
-p.errorText {
-    font-size: 22px;
-    padding-left: 50px;
-    padding-right: 50px;
+#redirectMsg{
+    text-align: center;
+    margin-top: 0;
 }
-
-/* Transition classes */
-
-.slide {
-    opacity: 1;
-    overflow: hidden;
-    transition: all 0.3s linear;
-    transition-property: height, padding, border;
-}
-
-/* TODO: May be a cleaner way to do this without using !important. */
-.slide.up {
-    height: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    border-top-width: 0 !important;
-    border-bottom-width: 0 !important;
-}
-
-.active {
-    z-index: 1;
-}
-
-.activeTop {
-    z-index: 2;
-}
-
 
 /* Login Specific */
 
-#loginBox {
-    height: 280px;
+#loginWrapper{
+    padding: 0px 20px;
+    overflow: hidden;
+    position: relative;
+    top: 110px;
 }
 
-#registerBox {
-    height: 400px;
+#loginArea {
+
 }
 
-.inputContainer {
-    margin: 50px auto;
-    width: 400px;
-    text-align: center;
+#loginHeader{
+    font-size: 24px;
+    margin: 10px 0px;
 }
 
-.inputBox {
-    height: 300px;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #555;
-    border-radius: 4px;
+.loginOption{
+    font-size: 14px;
 }
 
-h1.inputContainer {
-    text-align: center;
-}
-
-a.basicLink {
+.loginOption a{
     cursor: pointer;
 }
 
-span.error {
-    color: red;
+/*
+
+*/
+
+#regWrapper{
+    height: 0;
+    display: none;
+    padding: 0px 20px;
+    overflow: hidden;
+    position: relative;
+    top: 80px;
 }
 
-span.good {
-    color: green;
+#regArea {
+
 }
 
-.inputBox form {
-    width: 100%;
+#regHeader{
+    font-size: 24px;
+    margin: 10px 0px;
 }
 
-.inputBox label, .inputBox input {
-    display: inline-block;
+.regOption{
+    font-size: 14px;
 }
 
-.inputBox label {
-    clear: both;
-    margin: 6px auto;
-    text-align: right;
-    width: 95%;
+/*
+
+*/
+
+#demoMolecule{
+    height: 500px;
 }
 
-.inputBox label input {
-    width: 58%;
-    margin-left: 10px;
+#bodyRow{
+    height: 500px;
 }
 
-.returnMenuButton {
-    display: block;
-    margin: auto !important;
-    width: 200px !important;
+#loginEmail{
+    border-radius: 4px 4px 0px 0px;
 }
 
-.endLogin {
-    padding-top: 100px;
-    text-align: center;
+#loginPass{
+   border-radius: 0px 0px 4px 4px; 
+}
+
+#regEmail{
+    border-radius: 4px 4px 0px 0px;
+}
+
+#regUser{
+    border-radius: 0px;
+}
+
+#regPass1{
+    border-radius: 0px;    
+}
+
+#regPass2{
+    border-radius: 0px 0px 4px 4px;
 }

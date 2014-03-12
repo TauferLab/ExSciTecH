@@ -1,0 +1,94 @@
+#loadingContainer{
+    height: 636px;
+    text-align: center;
+    padding-top: 25%;
+}
+
+#contents{
+    display: none;
+}
+
+#questionSetListWrapper{
+    padding-left: 10px;
+    padding-right: 10px; 
+}
+
+#questionSetList{
+    height: 550px;
+    overflow: auto;  
+}
+
+.topicImage{
+    width:114px;
+    height:94px;
+    float:left;
+}
+
+.topicTitle{
+    min-width: 142px;
+    max-width: 200px;
+    width: 55%;
+    height: 75px;
+    float: right;
+}
+
+.topicTitle h4:hover{
+    text-decoration: underline;
+    
+}
+
+.topicTitle h4{
+    float: right;
+    text-align: right;
+    cursor: pointer;
+}
+
+.editLink{
+    float: right;
+    text-align: right;
+    width: 25%;
+}
+
+.questionSet{
+    margin-bottom: 5px;
+}
+
+#statTitle{
+    margin-bottom: 18px;
+}
+
+#loadingIcon{
+    display: block;
+}
+
+.outputFrame{
+    height: 500px;
+    width: 700px;    
+}
+
+#generalStats{
+    display: block;
+}
+#guessChart{
+    display: none;    
+
+}
+#scoreChart{
+    display: none;
+}
+
+#chartsContainer{
+    display: none;
+}
+
+#genStatTable{
+    margin: 20px auto;
+}
+
+#genStatTable tr{
+    line-height: 32px;
+}
+
+.reviewStatus{
+	text-align: center;
+}

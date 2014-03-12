@@ -90,4 +90,17 @@ function is_banned_email_addr($email_addr) {
     return false;
 }
 
+function get_user($authenticator){
+	$authenticator = BoincDb::escape_string($authenticator);
+	
+	$user = BoincUser::lookup("authenticator = \"".$authenticator."\"");
+	
+	return $user;
+}
+
+function lookup_user_username($username) {
+    $username = BoincDb::escape_string($username);
+    return BoincUser::lookup("name='$username'");
+}
+
 ?>

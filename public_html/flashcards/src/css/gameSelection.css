@@ -1,0 +1,197 @@
+#contentWrapper{
+    overflow: hidden;
+    
+}
+
+/****************************
+ * TILES *
+ ****************************/
+.tileRow{
+    width: 100%;
+} 
+ 
+#tileWrapper{
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	float:left;
+	overflow: hidden;
+	padding-bottom: 30px;
+	background-color: #d7d7d7;
+}
+
+#tileHeader{
+	margin: 5 0 0 16;
+    color: rgb(85, 85, 85);
+}
+
+.module-game-tile {
+	height: 230px;
+	width: 100%;
+	background: #fff;
+	float: left;
+	margin: 16 0 0 16;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+	border: 0;
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+	box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+	zoom: 1;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+}
+		
+.module-game-tile .game-image-wrapper {
+	cursor: pointer;
+	display: inline-block;
+	height: 188px;
+	width: 90%;
+	max-width: 228px;
+	margin-top: 10px;
+	overflow: hidden;
+	position: relative;
+	text-align: left;
+	z-index: 10;
+	zoom: 1;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+}
+.module-game-tile .text-wrapper {
+	background: #fff;
+	position: relative;
+	z-index: 20;
+	height: 30%;
+	margin-top: -3px;
+}
+.module-game-tile .text-wrapper .text {
+	height: 52px;
+	margin: -3px 10px 0 10px;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	text-align: left;
+	zoom: 1;
+}
+.module-game-tile .text-wrapper .text h3 {
+	color: #313131;
+	font-size: 15px;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+.module-game-tile .text-wrapper .text h3.overflow {
+	line-height: 1.25rem;
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 0;
+}
+.module-game-tile .text-wrapper .text h3 a {
+	color: #333;
+	display: block;
+	padding: 6px 0;
+	border-top: 1px solid #999;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	background: transparent;
+	border: 0;
+	margin: 0;
+}
+.play-btn-wrapper{
+	z-index: 15;
+	position: relative;
+	top: 0px;
+	opacity: 0;
+
+}
+.game-image{
+	display: block;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    max-width: 228px;
+    height: 98%;
+    width: 100%;
+    margin: 0 auto;
+    background: grey;
+}
+.module-game-tile .game-image-overlay {
+	display: none;
+	position: absolute;
+	background: #000;
+	opacity: 0.5;
+	filter: Alpha(opacity=50);
+	z-index: 1;
+    max-width: 228px;
+    height: 98%;
+    width: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+}
+
+.play-btn .button-text {
+	display: block;
+	padding: 52px 25px;
+	height: auto;
+	text-shadow: 0 0 3px rgba(0,0,0,0.44);
+	text-align: center;
+	vertical-align: middle;
+}
+
+.play_button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #caefab;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
+	box-shadow:inset 0px 1px 0px 0px #caefab;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+	background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
+	background-color:#77d42a;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	border:4px solid #FFF;
+	display:inline-block;
+	color: #fcfdff;
+	//font-family:Verdana;
+	font-size:21px;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #5cb811;
+	height: 45px;
+	width: 100px;
+	
+}.play_button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+	background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
+	background-color:#5cb811;
+}.play_button:active {
+	position:relative;
+	top:1px;
+}
+
+.module-game-tile .text-wrapper .text {
+	height: 52px;
+	margin: -3px 10px 0 10px;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	text-align:center;
+	zoom: 1;
+}
+
+.tile_page{
+	float: left;
+	width: 1080;
+	height: 100%;
+	
+}

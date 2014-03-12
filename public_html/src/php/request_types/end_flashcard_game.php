@@ -27,7 +27,9 @@
 		// ie if num_questions_answered == num_questions or time == time_limit 		
 		if(are_all_questions_answered($game_session_id) || $remaining_time == $max_time){
 			//store score
-			store_score($user, $game_session_id,$final_score);
+			if(isset($user->name)){
+    			store_score($user, $game_session_id,$final_score);
+            }
 		
 			//return score rank
 			$response_object["rank"] = get_rank($final_score, $game_session_id);

@@ -1,3 +1,52 @@
+<?php
+    require_once("./src/php/template.php");
+    require_once("./src/php/config.inc");
+    
+    function getNews(){
+        global $MYSQL_SERVER;
+        global $MYSQL_USER;
+        global $MYSQL_PASSWORD;
+        global $MYSQL_FORUM_DB;
+        
+        $newsItems = array();
+        
+        $mysqli = new mysqli($MYSQL_SERVER, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_FORUM_DB);
+        
+        $query = "SELECT `DiscussionID`,`Name`,`Body`,`DateInserted` FROM `GDN_Discussion` WHERE `CategoryID` = 8 ORDER BY `DateInserted` DESC LIMIT 4;";
+        $result = $mysqli->query($query);
+        
+        if($result === false){
+            echo $mysqli->error;
+        }
+        else{
+            while ($obj = $result->fetch_object()) {
+                $newsItems[] = $obj;
+            }
+        }
+        
+        return $newsItems;
+    }
+    
+    function printNewsItems($newsItems){
+        foreach($newsItems as $item){
+        
+            $bodyStr = substr( str_replace("<br>","<br><br>",strip_tags($item->Body,"<br>")) ,0,100);
+            $dateStr = date('F d, Y', strtotime(str_replace('-', '/', $item->DateInserted)));
+            
+            if( strlen($item->Body) > strlen($bodyStr) ){
+                $bodyStr = $bodyStr."... <a href='https://exscitech.org/forum/#/discussion/".$item->DiscussionID."/'>More...</a>";
+            }
+        
+            echo "<div class='newsItem'>
+                    <h4 class='newsTitle'>".$item->Name." - <span class='newsDate'>$dateStr</span></h4>
+                    <p class='newsBody'>$bodyStr</p>
+                  </div>";
+        }
+    }
+    
+    $newsItems = getNews();
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,17 +55,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Welcome to ExSciTecH</title>
+    <title>Welcome to ExSciTecH!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./mailingList/cerulean.min.css" rel="stylesheet">
-    <link href="./mailingList/custom.css" rel="stylesheet">
+    <link href="./bootstrap/css/cerulean.min.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- Custom styles for this template -->
+    <link href="./src/css/homepage.css" rel="stylesheet">
+    <link href="./src/css/custom.css" rel="stylesheet">
 
+    <!-- Fonts from Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -26,137 +77,79 @@
 
   <body>
 
-        <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/"><img src="./mailingList/exscitech_logo.png"></a>
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
+      <?php printNavBar(); ?>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Welcome to ExSciTecH!</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <input id="demo_molecule_src" style="display:none" type="text"></input>
-                <div id="demo_molecule"></div>
-            </div>
-            <div class="col-md-6">
-                <p>ExSciTecH's goal is to improve the Volunteer Computing paradigm by bringing together human intuition and discernment with the unused power of millions of computers to engage diverse communities in aiding scientific discovery by:
-                <ul>
-<li>Converting participation from simply donation of idle cycles to donation of cycles plus deductive reasoning </li>
-<li>Reaching out to a broader and more diverse community of volunteers</li>
-                </ul>
-                ExSciTecH will be launching in the coming weeks! If you're interested in receiving announcements and updates on the project please join our mailing list below!
-</p>
-                <div id="mc_embed_signup">
-                    <form action="http://exscitech.us3.list-manage.com/subscribe/post?u=d9e292ceddb98023c6292928b&amp;id=b5f8274e58" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    
-                    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="Email" required>
-                    <div class="clear"><input class="btn btn-primary" type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                    </form>
-                </div>
-            </div>
-        </div>    
-      </div>
-    </div>
+	<div id="headerwrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2" style="text-align: right">
+					<h1>Welcome to ExSciTecH<br>Molecule Flashcards</h1>
+					<a href="https://exscitech.org/flashcards" class="btn btn-success btn-lg">Play Now!</a>
+				</div><!-- /col-lg-12 -->
+				
+			</div><!-- /row -->
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+	
+	
+	<div id="explanation" class="container">
+		<div class="row mt centered">
+			<div class="col-md-8 col-md-offset-2">
+				<h1>What is ExSciTecH?</h1>
+				<p>ExSciTecH is a set of chemistry study tools designed to help students learn about and understand chemical structures.</p>
+			</div>
+		</div><!-- /row -->
+		
+		<div class="row mt centered">
+			<div class="col-md-4">
+				<img src="assets/homepage/microscope5.png" height="155" alt="">
+				<h4>Explore </h4>
+				<p>Explore a huge database of 3D molecules with the molecule viewer.</p>
+			</div><!--/col-md-4 -->
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-          <div class="col-md-4">
-                <div class="thumbnail">
-                    <h2 style="text-align:center">Molecule Explorer</h2>
-                    <img src="./mailingList/explorer.png">
-                    <p>Users are given tools to easily search, visualize and explore the properIes of a huge database of molecules. Students can use this tool to beXer understand molecular properIes and structures right from their web browser </p>
-                </div>
-           </div>
-    
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <h2 style="text-align:center">Molecule Flashcards</h2>
-                    <img src="./mailingList/flashcards.png">
-                    <p>Users compete against one another and against the clock for high scores in a molecule idenIficaIon game. The game has a wide array of quesIon sets covering topics such as organic and inorganic chemistry at various difficulty levels</p>
-                </div>
-           </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <h2 style="text-align:center">Job Submission</h2>
-                    <img src="./mailingList/jobsubmit.png">
-                    <p>Users select a protein and associated disease and then solve puzzles in order to create a D@H job. Puzzle objects correlate to job input parameters; things like the protein (disease); ligand (drug); ligand conformaIon, ligand rotaIon, simulated annealing (SA) length and temperatures</p>
-                </div>
-           </div>
-       </div>
+			<div class="col-md-4">
+				<img src="assets/homepage/chemical.png" height="155" alt="">
+				<h4>Challenge</h4>
+				<p>Test your knowledge and show your skills with the molecule flashcards.</p>
 
-        <hr>
-        
-        <p>NSF IIS #0968350: Collaborative Research: SoCS - ExSciTecH: An Interactive, Easy-to-Use VolunteerComputing System to Explore Science, Technology, and Health</p>
-        
-        <footer>
-            <p>© University of Delaware 2013 - Global Computing Lab</p>
-        </footer>
-    
-    </div><!--container-->
+			</div><!--/col-md-4 -->
 
+			<div class="col-md-4">
+				<img src="assets/homepage/cards1.png" height="155" alt="">
+				<h4>Create</h4>
+				<p>Build your own flashcard decks with the deck editor.</p>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="./mailingList/bootstrap.min.js"></script>
-    <script src="./mailingList/Three49custom.js"></script>
-    <script src="./mailingList/GLmol.js"></script>
-    
-    <script>
-        $.get("./mailingList/pdb1ajx.pdb", function(data) {
-		    var glmol = new GLmol("demo_molecule",true);
-		    
-		    glmol.spin = function(){
-    		    dx = this.x;
-            	dy = this.y;
-            	
-            	//Modify stored X value
-            	//this.x = parseFloat(dx) + .002;
-            	this.y = parseFloat(dy) + .002;
-            	
-            	var r = Math.sqrt(dx * dx + dy * dy);
-            	var rs = Math.sin(r * Math.PI) / r;
-            	this.dq.x = 0;
-            	this.dq.y = Math.cos(r * Math.PI);
-            	this.dq.z =  rs * dx;
-            	this.dq.w =  rs * dy;
-            	this.rotationGroup.quaternion = new THREE.Quaternion(1, 0, 0, 0);
-            	this.rotationGroup.quaternion.multiplySelf(this.dq);
-            	this.rotationGroup.quaternion.multiplySelf(this.cq);
-            	this.show();
-            	//window.requestAnimationFrame($.proxy(game_glmol.spin, game_glmol));
-            	window.requestAnimationFrame($.proxy(this.spin, this));
-		    }
-		    
-		    glmol.defineRepresentation = function(){
-    		    var all = this.getAllAtoms();
-            	var hetatm = this.removeSolvents(this.getHetatms(all));
-            	this.colorByAtom(all, {});
-            	this.colorByChain(all);
-            	
-            	this.drawBondsAsStick(this.modelGroup, hetatm, this.cylinderRadius / 2.0, this.cylinderRadius, true, true, 0.3); 
-            	this.drawMainchainCurve(this.modelGroup, all, this.curveWidth, 'P');
-            	this.drawCartoon(this.modelGroup, all, this.curveWidth);
-		    }
-		    
-		    glmol.loadMoleculeStr(false, data);
-		    glmol.x = 0;
-	        glmol.y = 0;
-		    glmol.rebuildScene();
-		    glmol.spin();
-        });
-    </script>
+			</div><!--/col-md-4 -->
+		</div><!-- /row -->
+	</div><!-- /container -->
+	
+	<div id="bottomwrap">
+	    <div class="container">
+        	<div class="row mt centered">
+    			<div class="col-md-6" id="news">
+    			    <h3>Latest News</h3>
+    			    <div class="row">
+    			        <div class="col-sm-12">
+        			        <?php printNewsItems($newsItems) ?>
+    			        </div>
+    			    </div>
+    			</div>
+    			<div class="col-md-6" id="sponsors">
+    			    <h3>Sponsors</h3>
+    			    <div class="row">
+    			        <div class="col-sm-8 col-sm-offset-2">
+            			    <div class="row">
+                                <div class="col-sm-4 imgWrap"><a href="http://www.nsf.gov/awardsearch/showAward?AWD_ID=0968350"><img src="./assets/homepage/nsf1.png"></a></div>
+                                <div class="col-sm-4 imgWrap"><a href="http://gcl.cis.udel.edu"><img src="./assets/homepage/GCLlogo.png"></a></div>
+                                <div class="col-sm-4 imgWrap"><a href="http://www.cis.udel.edu/"><img src="./assets/homepage/UD_circle1743_logo.png"></a></div>
+            			    </div>
+    			        </div>
+    			    </div>
+    			</div>
+        	</div>
+	    </div>
+	</div>
+	
+	<?php printFooter(); ?>
   </body>
 </html>

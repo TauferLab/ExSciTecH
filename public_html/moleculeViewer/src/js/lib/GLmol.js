@@ -44,11 +44,11 @@ GLmol.prototype.create = function(id, suppressAutoload) {
    this.Nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
    this.ElementColors = {"H": 0xCCCCCC, "C": 0xAAAAAA, "O": 0xCC0000, "N": 0x0000CC, "S": 0xCCCC00, "P": 0x6622CC,
                          "F": 0x00CC00, "CL": 0x00CC00, "BR": 0x882200, "I": 0x6600AA,
-                         "FE": 0xCC6600, "CA": 0x8888AA};
+                         "FE": 0xCC6600, "CA": 0x8888AA,"SI":0xFFD700};
 // Reference: A. Bondi, J. Phys. Chem., 1964, 68, 441.
-   this.vdwRadii = {"H": 1.2, "Li": 1.82, "Na": 2.27, "K": 2.75, "C": 1.7, "N": 1.55, "O": 1.52,
+   this.vdwRadii = {"H": 1.2, "LI": 1.82, "NA": 2.27, "K": 2.75, "C": 1.7, "N": 1.55, "O": 1.52,
                    "F": 1.47, "P": 1.80, "S": 1.80, "CL": 1.75, "BR": 1.85, "SE": 1.90,
-                   "ZN": 1.39, "CU": 1.4, "NI": 1.63};
+                   "ZN": 1.39, "CU": 1.4, "NI": 1.63,"SI":1.21};
 
    this.id = id;
    this.aaScale = 1; // or 2
@@ -169,7 +169,7 @@ GLmol.prototype.parseSDF = function(str) {
       atom.y = parseFloat(line.substr(10, 10));
       atom.z = parseFloat(line.substr(20, 10));
       atom.hetflag = true;
-      atom.atom = atom.elem = line.substr(31, 3).replace(/ /g, "");
+      atom.atom = atom.elem = line.substr(31, 3).replace(/ /g, "").toUpperCase();
       atom.bonds = [];
       atom.bondOrder = [];
       atoms[i] = atom;
@@ -206,7 +206,7 @@ GLmol.prototype.parseXYZ = function(str) {
       console.log(tokens);
       var atom = {};
       atom.serial = i;
-      atom.atom = atom.elem = tokens[0];
+      atom.atom = atom.elem = tokens[0].toUpperCase();
       atom.x = parseFloat(tokens[1]);
       atom.y = parseFloat(tokens[2]);
       atom.z = parseFloat(tokens[3]);
@@ -398,7 +398,11 @@ GLmol.prototype.drawAtomsAsSphere = function(group, atomlist, defaultRadius, for
       var sphereMaterial = new THREE.MeshLambertMaterial({color: atom.color});
       var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
       group.add(sphere);
+      
       var r = (!forceDefault && this.vdwRadii[atom.elem] != undefined) ? this.vdwRadii[atom.elem] : defaultRadius;
+      
+      //console.log(atom.elem,r);
+      
       if (!forceDefault && scale) r *= scale;
       sphere.scale.x = sphere.scale.y = sphere.scale.z = r;
       sphere.position.x = atom.x;
@@ -1619,34 +1623,42 @@ GLmol.prototype.enableMouse = function() {
    // Contribution is needed as I don't own any iOS or Android device with WebGL support.
    glDOM.bind('mousedown touchstart', function(ev) {
       ev.preventDefault();
-      if (!me.scene) return;
+      if (!this.scene) return;
       var x = ev.pageX, y = ev.pageY;
       if (ev.originalEvent.targetTouches && ev.originalEvent.targetTouches[0]) {
          x = ev.originalEvent.targetTouches[0].pageX;
          y = ev.originalEvent.targetTouches[0].pageY;
       }
       if (x == undefined) return;
-      me.isDragging = true;
-      me.mouseButton = ev.which;
-      me.mouseStartX = x;
-      me.mouseStartY = y;
-      me.cq = me.rotationGroup.quaternion;
-      me.cz = me.rotationGroup.position.z;
-      me.currentModelPos = me.modelGroup.position.clone();
-      me.cslabNear = me.slabNear;
-      me.cslabFar = me.slabFar;
-    });
+      this.isDragging = true;
+      this.mouseButton = ev.which;
+      this.mouseStartX = x;
+      this.mouseStartY = y;
+      this.cq = this.rotationGroup.quaternion;
+      this.cz = this.rotationGroup.position.z;
+      this.currentModelPos = this.modelGroup.position.clone();
+      this.cslabNear = this.slabNear;
+      this.cslabFar = this.slabFar;
+    }.bind(this));
 
    glDOM.bind('DOMMouseScroll mousewheel', function(ev) { // Zoom
       ev.preventDefault();
       if (!me.scene) return;
       var scaleFactor = (me.rotationGroup.position.z - me.CAMERA_Z) * 0.85;
+       
       if (ev.originalEvent.detail) { // Webkit
          me.rotationGroup.position.z += scaleFactor * ev.originalEvent.detail / 10;
       } else if (ev.originalEvent.wheelDelta) { // Firefox
          me.rotationGroup.position.z -= scaleFactor * ev.originalEvent.wheelDelta / 400;
       }
-      //console.log(ev.originalEvent.wheelDelta, ev.originalEvent.detail, me.rotationGroup.position.z);
+      
+      if(me.rotationGroup.position.z > -100)
+        me.rotationGroup.position.z = -100;
+      if(me.rotationGroup.position.z < -145)
+        me.rotationGroup.position.z = -145;
+        
+        console.log( me.rotationGroup.position.z );
+      
       me.show();
    });
    glDOM.bind("contextmenu", function(ev) {ev.preventDefault();});

@@ -40,7 +40,7 @@
     	if( $result->num_rows > 0 ){
         	$row = $result->fetch_array();
         	
-        	if( $row[1] == "1" ){
+        	if( $row[0] == "" ){
             	return;
         	}
         	
@@ -56,8 +56,11 @@
     	    $basename = uniqid();
     	
     	    $sdfFilename = $SDF_DIR.$basename.".sdf"; 
+    	    $pngFilename = $PNG_DIR.$basename.".png";
     	
             $sdfURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/SDF?record_type=3d";
+            $pngURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/PNG";
+            file_put_contents($pngFilename, fopen($pngURL, 'r'));
 	    
             if( 
                 false != file_put_contents($sdfFilename, fopen($sdfURL, 'r')) 
@@ -68,8 +71,9 @@
                                         `sdfFile`
                                       ) VALUES (
                                         \"".$molName."\",
-                                        \"\",
+                                        \"".$pngFilename."\",
                                         \"".$sdfFilename."\"
+                                        
                                       )";
                                       
                 if( $mysqli_gamedb->query($query) ){

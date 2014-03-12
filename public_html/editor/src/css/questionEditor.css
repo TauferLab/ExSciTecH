@@ -1,0 +1,67 @@
+.questionText{
+    width: 100%;
+}
+
+#leftSidebar button{
+    margin: 3.5px 3.5px;
+}
+
+#leftSidebar .settingBtn{
+    width: 100%;
+}
+
+#leftSidebar .questionBtn{
+    width: 22%;
+}
+
+#overlayBg{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: none;
+    background: black;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+}
+
+#imgSelOverlay{
+    display: none;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    z-index: 1000;
+    transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+
+}
+
+#selectedImg{
+    width: 238;
+    height: 198;
+}
+
+.imgSelimg{
+    width: 113;
+    float: left;
+    margin: 5 5;
+    opacity: 1;
+    transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -webkit-transition: opacity .1s ease-in-out;
+}
+
+.imgSelimg:hover {
+    opacity: 0.5;
+}
+
+.imgSelBtn{
+    top: 40%;
+    left: 24%;
+    position: absolute;
+}

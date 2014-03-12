@@ -43,14 +43,20 @@
     	
     	    $ID           = $mysqli_gamedb->escape_string($request_object["settings"]["ID"]);
     	    $name         = $mysqli_gamedb->escape_string($request_object["settings"]["name"]);
+    	    $image        = $mysqli_gamedb->escape_string($request_object["settings"]["image"]);
     	    $desc         = $mysqli_gamedb->escape_string($request_object["settings"]["description"]);
             $timeLimit    = $mysqli_gamedb->escape_string($request_object["settings"]["timeLimit"]);
             $renderMethod = $mysqli_gamedb->escape_string($request_object["settings"]["renderMethod"]);
+            
+            if( $image =="" ){
+                $image = "/data/flashcardImages/functional_groups.png";
+            }
             
             $query = "UPDATE `questionSet` SET
                         `name`         = \"$name\",
                         `description`  = \"$desc\",
                         `time_limit`   = \"$timeLimit\",
+                        `image`        = \"$image\",
                         `renderMethod` = \"$renderMethod\"
                       WHERE id= ".$ID;
             
@@ -92,7 +98,7 @@
                         `answer`= ".$answerChoices["answer"]."
                     WHERE `question_id` = $questionID AND `game_id`= $questionSetID ";
                     
-            $mysqli_gamedb->close();
+            
             return $mysqli_gamedb->query($query);
             
     	}
@@ -130,12 +136,17 @@
         $name         = $mysqli_gamedb->escape_string($request_object["settings"]["name"]);
         $desc         = $mysqli_gamedb->escape_string($request_object["settings"]["description"]);
         $timeLimit    = $mysqli_gamedb->escape_string($request_object["settings"]["timeLimit"]);
+        $image        = $mysqli_gamedb->escape_string($request_object["settings"]["image"]);
         $renderMethod = $mysqli_gamedb->escape_string($request_object["settings"]["renderMethod"]);
         $auth         = $mysqli_gamedb->escape_string($request_object["authenticator"]);
-                
+
+        if( $image =="" ){
+                $image = "/data/flashcardImages/functional_groups.png";
+            }
+            
         $user = get_user($auth);
         
-        if( !(($timeLimit < 1800000) && ($timeLimit > 10000)) ){
+        if( ($timeLimit > 2400000) || ($timeLimit < 1000) ){
             $timeLimit = 120000;
         }else{
             
@@ -152,7 +163,7 @@
                         \"$name\",
                         \"$desc\",
                         $timeLimit,
-                        \"\",
+                        \"$image\",
                         \"$renderMethod\",
                         \"".$user->id."\"
                    )";
@@ -237,9 +248,11 @@
     	    $sdfFilename = $SDF_DIR.$basename.".sdf";
     	
             $sdfURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/SDF?record_type=3d";
+            
             $pngURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/PNG";
+            file_put_contents($pngFilename, fopen($pngURL, 'r'));
 	    
-            if( false != file_put_contents($pngFilename, fopen($pngURL, 'r')) &&
+            if( //false != file_put_contents($pngFilename, fopen($pngURL, 'r')) &&
                 false != file_put_contents($sdfFilename, fopen($sdfURL, 'r')) 
             ){
                 $query = "INSERT INTO `molecules`(
@@ -253,8 +266,9 @@
                                       )";
                                       
                 if( $mysqli_gamedb->query($query) ){
+                    $retVal = $mysqli_gamedb->insert_id;
                     $mysqli_gamedb->close();
-                    return $mysqli_gamedb->insert_id;
+                    return $retVal;
                 }
                 else{
                     $mysqli_gamedb->close();
@@ -264,9 +278,13 @@
             else{
                 $query = "INSERT INTO `molecules`(
                                         `name`,
+                                        `imgFile`,
+                                        `sdfFile`,
                                         `unavailable`
                                       ) VALUES (
                                         \"".$molName."\",
+                                        \"".$pngFilename."\",
+                                        \"\",
                                         1
                                       )";
                                       

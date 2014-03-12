@@ -32,12 +32,12 @@ class BoincDb extends DbConn {
         global $MYSQL_SERVER;
         global $MYSQL_USER;
         global $MYSQL_PASSWORD;
-        global $MYSQL_BOINC_DB;
+        global $MYSQL_DB;
     
         $user   = $MYSQL_USER;
         $passwd = $MYSQL_PASSWORD;
         $host   = $MYSQL_SERVER;
-        $name   = $MYSQL_BOINC_DB;
+        $name   = $MYSQL_DB;
         
         if ($host == null) {
             $host = "localhost";
@@ -139,6 +139,28 @@ class BoincUser {
     function sum($field) {
         $db = BoincDb::get();
         return $db->sum('user', $field);
+    }
+    function changePW($newPW){
+        $newHash = md5($newPW.$this->email_addr);
+        self::update("passwd_hash=\"".$newHash."\"");
+    }
+    function changeEmail($newEmail,$pass){
+    	if( md5($pass.$this->email_addr) == $this->passwd_hash ){
+	        $newHash = md5($pass.$newEmail);
+	        self::update("passwd_hash=\"".$newHash."\"");
+	        self::update("email_addr=\"".$newEmail."\"");	
+	        return true;
+    	}
+    	else{
+	    	return false;
+    	}
+    }
+    function createPWresetToken(){
+    	$db = BoincDb::get();
+	    $token = md5( uniqid( rand(), true ) );
+		//Store it
+		$db->insert('pwResetToken',"(`token`, `userID`, `expirationTime`) VALUES ('$token', '$this->id', DATE_ADD(NOW(), INTERVAL 12 HOUR))");
+	    return $token;
     }
 }
 

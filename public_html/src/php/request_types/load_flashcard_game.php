@@ -92,12 +92,4 @@
 		$mysqli_gamedb->query($query);
 		$mysqli_gamedb->close();
 	}
-
-	function get_user($authenticator){
-		$authenticator = BoincDb::escape_string($authenticator);
-		
-		$user = BoincUser::lookup("authenticator = \"".$authenticator."\"");
-		
-		return $user;
-	}
 ?>

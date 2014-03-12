@@ -6,12 +6,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Molecule Viewer</title>
+        <title>ExSciTecH - Molecule Viewer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
 
         <link href="bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
         
+        <link href="../src/css/custom.css" rel="stylesheet" media="screen">
         <link href="./src/css/custom.css" rel="stylesheet" media="screen">
         <link href="./src/css/molSearch.css" rel="stylesheet" media="screen">
         <link href="./src/css/jquery-ui-1.8.23.custom.css" rel="stylesheet" media="screen">
@@ -25,54 +26,56 @@
     </head>
     
     <body>
-    
-        <div class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/"><img src="./assets/exscitech_logo.png"></a>
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                
-                <div class="navbar-collapse collapse" id="navbar-main">
-        <ul class="nav navbar-nav">
-            <li><a href="/jobSubmission">Job Submission</a></li>
-            <li><a href="/flashcards">Flashcards</a></li>
-            <li><a href="/moleculeViewer">Molecule Viewer</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                  <li><a href="/teachersContact.php">For Teachers</a></li>
-                  <li><a href="/contrib.php">Contributors</a></li>
-                  <li><a href="/contact.php">Contact Us</a></li>
-                  <li><a href="http://docking.cis.udel.edu">Docking@Home</a></li>
-              </ul>
-            </li>
-        </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <h1 id="moleculeName"> Molecule Viewer </h1>
-            <div class="row">
-                <div class="col-md-8" id="gmolArea">
-                    
+        
+        <?php printNavBar(); ?>
+        
+        <div id="contentWrapper" class="container">
+            <div id="almostEverythingRow" class="row">
+                <div class="col-md-8">
+                    <div id="gmolArea">
+                    </div>
+                    <h1 id="moleculeName"> Molecule Viewer </h1>
+                    <div class="panel panel-primary">
+                        
+                        <div id="molDesc" class="panel-body">
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    
-                        <div id="searchArea"></div>
-                    
+                    <div id="searchArea"></div>
+                
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Molecule Properties
+                        </div>
+                        <div id="molProp" class="panel-body">
+                            
+                        </div>
+                    </div>
+                    <div id="citationPanel">
+                    </div>
                 </div>
             </div>
+            <!--
+            <div class="row">
+                <div id="descRow" class="col-md-8">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Molecule Description
+                        </div>
+                        <div id="molDesc" class="panel-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
             
         </div>
 
 
-        <div class="navbar navbar-default navbar-fixed-bottom">    
+        <div id="footer" >    
             <div class="container">
                 <footer>
                     <p style="margin-top : 16px">© University of Delaware 2013 - Global Computing Lab</p>
@@ -84,11 +87,16 @@
         <script src="//code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="src/js/MoleculeSearch.js"></script>
-        <script src="src/js/lib/Three49custom.js"></script>
-        <script src="src/js/lib/GLmol.js"></script>
         <script src="src/js/lib/jquery-ui-1.8.23.custom.min.js"></script>
-        <script src="src/js/glmolMod.js"></script>
+        
+        <script src="src/js/lib/Three49custom.js"></script>
+        <script src="./src/js/lib/GLmol.js"></script>
+        <script src="./src/js/glmolMod.js"></script>
+                
+        <script src="src/js/MoleculeSearch.js"></script>
+        <script src="../src/js/cookies.js"></script>
+        <script src="../src/js/LoginForm.js"></script>
+        <script type="text/javascript" src="/src/js/webGLtest.js" language="javascript"></script>      
         
         <script>
             MoleculeSearch.Factory( new MoleculeSearch("#molSearch") );

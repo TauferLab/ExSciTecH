@@ -18,7 +18,7 @@
     	    $response_object["success"] = false;
 	    } 
 	    
-	    $mysqli_gamedb->close();
+	    
 	    return $response_object;
 	}
 	
@@ -40,6 +40,8 @@
         	$retVal["name"] = $row["name"];
         	$retVal["description"] = $row["description"];
         	$retVal["timeLimit"] = $row["time_limit"];
+        	$retVal["image"] = $row["image"];
+        	$retVal["private"] = $row["private"];
         	
     	}
         else{

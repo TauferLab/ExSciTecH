@@ -1,5 +1,4 @@
 body{
-    //background-color: #404040;
     background-color: #272b30;
 }
 
@@ -12,5 +11,52 @@ h1{
 }
 
 #gmolArea{
+    height: 475px;
+}
+
+#topMolList{
+    cursor: pointer;
+}
+
+#footer{
+    margin-bottom: 0px;
+}
+
+.molPropTable{
+    width: 100%;
+}
+
+.molPropText{
+    text-align: center;
+    margin: 0;
+}
+
+#moleculeName{
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+}
+
+#almostEverythingRow{
     height: 600px;
+    max-height: 600px;
+    margin-top: 15px;
+}
+
+.citation{
+    margin: 0 0 10px 0;
+    font-size: 10px;
+    color: white;
+}
+
+.panel{
+    margin-bottom: 10px;
+}
+
+.molNameWrapper{
+    margin-bottom: 10px;
+}
+
+#welcomeAlert{
+    display: none;
 }
