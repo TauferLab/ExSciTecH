@@ -1,5 +1,7 @@
 <?php
 
+    require_once("config.inc");
+
 	// The mysql connection is global just to make things easier
 	$mysqli_gamedb = connectToMysql();
 
@@ -9,11 +11,10 @@
 	}
 	
 	function connectToMysql(){
-        $MYSQL_SERVER = "localhost";
-        $MYSQL_USER = "exscitech";
-        $MYSQL_PASSWORD = "56eLKG3HVyUTA52u";
-        $MYSQL_DB = "exscitech_web";
-        $MYSQL_BOINC_DB = "exscitech_boinc";
+        global $MYSQL_SERVER;
+        global $MYSQL_USER;
+        global $MYSQL_PASSWORD;
+        global $MYSQL_DB;
 
 		$mysqli = new mysqli($MYSQL_SERVER, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_DB);
 		return $mysqli;
