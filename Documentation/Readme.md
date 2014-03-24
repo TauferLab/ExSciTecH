@@ -77,12 +77,12 @@ register a new user account
 ####3. get_avail_flashcard_games
 get a list of games available for a given user to play
 #####Request Fields
-```{
+    ```{
 	"request_type":"get_avail_flashcard_games",
 	"authenticator":null
 	}```
 #####Example reponse
-```{
+    ```{
     "success": "true",
     "categories": [
         {
