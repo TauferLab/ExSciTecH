@@ -67,7 +67,7 @@ login and get basic user data
 ####2. register
 register a new user account 
 #####Request Fields
-	email or username
+	email
     password
 #####Response Fields
 	username
@@ -77,11 +77,89 @@ register a new user account
 ####3. get_avail_flashcard_games
 get a list of games available for a given user to play
 #####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+```{
+	"request_type":"get_avail_flashcard_games",
+	"authenticator":null
+	}```
+#####Example reponse
+```{
+    "success": "true",
+    "categories": [
+        {
+            "ID": "1",
+            "name": "Test1",
+            "description": "Test1 Desc"
+        },
+        {
+            "ID": "2",
+            "name": "Test2",
+            "description": "Test2 Desc"
+        }
+    ],
+    "available_games": [
+        {
+            "id": "1",
+            "name": "Food Chemistry",
+            "category": "1",
+            "image": "/data/flashcardImages/9.png",
+            "description": "This question set is bananas!",
+            "time_limit": "1800000",
+            "high_scores": [
+                {
+                    "rank": 1,
+                    "username": "stephanplus",
+                    "score": 14891
+                },
+                {
+                    "rank": 2,
+                    "username": "sherbein",
+                    "score": 14524
+                },
+                {
+                    "rank": 3,
+                    "username": "tbaldwin",
+                    "score": 14507
+                },
+                {
+                    "rank": 4,
+                    "username": "tbaldwin",
+                    "score": 13744
+                },
+                {
+                    "rank": 5,
+                    "username": "Amy",
+                    "score": 13695
+                },
+                {
+                    "rank": 6,
+                    "username": "Connor",
+                    "score": 12300
+                },
+                {
+                    "rank": 7,
+                    "username": "Connor",
+                    "score": 11250
+                },
+                {
+                    "rank": 8,
+                    "username": "Laura",
+                    "score": 7060
+                },
+                {
+                    "rank": 9,
+                    "username": "Becky",
+                    "score": 7028
+                },
+                {
+                    "rank": 10,
+                    "username": "Joel",
+                    "score": 6007
+                }
+            ],
+            "mol_count": 6
+        }
+    ]
+}```
 ---
 
 ####4. get_high_scores
