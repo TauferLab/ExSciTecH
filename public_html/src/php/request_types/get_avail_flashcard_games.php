@@ -38,7 +38,7 @@
                 $newGame["description"] = $obj->description;
                 $newGame["time_limit"] = $obj->time_limit;
                 $newGame["high_scores"] = get_high_scores($obj->id);
-                $newGame["num_mol"] = countMoleculesInGame($obj->id);
+                $newGame["mol_count"] = countMoleculesInGame($obj->id);
                 $response_object['available_games'][] = $newGame;    
             }
         }
