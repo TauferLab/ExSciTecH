@@ -58,8 +58,8 @@
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         
         <!-- Login form & WebGL tests -->
-        <script type="text/javascript" src="/src/js/webGLtest.js" language="javascript"></script>
         <script type="text/javascript" src="/src/js/cookies.js" language="javascript"></script>
+        <script type="text/javascript" src="/src/js/webGLtest.js" language="javascript"></script>
         <script type="text/javascript" src="/src/js/LoginForm.js" language="javascript"></script>
         ';
     }

@@ -11,12 +11,12 @@
         <h1>ExSciTecH Contributors</<h1>
             
             <h3>University of Delaware Team:</h3>
-            <li>Sam Schlachter</li>
+            <li>Sam Schlachter (<a href="http://samschlachter.com">Personal Webpage</a>) </li>
             <li>Dr. Trilce Estrada</li>
             <li>Stephen Herbein</li>
             <li>Michael Matheny</li>
             
-            <h4>Contact and Project Lead at University of Delaware: Michela Taufer (taufer@udel.edu)</h4>
+            <h4>Contact and Project Lead at University of Delaware: Michela Taufer (<a href="http://gcl.cis.udel.edu/personal/taufer/index.php">Personal Webpage</a>, email: taufer@udel.edu)</h4>
             
             <h3>Millersville University Team:</h3>
             
@@ -53,6 +53,19 @@
             <li>jQuery - <a href="http://jquery.com/">http://jquery.com/</a></li>
             <li>qTip2 - <a href="http://qtip2.com/">http://qtip2.com/</a></li>
             <li>PubChem Substance Database</h1>: <br><a href="http://oldwww.acscomp.org/Publications/ARCC/volume4/chapter12.html"><!-- A HREF="http://www.acscomp.org/Publications/ARCC/volume4/chapter12.html" -->Bolton E, Wang Y, Thiessen PA, Bryant SH. PubChem: Integrated Platform of Small Molecules and Biological Activities. Chapter 12 IN <i>Annual Reports in Computational Chemistry</i>, Volume 4, American Chemical Society, Washington, DC, 2008 Apr.</a></li>
+            
+      		<h3>Source Code</h3>
+            <p>
+                This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 License</a>
+                <br>
+                <a rel="license" href="https://creativecommons.org/licenses/by-nc/3.0/">
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/88x31.png" />
+                </a>
+            </p>
+            <p>
+                This work is available on GitHub<br>
+                <a href="https://github.com/TauferLab/ExSciTecH/">https://github.com/TauferLab/ExSciTecH/</a>
+            </p>
         </div>
     </div>
 </div>

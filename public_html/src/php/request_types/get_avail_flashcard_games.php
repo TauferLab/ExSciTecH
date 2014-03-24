@@ -38,6 +38,7 @@
                 $newGame["description"] = $obj->description;
                 $newGame["time_limit"] = $obj->time_limit;
                 $newGame["high_scores"] = get_high_scores($obj->id);
+                $newGame["num_mol"] = countMoleculesInGame($obj->id);
                 $response_object['available_games'][] = $newGame;    
             }
         }
@@ -94,4 +95,16 @@
 		return $ret;
 	}
 
+    function countMoleculesInGame($game_id){
+        $mysqli_gamedb = connectToMysql();
+        
+        $game_id = $mysqli_gamedb->real_escape_string($game_id);
+        
+        $query = "SELECT * FROM `questions` WHERE `game_id` = ".$game_id;
+        
+        $result = $mysqli_gamedb->query($query);
+        
+        return $result->num_rows;
+    
+    }
 ?>
