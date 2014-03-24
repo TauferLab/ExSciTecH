@@ -46,10 +46,18 @@ send_request(request_obj, "/request_handler.php");
 6. start_flashcard_game.php
 7. submit_flashcard_answer.php
 8. end_flashcard_game.php
-
 9. getTeachersQuestionInfo.php
 10. loadQuestionSet.php
 11. saveQuestionSet.php
 12. submitQsetForReview.php
 13. getTeachersQuestionSets.php
 14. getPDB.php
+
+####login
+login and get basic user data
+#####Request Fields
+	email or username
+    password
+#####Response Fields
+	username
+	authenticator
