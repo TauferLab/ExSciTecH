@@ -52,6 +52,7 @@ send_request(request_obj, "/request_handler");
 12. getTeachersQuestionSets
 13. getPDB
 14. get_media
+
 ---
 
 ####1. login
@@ -62,6 +63,7 @@ login and get basic user data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####2. register
@@ -72,6 +74,7 @@ register a new user account
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####3. get_avail_flashcard_games
@@ -160,6 +163,7 @@ get a list of games available for a given user to play
         }
     ]
 }```
+
 ---
 
 ####4. get_high_scores
@@ -170,6 +174,7 @@ get additional high scores for a specific game
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####5. load_flashcard_game		
@@ -180,6 +185,7 @@ load the flashcard game data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####6. submit_flashcard_answer
@@ -190,6 +196,7 @@ Submitted when a user answers a question - submit  -1 when the user hits the "st
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####7. end_flashcard_game
@@ -200,6 +207,7 @@ Submitted when the game is over or the user goes back to the main menu (the serv
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####8. getTeachersQuestionInfo
@@ -210,6 +218,7 @@ For the question set editor - load the question sets to displa
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####9. loadQuestionSet
@@ -220,6 +229,7 @@ login and get basic user data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####10. saveQuestionSet
@@ -230,6 +240,7 @@ login and get basic user data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####11. submitQsetForReview
@@ -240,6 +251,7 @@ login and get basic user data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####12. getTeachersQuestionSets
@@ -250,6 +262,7 @@ login and get basic user data
 #####Response Fields
 	username
 	authenticator
+	
 ---
 
 ####13. getPDB
@@ -258,8 +271,8 @@ Used to get molecule files for the molecule search - actually downloads SDFs
 	compoundName
 #####Response
     SDF file
+    
 ---
-
 
 ####14. get_media
 	get a single piece of media (image/pdb). This is a GET request is sent to /get_media.php
