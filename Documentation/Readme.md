@@ -106,18 +106,22 @@ Register a new user account - only a single password needs to be submitted to th
 
 Failed attempt:
 
-```{
+```
+{
     "success":"false",
     "error":"Invalid email address: you must enter a valid address of the form name@domain"
-}```
+}
+```
 
 On success:
 
-```{
+```
+{
     "success":true,
     "username":"lololol",
     "auth":"53319a76bf5a8"
-}```
+}
+```
 
 ---
 
@@ -125,14 +129,17 @@ On success:
 get a list of games available for a given user to play
 #####Example Request
 
-```{
+```
+{
 "request_type":"get_avail_flashcard_games",
 "authenticator":null
-}```
+}
+```
 
 #####Example reponse
 
-```{
+```
+{
 "success": "true",
 "categories": [
     {
@@ -174,7 +181,8 @@ get a list of games available for a given user to play
         "mol_count": 6
     }
 ]
-}```
+}
+```
 
 ---
 
@@ -182,15 +190,18 @@ get a list of games available for a given user to play
 get additional high scores for a specific game
 #####Example Request
 
-```{
-"game_id": 12,
-"starting_rank" : 15,
-"range": 3
-}```
+```
+{
+    "game_id": 12,
+    "starting_rank" : 15,
+    "range": 3
+}
+```
 
 #####Example Response
 
-```{
+```
+{
 "scores": [
     {
         "rank": 15,
@@ -209,7 +220,8 @@ get additional high scores for a specific game
     }
 ],
 "success": true
-}```
+}
+```
 	
 ---
 
@@ -217,15 +229,18 @@ get additional high scores for a specific game
 load the flashcard game data
 #####Example Request
 
-```{
+```
+{
     "request_type":"load_flashcard_game",
     "authenticator":"53319a76bf5a8",
     "game_id":"1"
-}```
+}
+```
 
 #####Example response
 
-```{
+```
+{
     "game_session_id": "53319efea4159",
     "questions": [
         {
@@ -349,7 +364,8 @@ load the flashcard game data
         }
     ],
     "success": "true"
-}```
+}
+```
 	
 ---
 
@@ -357,23 +373,27 @@ load the flashcard game data
 Submitted when a user answers a question - submit  -1 when the user hits the "start" button
 #####Example Request
 
-```{
+```
+{
     "request_type":"submit_flashcard_answer",
     "game_session_id":"53319efea4159",
     "authenticator":"53319a76bf5a8",
     "question_id":1,
     "answer":"0",
     "game_time":2156
-}```
+}
+```
 
 #####Example Response
 
-```{
+```
+{
     "correct":"false",
     "score":-350,
     "ansID":"0",
     "success":"true"
-}```
+}
+```
 
 ---
 
@@ -381,20 +401,24 @@ Submitted when a user answers a question - submit  -1 when the user hits the "st
 Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big). Also computes the final score 
 #####Example Request
 
-```{
+```
+{
     "request_type":"end_flashcard_game",
     "game_time":88228,
     "authenticator":"53319a76bf5a8",
     "game_session_id":"53319efea4159"
-}```
+}
+```
 
 #####Example Response
 
-```{
+```
+{
     "rank":7,
     "final_score":13158.86,
     "success":"true"
-}```
+}
+```
 	
 ---
 
