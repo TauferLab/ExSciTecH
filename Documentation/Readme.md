@@ -62,7 +62,7 @@ login and get basic user data
     "request_type":"login",
     "login":"lololol",
     "pass":"lol1234"
-```}
+}```
 #####Example Response
 When an error occurs:
 ```{
