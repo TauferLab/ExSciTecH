@@ -57,7 +57,7 @@ send_request(request_obj, "/request_handler");
 
 ####1. login
 login and get basic user data
-#####Request Fields
+#####Example Request
 ```{
     "request_type":"login",
     "login":"lololol",
@@ -65,11 +65,14 @@ login and get basic user data
 }```
 #####Example Response
 When an error occurs:
+
 ```{
 	"success":"false",
 	"error":"Invalid username and\/or password."
 }```
+
 On success:
+
 ```{
     "success":true,
     "username":"lololol",
@@ -80,14 +83,14 @@ On success:
 
 ####2. register
 Register a new user account - only a single password needs to be submitted to the server - either have the user input one password field, or if you have them confirm their password check it client side before submitting the registration request.
-#####Request Fields
+#####Example Request
 ```{
     "request_type":"register",
     "email":"1234",
     "password":"lol1234",
     "username":"asfd"
 }```
-#####Response Fields
+#####Example Response
 
 Failed attempt:
 
@@ -165,7 +168,7 @@ get a list of games available for a given user to play
 
 ####4. get_high_scores
 get additional high scores for a specific game
-#####Request Fields
+#####Example Request
 
 ```{
 "game_id": 12,
@@ -173,7 +176,7 @@ get additional high scores for a specific game
 "range": 3
 }```
 
-#####Response Fields
+#####Example Response
 
 ```{
 "scores": [
@@ -200,7 +203,7 @@ get additional high scores for a specific game
 
 ####5. load_flashcard_game		
 load the flashcard game data
-#####Request Fields
+#####Example Request
 
 ```{
     "request_type":"load_flashcard_game",
@@ -340,7 +343,7 @@ load the flashcard game data
 
 ####6. submit_flashcard_answer
 Submitted when a user answers a question - submit  -1 when the user hits the "start" button
-#####Request Fields
+#####Example Request
 
 ```{
     "request_type":"submit_flashcard_answer",
@@ -351,7 +354,7 @@ Submitted when a user answers a question - submit  -1 when the user hits the "st
     "game_time":2156
 }```
 
-#####Response Fields
+#####Example Response
 
 ```{
     "correct":"false",
@@ -364,7 +367,7 @@ Submitted when a user answers a question - submit  -1 when the user hits the "st
 
 ####7. end_flashcard_game
 Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big). Also computes the final score 
-#####Request Fields
+#####Example Request
 
 ```{
     "request_type":"end_flashcard_game",
@@ -373,7 +376,7 @@ Submitted when the game is over or the user goes back to the main menu (the serv
     "game_session_id":"53319efea4159"
 }```
 
-#####Response Fields
+#####Example Response
 
 ```{
     "rank":7,
@@ -445,7 +448,7 @@ login and get basic user data
 
 ####13. getPDB
 Used to get molecule files for the molecule search - actually downloads SDFs
-#####Request Fields
+#####Example Request
 	compoundName
 #####Response
     SDF file
@@ -454,7 +457,7 @@ Used to get molecule files for the molecule search - actually downloads SDFs
 
 ####14. get_media
 	get a single piece of media (image/pdb). This is a GET request is sent to /get_media.php
-#####Request Fields
+#####Example Request
 	gsi - game_session_id
 	mt - media_type (0 for pdbs, 1 for images)
 	qid - question_id
