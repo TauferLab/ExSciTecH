@@ -387,14 +387,14 @@ Submitted when the game is over or the user goes back to the main menu (the serv
 ---
 
 ####8. getTeachersQuestionInfo
-For the question set editor - load the question sets to displa
+For the question set editor - load a specific question to display in the teacher/question set editor dashboard
 #####Example Request
 
-```TODO```
+```{"TODO":""}```
 
 #####Example Response
 
-```TODO```
+```{"TODO":""}```
 	
 ---
 
@@ -402,7 +402,7 @@ For the question set editor - load the question sets to displa
 login and get basic user data
 #####Example Request
 
-```TODO```
+```{"TODO":""}```
 
 #####Example Response
 
