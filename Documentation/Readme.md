@@ -406,7 +406,7 @@ login and get basic user data
 
 #####Example Response
 
-```TODO```
+```{"TODO":""}```
 	
 ---
 
@@ -414,11 +414,11 @@ login and get basic user data
 login and get basic user data
 #####Example Request
 
-```TODO```
+```{"TODO":""}```
 
 #####Example Response
 
-```TODO```
+```{"TODO":""}```
 	
 ---
 
@@ -426,11 +426,11 @@ login and get basic user data
 login and get basic user data
 #####Example Request
 
-```TODO```
+```{"TODO":""}```
 
 #####Example Response
 
-```TODO```
+```{"TODO":""}```
 	
 ---
 
@@ -438,11 +438,11 @@ login and get basic user data
 login and get basic user data
 #####Example Request
 
-```TODO```
+```{"TODO":""}```
 
 #####Example Response
 
-```TODO```
+```{"TODO":""}```
 	
 ---
 
