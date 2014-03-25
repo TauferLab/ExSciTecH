@@ -58,110 +58,99 @@ send_request(request_obj, "/request_handler");
 ####1. login
 login and get basic user data
 #####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
-	
+```{
+    "request_type":"login",
+    "login":"lololol",
+    "pass":"lol1234"
+```}
+#####Example Response
+When an error occurs:
+```{
+	"success":"false",
+	"error":"Invalid username and\/or password."
+}```
+On success:
+```{
+    "success":true,
+    "username":"lololol",
+    "auth":"53319a76bf5a8"
+}```
 ---
 
 ####2. register
-register a new user account 
+Register a new user account - only a single password needs to be submitted to the server - either have the user input one password field, or if you have them confirm their password check it client side before submitting the registration request.
 #####Request Fields
-	email
-    password
+```{
+    "request_type":"register",
+    "email":"1234",
+    "password":"lol1234",
+    "username":"asfd"
+}```
 #####Response Fields
-	username
-	authenticator
-	
+Failed attempt:
+```{
+    "success":"false",
+    "error":"Invalid email address: you must enter a valid address of the form name@domain"
+}```
+On success:
+```{
+    "success":true,
+    "username":"lololol",
+    "auth":"53319a76bf5a8"
+}```
+
 ---
 
 ####3. get_avail_flashcard_games
 get a list of games available for a given user to play
-#####Request Fields
-    ```{
-	"request_type":"get_avail_flashcard_games",
-	"authenticator":null
-	}```
+#####Example Request
+```{
+"request_type":"get_avail_flashcard_games",
+"authenticator":null
+}```
 #####Example reponse
-    ```{
-    "success": "true",
-    "categories": [
-        {
-            "ID": "1",
-            "name": "Test1",
-            "description": "Test1 Desc"
-        },
-        {
-            "ID": "2",
-            "name": "Test2",
-            "description": "Test2 Desc"
-        }
-    ],
-    "available_games": [
-        {
-            "id": "1",
-            "name": "Food Chemistry",
-            "category": "1",
-            "image": "/data/flashcardImages/9.png",
-            "description": "This question set is bananas!",
-            "time_limit": "1800000",
-            "high_scores": [
-                {
-                    "rank": 1,
-                    "username": "stephanplus",
-                    "score": 14891
-                },
-                {
-                    "rank": 2,
-                    "username": "sherbein",
-                    "score": 14524
-                },
-                {
-                    "rank": 3,
-                    "username": "tbaldwin",
-                    "score": 14507
-                },
-                {
-                    "rank": 4,
-                    "username": "tbaldwin",
-                    "score": 13744
-                },
-                {
-                    "rank": 5,
-                    "username": "Amy",
-                    "score": 13695
-                },
-                {
-                    "rank": 6,
-                    "username": "Connor",
-                    "score": 12300
-                },
-                {
-                    "rank": 7,
-                    "username": "Connor",
-                    "score": 11250
-                },
-                {
-                    "rank": 8,
-                    "username": "Laura",
-                    "score": 7060
-                },
-                {
-                    "rank": 9,
-                    "username": "Becky",
-                    "score": 7028
-                },
-                {
-                    "rank": 10,
-                    "username": "Joel",
-                    "score": 6007
-                }
-            ],
-            "mol_count": 6
-        }
-    ]
+```{
+"success": "true",
+"categories": [
+    {
+        "ID": "1",
+        "name": "Test1",
+        "description": "Test1 Desc"
+    },
+    {
+        "ID": "2",
+        "name": "Test2",
+        "description": "Test2 Desc"
+    }
+],
+"available_games": [
+    {
+        "id": "1",
+        "name": "Food Chemistry",
+        "category": "1",
+        "image": "/data/flashcardImages/9.png",
+        "description": "This question set is bananas!",
+        "time_limit": "1800000",
+        "high_scores": [
+            {
+                "rank": 1,
+                "username": "stephanplus",
+                "score": 14891
+            },
+            {
+                "rank": 2,
+                "username": "sherbein",
+                "score": 14524
+            },
+            {
+                "rank": 3,
+                "username": "tbaldwin",
+                "score": 14507
+            }
+        ],
+        "mol_count": 6
+    }
+]
 }```
 
 ---
@@ -169,44 +158,207 @@ get a list of games available for a given user to play
 ####4. get_high_scores
 get additional high scores for a specific game
 #####Request Fields
-	email or username
-    password
+```{
+"game_id": 12,
+"starting_rank" : 15,
+"range": 3
+}```
 #####Response Fields
-	username
-	authenticator
+```{
+"scores": [
+    {
+        "rank": 15,
+        "username": "stephanplus",
+        "score": 14891
+    },
+    {
+        "rank": 16,
+        "username": "sherbein",
+        "score": 14524
+    },
+    {
+        "rank": 17,
+        "username": "tbaldwin",
+        "score": 14507
+    }
+],
+"success": true
+}```
 	
 ---
 
 ####5. load_flashcard_game		
 load the flashcard game data
 #####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+```{
+    "request_type":"load_flashcard_game",
+    "authenticator":"53319a76bf5a8",
+    "game_id":"1"
+}```
+#####Example response
+```{
+    "game_session_id": "53319efea4159",
+    "questions": [
+        {
+            "id": 1,
+            "text": "Classify this acid. It is found primarily in seafood and is vital for normal metabolism.",
+            "answers": [
+                {
+                    "id": 0,
+                    "text": "Hydrochloric Acid"
+                },
+                {
+                    "id": 1,
+                    "text": "Omega-3 fatty acid"
+                },
+                {
+                    "id": 2,
+                    "text": "Salic Acid"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "text": "Which simple sugar is this?",
+            "answers": [
+                {
+                    "id": 0,
+                    "text": "Glucose"
+                },
+                {
+                    "id": 1,
+                    "text": "Salic Acid"
+                },
+                {
+                    "id": 2,
+                    "text": "Fructose"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "text": "This is Sucrose. Is it a simple or complex sugar?",
+            "answers": [
+                {
+                    "id": 0,
+                    "text": "Complex"
+                },
+                {
+                    "id": 1,
+                    "text": "Simple"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "text": "What food can this molecule, pectin, be found in?",
+            "answers": [
+                {
+                    "id": 0,
+                    "text": "Pizza"
+                },
+                {
+                    "id": 1,
+                    "text": "Hamburgers"
+                },
+                {
+                    "id": 2,
+                    "text": "Cake"
+                },
+                {
+                    "id": 3,
+                    "text": "Ice cream"
+                },
+                {
+                    "id": 4,
+                    "text": "Jello"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "text": "What type of artificial sweetener is this?",
+            "answers": [
+                {
+                    "id": 0,
+                    "text": "Sucralose"
+                },
+                {
+                    "id": 1,
+                    "text": "Stevia"
+                },
+                {
+                    "id": 2,
+                    "text": "Sugar"
+                },
+                {
+                    "id": 3,
+                    "text": "Sucrose"
+                }
+            ]
+        }
+    ],
+    "name": "Food Chemistry",
+    "time_limit": "1800000",
+    "description": "This question set is bananas!",
+    "imageURL": "/data/flashcardImages/9.png",
+    "high_scores": [
+        {
+            "rank": 1,
+            "username": "stephanplus",
+            "score": 14891
+        },
+        {
+            "rank": 2,
+            "username": "sherbein",
+            "score": 14524
+        },
+        {
+            "rank": 3,
+            "username": "tbaldwin",
+            "score": 14507
+        }
+    ],
+    "success": "true"
+}```
 	
 ---
 
 ####6. submit_flashcard_answer
 Submitted when a user answers a question - submit  -1 when the user hits the "start" button
 #####Request Fields
-	email or username
-    password
+```{
+    "request_type":"submit_flashcard_answer",
+    "game_session_id":"53319efea4159",
+    "authenticator":"53319a76bf5a8",
+    "question_id":1,
+    "answer":"0",
+    "game_time":2156
+}```
 #####Response Fields
-	username
-	authenticator
-	
+```{
+    "correct":"false",
+    "score":-350,
+    "ansID":"0",
+    "success":"true"
+}```
 ---
 
 ####7. end_flashcard_game
 Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big). Also computes the final score 
 #####Request Fields
-	email or username
-    password
+```{
+    "request_type":"end_flashcard_game",
+    "game_time":88228,
+    "authenticator":"53319a76bf5a8",
+    "game_session_id":"53319efea4159"
+}```
 #####Response Fields
-	username
-	authenticator
+```{
+    "rank":7,
+    "final_score":13158.86,
+    "success":"true"
+}```
 	
 ---
 
