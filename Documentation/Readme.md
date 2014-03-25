@@ -88,12 +88,16 @@ Register a new user account - only a single password needs to be submitted to th
     "username":"asfd"
 }```
 #####Response Fields
+
 Failed attempt:
+
 ```{
     "success":"false",
     "error":"Invalid email address: you must enter a valid address of the form name@domain"
 }```
+
 On success:
+
 ```{
     "success":true,
     "username":"lololol",
