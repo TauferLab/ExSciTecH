@@ -58,38 +58,50 @@ send_request(request_obj, "/request_handler");
 ####1. login
 login and get basic user data
 #####Example Request
-```{
+
+```
+{
     "request_type":"login",
     "login":"lololol",
     "pass":"lol1234"
-}```
+}
+```
+
 #####Example Response
 When an error occurs:
 
-```{
+```
+{
 	"success":"false",
 	"error":"Invalid username and\/or password."
-}```
+}
+```
 
 On success:
 
-```{
+```
+{
     "success":true,
     "username":"lololol",
     "auth":"53319a76bf5a8"
-}```
+}
+```
 
 ---
 
 ####2. register
 Register a new user account - only a single password needs to be submitted to the server - either have the user input one password field, or if you have them confirm their password check it client side before submitting the registration request.
 #####Example Request
-```{
+
+```
+{
     "request_type":"register",
     "email":"1234",
     "password":"lol1234",
     "username":"asfd"
-}```
+}
+```
+
 #####Example Response
 
 Failed attempt:
