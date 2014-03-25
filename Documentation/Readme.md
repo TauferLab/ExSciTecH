@@ -75,6 +75,7 @@ On success:
     "username":"lololol",
     "auth":"53319a76bf5a8"
 }```
+
 ---
 
 ####2. register
@@ -104,11 +105,14 @@ On success:
 ####3. get_avail_flashcard_games
 get a list of games available for a given user to play
 #####Example Request
+
 ```{
 "request_type":"get_avail_flashcard_games",
 "authenticator":null
 }```
+
 #####Example reponse
+
 ```{
 "success": "true",
 "categories": [
@@ -158,12 +162,15 @@ get a list of games available for a given user to play
 ####4. get_high_scores
 get additional high scores for a specific game
 #####Request Fields
+
 ```{
 "game_id": 12,
 "starting_rank" : 15,
 "range": 3
 }```
+
 #####Response Fields
+
 ```{
 "scores": [
     {
@@ -190,12 +197,15 @@ get additional high scores for a specific game
 ####5. load_flashcard_game		
 load the flashcard game data
 #####Request Fields
+
 ```{
     "request_type":"load_flashcard_game",
     "authenticator":"53319a76bf5a8",
     "game_id":"1"
 }```
+
 #####Example response
+
 ```{
     "game_session_id": "53319efea4159",
     "questions": [
@@ -327,6 +337,7 @@ load the flashcard game data
 ####6. submit_flashcard_answer
 Submitted when a user answers a question - submit  -1 when the user hits the "start" button
 #####Request Fields
+
 ```{
     "request_type":"submit_flashcard_answer",
     "game_session_id":"53319efea4159",
@@ -335,25 +346,31 @@ Submitted when a user answers a question - submit  -1 when the user hits the "st
     "answer":"0",
     "game_time":2156
 }```
+
 #####Response Fields
+
 ```{
     "correct":"false",
     "score":-350,
     "ansID":"0",
     "success":"true"
 }```
+
 ---
 
 ####7. end_flashcard_game
 Submitted when the game is over or the user goes back to the main menu (the server will automatically clean up old sessions, this just keeps the table from getting too big). Also computes the final score 
 #####Request Fields
+
 ```{
     "request_type":"end_flashcard_game",
     "game_time":88228,
     "authenticator":"53319a76bf5a8",
     "game_session_id":"53319efea4159"
 }```
+
 #####Response Fields
+
 ```{
     "rank":7,
     "final_score":13158.86,
@@ -364,56 +381,61 @@ Submitted when the game is over or the user goes back to the main menu (the serv
 
 ####8. getTeachersQuestionInfo
 For the question set editor - load the question sets to displa
-#####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+#####Example Request
+
+```TODO```
+
+#####Example Response
+
+```TODO```
 	
 ---
 
 ####9. loadQuestionSet
 login and get basic user data
-#####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+#####Example Request
+
+```TODO```
+
+#####Example Response
+
+```TODO```
 	
 ---
 
 ####10. saveQuestionSet
 login and get basic user data
-#####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+#####Example Request
+
+```TODO```
+
+#####Example Response
+
+```TODO```
 	
 ---
 
 ####11. submitQsetForReview
 login and get basic user data
-#####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+#####Example Request
+
+```TODO```
+
+#####Example Response
+
+```TODO```
 	
 ---
 
 ####12. getTeachersQuestionSets
 login and get basic user data
-#####Request Fields
-	email or username
-    password
-#####Response Fields
-	username
-	authenticator
+#####Example Request
+
+```TODO```
+
+#####Example Response
+
+```TODO```
 	
 ---
 
