@@ -159,6 +159,7 @@ get a list of games available for a given user to play
         "name": "Food Chemistry",
         "category": "1",
         "image": "/data/flashcardImages/9.png",
+        "hires_image": "/data/flashcardImages/9.png",
         "description": "This question set is bananas!",
         "time_limit": "1800000",
         "high_scores": [

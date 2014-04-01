@@ -47,6 +47,7 @@
             $response_object['time_limit'] = $row['time_limit'];
             $response_object['description'] = $row['description'];
             $response_object['imageURL'] = $row['image'];
+            $response_object['highres_image'] = $row['image'];
         }
         
         $response_object['high_scores'] = get_high_scores( $game_id );

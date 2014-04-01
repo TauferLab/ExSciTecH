@@ -35,6 +35,7 @@
                 $newGame["name"] = $obj->name;
                 $newGame["category"] = $obj->category;
                 $newGame["image"] = $obj->image;
+                $newGame["hires_image"] = $obj->image;//$obj->hires_image;
                 $newGame["description"] = $obj->description;
                 $newGame["time_limit"] = $obj->time_limit;
                 $newGame["high_scores"] = get_high_scores($obj->id);
