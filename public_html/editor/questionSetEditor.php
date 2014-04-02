@@ -46,16 +46,6 @@
     <script type="text/javascript" src="src/js/questionSetEditor/QuestionSetEditor.js"></script>
 	<script type="text/javascript" src="src/js/questionSetEditor/MoleculeSearch.js"></script>
 
-		
-	<script type="text/javascript">
-	    
-	    function init(){
-    	    QuestionSetEditor.instace = new QuestionSetEditor( "#contents" );
-	    }
-
-	</script>
-
-
   <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 
   
@@ -70,5 +60,11 @@
     
     <?php printFooter();?>
 
+
+	<script type="text/javascript">
+	    function init(){
+    	    QuestionSetEditor.instace = new QuestionSetEditor( "#contents" );
+	    }
+	</script>
 </body>
 </html>

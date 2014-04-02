@@ -12,9 +12,6 @@ MoleculeSearch = function (parentSelector, preloadName ) {
         select: function(event, ui){ molSearch.search( event, ui, ID ) }
     });
     
-    this.glmol = new GLmol( 'glmol_'+ this.ID );
-    this.glmol.defineRepresentation = glmol_ball_and_stick_rep
-    
     if( typeof preloadName != "undefined" ){
         this.downloadSDF(preloadName);
         $("#mn_" + this.ID).val(preloadName);
@@ -42,8 +39,10 @@ MoleculeSearch.prototype.generateHTML = function (){
     ret += "       <label class='molNameLabel' for='mn_" + ID +"'>Molecule Search: </label><br>";
     ret += "       <input class='molName' id='mn_" + ID +"' />";
     ret += "    </div>";
-    ret += "    <div class ='glmol' id='glmol_" + ID +"'></div>";
+    ret += "    <div class ='glmol_wrapper'>";
+    //ret += "        <div class ='glmol' id='glmol_" + ID +"'></div>";
     ret += "    <textarea class='glmol_src' id='glmol_" + ID +"_src'></textarea>";
+    ret += "    </div>";
     ret += "    <h4 class='loadingMsg' id='lm_" + ID +"'></h4>";
     ret += "</div>";
         
@@ -81,7 +80,7 @@ MoleculeSearch.autocpCallback = function (data) {
 MoleculeSearch.prototype.search = function ( event, ui , ID) {
 
     $("#glmol_" + ID +"_src").val("");
-    MoleculeSearch.SearchArray[ID].glmol.loadMolecule();
+    MoleculeSearch.loadMolecule(ID);
 
     $( "#lm_" + ID ).html("<img src='./media/ajax-loader.gif'>   Searching...");
     $( "#lm_" + ID ).css( {opacity : 1, background: ""} );
@@ -126,9 +125,15 @@ MoleculeSearch.downloadCallbackSuccess = function (data, ID) {
     }
     catch(err){
         $("#glmol_" + ID +"_src").val(data);
-        MoleculeSearch.SearchArray[ID].glmol.loadMolecule();    
+        MoleculeSearch.loadMolecule( ID );
     }
 };
+
+MoleculeSearch.loadMolecule = function(ID){
+    var data = $("#glmol_" + ID +"_src").val();
+    //MoleculeSearch.SearchArray[ID].glmol.loadMoleculeStr(undefined,data);
+    QuestionSetEditor.instace.glmol.loadMoleculeStr(undefined,data);
+}
 
 MoleculeSearch.downloadCallbackFailure = function (data) {
     $("#lm_" + MoleculeSearch.activeSearchID ).css( {opacity : 0} );

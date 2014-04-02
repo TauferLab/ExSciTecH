@@ -19,48 +19,49 @@ QuestionPage.prototype.generateHTML = function(){
     var HTML = '<button type="button" class="btn btn-primary questionBtn" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
     
     $('#questBtnWrapper').append(HTML);
-    var height = 40 *11;// * Math.ceil(this.ID/4);
+    var height = 40 * 11;
     
     $('#questBtnWrapper').css({height: height});
     
 
-    HTML  ='<div class="panel panel-primary"  id="qp_' + this.ID + '" style="display:none">';
-    HTML +='    <div class="panel-heading">';
-    HTML +='        <h3 class="panel-title">Question ' + this.ID + '</h3>';
-    HTML +='    </div>';
-    HTML +='    <div class="panel-body">';
-    
-    HTML += ' <div class="row"><div class="col-md-12">';
-    HTML += "       <div class='editorPageQuestionText'>"+
-            "           <label for ='qt_" + this.ID +"'>Question Text:</label><br>"+
-            "           <input class = 'questionText' id  ='qt_" + this.ID +"'></input>"+
-            "       </div>";
-    HTML += '</div></div>';        
-           
-    HTML += ' <div class="row">'; 
-    HTML += '       <div class="col-md-6"><div class="editorPageMolSearch"> </div></div>';
-    HTML += "       <div class='col-md-6'>"+
-            "       <div class='editorPageAnswers'>"+
-            "           <h4 style='text-align:center'>Answer Choices</h4> <p style='text-align:center'>(Order will be randomized)</p>"+
-            "           <table class='editorPageAnswersTable' id='epat_" + this.ID +"'>"+
-            "               <tr>"+
-            "                   <td>Correct Answer:</td>"+
-            "                   <td><input type='text' id='epac_" + this.ID +"_0'></td>"+
-            "               </tr>"+
-            "               <tr>"+
-            "                   <td>Other Answers:</td>"+
-            "                   <td><input type='text' id='epac_" + this.ID +"_1'></td>"+
-            "               </tr>"+
-            "               <tr>"+
-            "                   <td></td>"+
-            '                   <td> <button type="button" class="btn btn-primary" onClick="QuestionPage.addAnswerChoice(' + this.ID +');">Add...</button> </td>'+
-            "               </tr>"+
-            "            </table>"+
-            "          </div>"+
-            "       </div>";
-
-    HTML += "   </div>";    
-    HTML += "</div>";
+    HTML  = '<div class="panel panel-primary"  id="qp_' + this.ID + '" style="display:none">' +
+            '    <div class="panel-heading">' +
+            '        <h3 class="panel-title">Question ' + this.ID + '</h3>' +
+            '    </div>' +
+            '    <div class="panel-body">' +
+            '        <div class="row"><div class="col-md-12">' +
+            '           <div class="editorPageQuestionText">'+
+            '               <label for ="qt_' + this.ID +'">Question Text:</label><br>'+
+            '               <input class = "questionText" id  ="qt_' + this.ID +'"></input>'+
+            '           </div>' +
+            '       </div>'+
+            '   </div>' +   
+            '   <div class="row">' + 
+            '       <div class="col-md-6">'+
+            '           <div class="editorPageMolSearch"></div>'+
+            '       </div>'+
+            '       <div class="col-md-6">'+
+            '           <div class="editorPageAnswers">'+
+            '               <h4 style="text-align:center">Answer Choices</h4>'+
+            '               <p style="text-align:center">(Order will be randomized)</p>'+
+            '               <table class="editorPageAnswersTable" id="epat_' + this.ID +'">'+
+            '                   <tr>'+
+            '                       <td>Correct Answer:</td>'+
+            '                       <td><input type="text" id="epac_' + this.ID +'_0"></td>'+
+            '                   </tr>'+
+            '                   <tr>'+
+            '                       <td>Other Answers:</td>'+
+            '                       <td><input type="text" id="epac_' + this.ID +'_1"></td>'+
+            '                   </tr>'+
+            '                   <tr>'+
+            '                       <td></td>'+
+            '                       <td> <button type="button" class="btn btn-primary" onClick="QuestionPage.addAnswerChoice(' + this.ID +');">Add...</button> </td>'+
+            '                   </tr>'+
+            '               </table>'+
+            '           </div>'+
+            '       </div>'+
+            '   </div>'+
+            '</div>';
     
     $("#rightContent").append(HTML);
 }

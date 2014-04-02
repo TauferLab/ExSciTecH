@@ -26,6 +26,13 @@ QuestionSetEditor = function ( parentSelector ) {
         this.downloadQSet();
         QuestionSetEditor.selectPage( 0 );
     }
+    
+    this.glmol = new GLmol( 'glmol_frame', true );
+    this.glmol.defineRepresentation = glmol_ball_and_stick_rep;
+    
+    //Move the GLmol frame to the first question page.
+    //We'll move it to the other pages when the page select buttons are clicked (selectPage).
+    //$('#glmol_frame').prependTo('#ms_1 .glmol_wrapper');
 };
 
 QuestionSetEditor.prototype.downloadQSet = function(){
@@ -118,6 +125,8 @@ QuestionSetEditor.prototype.generateHTML = function ( parentSelector ){
     HTML += '       <div class="panel-body" id="imgSelBody"></div>';
     HTML += '   </div>';
     HTML += '</div>';
+    
+    HTML += '<div class="glmol" id="glmol_frame"></div>';
     
     $(parentSelector).append( HTML );
     
@@ -272,7 +281,16 @@ QuestionSetEditor.selectImg = function(el){
 QuestionSetEditor.selectPage = function( pageNum ){
     $( "#qp_" + QuestionSetEditor.activePage ).css( { display: "none" } );
     
-    $( "#qp_" + pageNum ).css( { display: "block" } );   
+    $( "#qp_" + pageNum ).css( { display: "block" } );  
+    
+    
+    if( pageNum == 0){
+        $('#glmol_frame').prependTo('#ms_1 .glmol_wrapper');
+    }
+    else{
+        $('#glmol_frame').prependTo('#ms_'+pageNum+' .glmol_wrapper');
+        MoleculeSearch.loadMolecule(pageNum);
+    }
     
     QuestionSetEditor.activePage  = pageNum; 
     MoleculeSearch.activeSearchID = pageNum; 
