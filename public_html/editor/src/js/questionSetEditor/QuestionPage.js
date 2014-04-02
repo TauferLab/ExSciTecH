@@ -15,14 +15,67 @@ QuestionPage = function ( preload ) {
     }
 }
 
+//current is used for adding buttons, selected is for navigating pages.
+QuestionPage.currentButtonPage = 1;
+QuestionPage.selectedButtonPage = 1;
+
+QuestionPage.selectQuestBtnPage = function(ID){
+    if(ID < 1)
+        ID = 1;
+        
+    if(ID > QuestionPage.currentButtonPage)
+        ID = QuestionPage.currentButtonPage;
+
+    $("#questBtnPage" + QuestionPage.selectedButtonPage).css({display:"none"});
+    
+    QuestionPage.selectedButtonPage = ID;
+    
+    $("#questBtnPage" + ID).css({display:"block"});
+    
+    if(QuestionPage.selectedButtonPage == QuestionPage.currentButtonPage){
+        $("#nextQuestSelBtn").css({opacity:0});
+    }
+    else{
+        $("#nextQuestSelBtn").css({opacity:1});        
+    }
+    if(QuestionPage.selectedButtonPage == 1){
+        $("#prevQuestSelBtn").css({opacity:0});
+    }
+    else{
+        $("#prevQuestSelBtn").css({opacity:1});
+    }
+}
+
 QuestionPage.prototype.generateHTML = function(){
     var HTML = '<button type="button" class="btn btn-primary questionBtn" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
     
-    $('#questBtnWrapper').append(HTML);
-    var height = 40 * 11;
+    /*if(){
+        questBtnPage1
+    }*/
     
-    $('#questBtnWrapper').css({height: height});
+    var numBtns = MoleculeSearch.SearchArray.length - 1; //Index 0 doesn't count towards total
     
+    if( numBtns%32 == 0){
+        QuestionPage.currentButtonPage++;
+    }
+    
+    var btnDivName = "questBtnPage" + QuestionPage.currentButtonPage;
+    
+    if( $("#" + btnDivName).length == 0 ){
+        $("#questBtnWrapper").append('<div id="'+btnDivName+'"></div>');
+        
+        if( QuestionPage.currentButtonPage == 2 ){
+            $("#questSelBtns").css({opacity: 1});
+        }
+        
+        QuestionPage.selectQuestBtnPage(QuestionPage.currentButtonPage);
+    }
+    
+    if(QuestionPage.selectedButtonPage != QuestionPage.currentButtonPage){
+        QuestionPage.selectQuestBtnPage(QuestionPage.currentButtonPage);
+    }
+    
+    $("#" + btnDivName).append(HTML);
 
     HTML  = '<div class="panel panel-primary"  id="qp_' + this.ID + '" style="display:none">' +
             '    <div class="panel-heading">' +

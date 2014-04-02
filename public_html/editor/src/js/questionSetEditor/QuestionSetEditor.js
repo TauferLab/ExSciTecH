@@ -108,10 +108,16 @@ QuestionSetEditor.prototype.generateHTML = function ( parentSelector ){
     HTML += '                <button type="button" class="btn btn-primary settingBtn" id="SaveBtn">Save</button>';
         
     HTML += '                <h4 style="text-align:center;">Questions</h4>';
-    HTML += '                <div id="questBtnWrapper"></div>';
+    HTML += '                <div id="questBtnWrapper">';
+    HTML += '                <div id="questBtnPage1"></div>';
+    HTML += '                </div>';
+    
+    HTML += '                <ul id="questSelBtns" class="pager">';
+    HTML += '                   <li><a id="prevQuestSelBtn">Previous</a></li>';
+    HTML += '                   <li><a id="nextQuestSelBtn">Next</a></li>';
+    HTML += '                </ul>';
 
     HTML += '                <button type="button" class="btn btn-primary settingBtn" id="addQuestBtn">Add Another Question... </button>';
-    
     HTML += '            </div>';
     HTML += '    </div>';
     HTML += '    <div class="col-md-9"  id="rightContent"></div>';
@@ -224,7 +230,6 @@ QuestionSetEditor.prototype.setUpListeners = function (){
     $("#addQuestBtn").click( function(){
         var newQuestPage = new QuestionPage();
         QuestionSetEditor.instace.questionPages[ newQuestPage.ID ] = newQuestPage;
-        
         QuestionSetEditor.selectPage(newQuestPage.ID);
     } );
     
@@ -239,8 +244,17 @@ QuestionSetEditor.prototype.setUpListeners = function (){
     $("#imgSelBtn").click( function(){
         QuestionSetEditor.openImageSelect();
     });
+    
     $("#backBtn").click( function(){
         window.location = "/editor";
+    });
+    
+    $("#nextQuestSelBtn").click( function(){
+        QuestionPage.selectQuestBtnPage(QuestionPage.selectedButtonPage+1);
+    });
+    
+    $("#prevQuestSelBtn").click( function(){
+        QuestionPage.selectQuestBtnPage(QuestionPage.selectedButtonPage-1);
     });
 };
 
