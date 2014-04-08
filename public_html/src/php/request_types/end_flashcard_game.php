@@ -27,7 +27,7 @@
 		// ie if num_questions_answered == num_questions or time == time_limit 		
 		if(are_all_questions_answered($game_session_id) || $remaining_time == $max_time){
 			//store score
-			if(isset($user->name)){
+			if( isset($user->name) && !scoreStoredPreviously($game_session_id) ){
     			store_score($user, $game_session_id,$final_score);
             }
 		
@@ -46,6 +46,32 @@
 		
 		$mysqli_gamedb->close();
 		return $response_object;
+	}
+	
+	function scoreStoredPreviously($game_session_id){
+		$mysqli_gamedb = connectToMysql();
+		
+		$query = "SELECT COUNT(*) FROM `scores` WHERE `game_session_id` = '".$game_session_id."'";
+		
+		$result = $mysqli_gamedb->query($query);
+		
+		if($row = $result->fetch_array()){
+    		$mysqli_gamedb->close();
+		    if($row[0] == 1)
+		        return true;
+            else
+                return false;
+		
+		    
+		}
+		else{
+		    $mysqli_gamedb->close();
+			return true;
+		}
+		
+		$mysqli_gamedb->close();
+    	return true;
+    	return false;
 	}
 	
 	function are_all_questions_answered($game_session_id){
@@ -79,13 +105,15 @@
                                         `game_id`,
                                         `user_id`,
                                         `username`,
-                                        `time`)
+                                        `time`,
+                                        `game_session_id`)
                                 VALUES (
                                         '".$final_score."',
                                         (SELECT game_id  FROM `game_sessions` WHERE `session_id` = '".$game_session_id."'),
                                         '".$user->id."',
                                         '".$user->name."',
-                                        NOW());";
+                                        NOW(),
+                                        '".$game_session_id."');";
                                         
         $result = $mysqli_gamedb->query($query);
 		
