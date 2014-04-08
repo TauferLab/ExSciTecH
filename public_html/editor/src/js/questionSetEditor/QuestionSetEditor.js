@@ -114,6 +114,8 @@ QuestionSetEditor.prototype.generateHTML = function ( parentSelector ){
     
     HTML += '                <ul id="questSelBtns" class="pager">';
     HTML += '                   <li><a id="prevQuestSelBtn">Previous</a></li>';
+    HTML += '                   <li id="questSelPageInd">1/2</li>';
+    
     HTML += '                   <li><a id="nextQuestSelBtn">Next</a></li>';
     HTML += '                </ul>';
 

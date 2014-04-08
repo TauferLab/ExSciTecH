@@ -44,10 +44,21 @@ QuestionPage.selectQuestBtnPage = function(ID){
     else{
         $("#prevQuestSelBtn").css({opacity:1});
     }
+    
+    
+    $("#questSelPageInd").html(QuestionPage.selectedButtonPage+"/"+QuestionPage.currentButtonPage)
 }
 
 QuestionPage.prototype.generateHTML = function(){
-    var HTML = '<button type="button" class="btn btn-primary questionBtn" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
+
+    if( this.ID % 2 == 0){
+        var btnClass = 'btn-info';
+    }
+    else{
+        var btnClass = 'btn-info';
+    }
+
+    var HTML = '<button type="button" class="btn ' + btnClass + ' questionBtn" id="qsb_'+this.ID+'" onClick="QuestionSetEditor.selectPage('+this.ID+');">'+this.ID+'</button>';
     
     /*if(){
         questBtnPage1
@@ -55,7 +66,7 @@ QuestionPage.prototype.generateHTML = function(){
     
     var numBtns = MoleculeSearch.SearchArray.length - 1; //Index 0 doesn't count towards total
     
-    if( numBtns%32 == 0){
+    if( numBtns%40 == 0){
         QuestionPage.currentButtonPage++;
     }
     

@@ -11,7 +11,9 @@
 }
 
 #leftSidebar .questionBtn{
-    width: 22%;
+    width: 16%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #leftSidebar .well{
@@ -20,6 +22,7 @@
 
 #leftSidebar{
     padding: 12px;
+    padding-top: 0px;
     overflow: hidden;
 }
 
@@ -32,14 +35,24 @@
     opacity: 0;
 }
 
+#nextQuestSelBtn, #prevQuestSelBtn{
+
+    cursor: pointer;
+    width: 35%;
+    padding: 5px 0px;
+    text-align: center;
+}
+
 #nextQuestSelBtn{
     float: right;
-    cursor: pointer;
+}
+
+#questSelPageInd{
+    line-height: 32px;
 }
 
 #prevQuestSelBtn{
     float: left;
-    cursor: pointer;
 }
 
 #overlayBg{
