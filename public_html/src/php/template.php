@@ -132,7 +132,7 @@
                 </li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Sign In<b class="caret"></b></a>
                     <ul class="dropdown-menu" style="padding: 15px;">
-                        <form class="form-signin" _lpchecked="1" action="" onSubmit="return false;">
+                        <form class="form-signin headerLogin" _lpchecked="1" action="" onSubmit="return false;">
                             <input id="loginEmail" type="text" class="form-control" placeholder="Email or Username" autofocus="">
                             <input id="loginPass" type="password" class="form-control" placeholder="Password">
                             <button id="loginBtn" class="btn btn-primary btn-block" type="submit">Sign in</button>

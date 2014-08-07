@@ -47,7 +47,7 @@
                     var_dump($Session);
                 }
                 */
-                if($user->name == "Sam"){
+                if( isAdmin($user->name) ){
                     send_cookie('admin', "1", true);
                 }
                 
@@ -73,15 +73,8 @@
 		else{
 			return build_error_response("Invalid login request");
 		}
-				
 
-		//form response text
-		//$response = array();
-		//$response["success"] = true;
-		//$response["username"] = "Sam";
-		//$response["auth"] = "74d5012a6404319d777dadd18322a437";
 		return $response;
 	}
-	
 
 ?>

@@ -103,4 +103,35 @@ function lookup_user_username($username) {
     return BoincUser::lookup("name='$username'");
 }
 
+function isAdmin( $username ){	
+    global $MYSQL_SERVER;
+    global $MYSQL_USER;
+    global $MYSQL_PASSWORD;
+    global $MYSQL_FORUM_DB;
+    
+	    $mysqli = new mysqli($MYSQL_SERVER, $MYSQL_USER, $MYSQL_PASSWORD, $MYSQL_FORUM_DB);
+    
+	$query = "SELECT `Admin` FROM `GDN_User` WHERE `Name` = ?";
+	
+	if($stmt = $mysqli->prepare($query)){
+		$stmt->bind_param("s", $username );
+		$stmt->execute();
+		
+		$stmt->bind_result( $admin );
+		
+		$admin = 0;
+		
+		$stmt->fetch();
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $admin == 1;
+    }
+    else{
+        var_dump($mysqli->error);
+        return false;
+    }
+}
+
 ?>

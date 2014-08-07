@@ -2,9 +2,8 @@
         //Database connection parameters
         $MYSQL_SERVER = "localhost";
         $MYSQL_USER = "exscitech";
-        $MYSQL_PASSWORD = "56eLKG3HVyUTA52u";
+        $MYSQL_PASSWORD = "CuuuRZqjxqzH3QpN";
         $MYSQL_DB = "exscitech_web";
-        $MYSQL_BOINC_DB = "exscitech_boinc";
         $MYSQL_FORUM_DB = "exscitech_forum";
 
         //Flashcard Data Directories

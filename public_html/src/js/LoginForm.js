@@ -127,8 +127,9 @@ LoginRegForm.prototype.writeUserInfoNav = function( username ){
         HTML += '<li><a href="/editor">Question Set Editor</a></li>';
         HTML += '<li><a href="/flashcards/' + username + '">My Question Sets</a></li>';
         
-        if(get_cookie("admin") == 1)
-            HTML += '<li><a href="/forum/index.php#/dashboard/settings">Forum Dashboard</a></li>'; 
+        if(get_cookie("admin") == 1){
+            HTML += '<li><a href="/admin">Admin Panel</a></li>'; 
+        }
         
         HTML += '<li><a href="/forum/index.php#/messages/inbox">Inbox</a></li>'+
                 '<li><a href="#" id="logoutBtn">Logout</a></li>'+

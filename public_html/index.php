@@ -84,7 +84,11 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2" style="text-align: right">
 					<h1>Welcome to ExSciTecH<br>Molecule Flashcards</h1>
-					<a href="https://exscitech.org/flashcards" class="btn btn-success btn-lg">Play Now!</a>
+					<a href="https://exscitech.org/flashcards" class="btn btn-success btn-lg playNow">Play Now!</a>
+					<p id="homepageOr">or</p>
+					<a href="http://bit.ly/1xuXkLu">
+                        <img alt="Get it on Google Play" src="/assets/homepage/en_generic_rgb_wo_45.png" />
+                    </a>
 				</div><!-- /col-lg-12 -->
 				
 			</div><!-- /row -->
