@@ -2,9 +2,9 @@ WebGLTest = function(){
 
     if(get_cookie("welcomeAlert") != 1){
         var HTML =  '<div class="alert alert-dismissable alert-success" id="welcomeAlert">'+
-                        '<button type="button" class="close" data-dismiss="alert">×</button>'+
+                        '<button type="button" class="close" data-dismiss="alert">x</button>'+
                         '<h4>Welcome to ExSciTecH!</h4>'+
-                        '<p>We’re excited to announce that the ExSciTecH molecule flashcards are now in beta. '+
+                        '<p>We&#39;re excited to announce that the ExSciTecH molecule flashcards are now in beta. '+
                             'Please be advised the is still under active development and there may be bugs. '+
                             'If you encounter a bug please stop by the forums and let us know.</p>'+
     

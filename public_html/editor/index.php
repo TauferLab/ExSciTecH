@@ -1,6 +1,7 @@
 <?php
-    require_once("/var/www/ExSciTecH/public_html/src/php/template.php");
-    require_once("/var/www/ExSciTecH/public_html/BOINC/main.inc");
+    require_once("../src/php/template.php");
+    require_once("../BOINC/main.inc");
+    $CALLING_PREFIX = "../";
     
     if( !isset($_COOKIE["auth"]) ){
         header("Location: https://exscitech.org");

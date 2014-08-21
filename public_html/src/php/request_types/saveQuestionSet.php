@@ -15,21 +15,21 @@
 		    if( $ID != false ){
                 $response_object['ID'] = $ID;
                 $response_object['insert'] = "true";
-                $response_object['success'] = "true";
+                $response_object['success'] = true;
 		    }
     		else{
-    		    $response_object['success'] = "false";
+    		    $response_object['success'] = false;
     		}
 		}
 		else{
 		    if( updateQuestionSet($request_object) ){
     		    $response_object['ID'] = $ID;
         		$response_object['update'] = "true";
-        		$response_object['success'] = "true";
+        		$response_object['success'] = true;
             }
             else{
                 $response_object['update'] = "true";
-    		    $response_object['success'] = "false";
+    		    $response_object['success'] = false;
     		}
 		}
 
@@ -148,8 +148,6 @@
         
         if( ($timeLimit > 2400000) || ($timeLimit < 1000) ){
             $timeLimit = 120000;
-        }else{
-            
         }
         
         $query = "INSERT INTO `questionSet`(

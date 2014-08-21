@@ -1,5 +1,6 @@
 <?php
-    require_once("/var/www/ExSciTecH/public_html/src/php/template.php");
+    require_once("../src/php/template.php");
+    $CALLING_PREFIX = "../";
 ?>
 
 
@@ -13,10 +14,10 @@
         <link href="bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
         
         <link href="../src/css/custom.css" rel="stylesheet" media="screen">
-        <link href="./src/css/custom.css" rel="stylesheet" media="screen">
-        <link href="./src/css/molSearch.css" rel="stylesheet" media="screen">
-        <link href="./src/css/jquery-ui-1.8.23.custom.css" rel="stylesheet" media="screen">
-        <link href="./src/css/MoleculeSearch.css" rel="stylesheet" media="screen">
+        <link href="src/css/custom.css" rel="stylesheet" media="screen">
+        <link href="src/css/molSearch.css" rel="stylesheet" media="screen">
+        <link href="src/css/jquery-ui-1.8.23.custom.css" rel="stylesheet" media="screen">
+        <link href="src/css/MoleculeSearch.css" rel="stylesheet" media="screen">
         
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -78,7 +79,7 @@
         <div id="footer" >    
             <div class="container">
                 <footer>
-                    <p style="margin-top : 16px">© University of Delaware 2013 - Global Computing Lab</p>
+                    <p style="margin-top : 16px">&copy; University of Delaware 2013 - Global Computing Lab</p>
                 </footer>
             </div>
         </div>
@@ -90,13 +91,13 @@
         <script src="src/js/lib/jquery-ui-1.8.23.custom.min.js"></script>
         
         <script src="src/js/lib/Three49custom.js"></script>
-        <script src="./src/js/lib/GLmol.js"></script>
-        <script src="./src/js/glmolMod.js"></script>
+        <script src="src/js/lib/GLmol.js"></script>
+        <script src="src/js/glmolMod.js"></script>
                 
         <script src="src/js/MoleculeSearch.js"></script>
         <script src="../src/js/cookies.js"></script>
         <script src="../src/js/LoginForm.js"></script>
-        <script type="text/javascript" src="/src/js/webGLtest.js" language="javascript"></script>      
+        <script type="text/javascript" src="../src/js/webGLtest.js" language="javascript"></script>      
         
         <script>
             MoleculeSearch.Factory( new MoleculeSearch("#molSearch") );

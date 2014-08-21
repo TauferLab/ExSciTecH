@@ -1,5 +1,6 @@
 <?php
-    require_once("./src/php/template.php");
+    require_once("../src/php/template.php");
+    $CALLING_PREFIX = "../";
     
     printHeader("Teachers");
 ?>

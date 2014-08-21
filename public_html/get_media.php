@@ -13,7 +13,7 @@
 		$question_id = $_GET["qid"];
 		$media_type = $_GET["mt"];
 		
-		if($media_type==0){
+		if($media_type == 0){
 			$mt_str = "sdfFile";
 		}
 		else{
@@ -25,7 +25,7 @@
 		$mt_str = $mysqli_gamedb->real_escape_string($mt_str);
 		
 		//$query = "SELECT ".$mt_str." FROM questions WHERE game_id=(SELECT game_id FROM game_sessions WHERE session_id=\"".$game_session_id."\") AND question_id=(SELECT `original_q_id` FROM  `question_id_map` WHERE  `session_id` =  \"".$game_session_id."\" AND  `mapped_q_id` =".$question_id.")";
-		$query = "SELECT ".$mt_str." FROM molecules WHERE id = (
+		$query = "SELECT " . $mt_str . " FROM molecules WHERE id = (
 		            SELECT molID FROM questions WHERE question_id=(
 		                SELECT `original_q_id` FROM  `question_id_map` WHERE  `session_id` =  \"".$game_session_id."\" AND  `mapped_q_id` =".$question_id."
 		            ) AND game_id = (
@@ -46,11 +46,13 @@
 		else{
 			exit;
 		}
-		
+
+		$filename = str_replace('/var/www/ExSciTecH/public_html/', '', $filename);
+
 		$file = fopen($filename, 'rb');
 		
 		// send the right headers
-		if($media_type==0){
+		if($media_type == 0){
 			header("Content-Type: application/vnd.palm");
 		}
 		else{
@@ -66,3 +68,4 @@
 		exit;
 		
 	}
+?>

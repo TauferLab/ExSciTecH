@@ -67,7 +67,6 @@ function get_config() {
     global $g_config;
     if ($g_config == null) {
         $d = dirname(__FILE__);
-        //$g_config = file_get_contents("$d/../../config.xml");
     }
     return $g_config;
 }

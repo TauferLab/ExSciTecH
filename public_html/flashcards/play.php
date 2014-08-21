@@ -1,5 +1,6 @@
 <?php
 	require_once("../src/php/template.php");
+	$CALLING_PREFIX = "../";
 ?>
 
 <html>
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link href="/bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">        
+    <link href="../bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">        
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="../../assets/js/html5shiv.js"></script>
@@ -16,22 +17,22 @@
     <![endif]-->
     
     <!-- Custom CSS-->
-    <link href="/src/css/custom.css" rel="stylesheet" media="screen">
+    <link href="../src/css/custom.css" rel="stylesheet" media="screen">
 	<link href="./src/css/play.css" type="text/css" rel="stylesheet"></link>
 	
 	<!-- Libraries -->
-	<script type="text/javascript" src="./src/js/libs/md5-min.js" language="javascript"></script>
-	<script type="text/javascript" src="./src/js/libs/Three49custom.js"></script>
-	<script type="text/javascript" src="./src/js/libs/GLmol.js"></script>
+	<script type="text/javascript" src="src/js/libs/md5-min.js" language="javascript"></script>
+	<script type="text/javascript" src="src/js/libs/Three49custom.js"></script>
+	<script type="text/javascript" src="src/js/libs/GLmol.js"></script>
 	
 	<!-- Our Stuff -->
-	<script type="text/javascript" src="./src/js/Communication_Manager.js" language="javascript"></script>
-	<script type="text/javascript" src="./src/js/play.js"></script>
-	<script type="text/javascript" src="./src/js/LoadingScreen.js"></script>
-	<script type="text/javascript" src="./src/js/GameScreen.js"></script>
-	<script type="text/javascript" src="./src/js/EndScreen.js"></script>
-	<script type="text/javascript" src="./src/js/Timer.js"></script>
-	<script type="text/javascript" src="./src/js/StatManager.js"></script>
+	<script type="text/javascript" src="src/js/Communication_Manager.js" language="javascript"></script>
+	<script type="text/javascript" src="src/js/play.js"></script>
+	<script type="text/javascript" src="src/js/LoadingScreen.js"></script>
+	<script type="text/javascript" src="src/js/GameScreen.js"></script>
+	<script type="text/javascript" src="src/js/EndScreen.js"></script>
+	<script type="text/javascript" src="src/js/Timer.js"></script>
+	<script type="text/javascript" src="src/js/StatManager.js"></script>
     <script type="text/javascript" src="src/js/cookies.js"></script>
 
 </head>
@@ -52,6 +53,8 @@
                         </h1>
 
                     </div>
+
+
                     <div class="row">
                         <div id="qSetInfoWrapper" class="col-md-8" style="font-size: 1.5em">
                             <div class="qSetImgWrapper">
@@ -65,13 +68,16 @@
                                 <label for="infoDesc" class=" control-label">Description:</label>
                                 <span id="infoDesc"></span> 
                             </p>
+                            
                             <div id="loadingContainer">
                                 <div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-info" style="width: 0%;"></div>
                                 </div>
                                 <p style="text-align: center">Loading...</p>
                             </div>
+
                         </div>
+
                         <div class="col-md-4">
                             <div id="hsWrapper">
                                 <h2>High Scores</h2>
@@ -83,17 +89,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2" id="loadingContainer">
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-info" style="width: 0%;"></div>
-                            </div>
-                            <p style="text-align: center">Loading...</p>
-                        </div>
-                    </div>
-                    -->
 				</div>
+
+
 				<div id="gameUI">
 				    <div class="row">
                         <div class="col-md-8">
@@ -110,10 +108,19 @@
                             
                                 <h2 id="scoreDiff">+1,000</h2>
                             </div>
+
                             <div id="answerBtns">
                             </div>
                         </div>
 				    </div>
+ 
+                   
+                    <div>
+                        <div id = 'qProgressWrapper' class = "progress">
+                           <div id = "qProgressBar" class = "progress-bar"></div>
+                       </div>
+                    </div>
+
 				    <div id="qTextInfoWinWrapper">
     				    <div class="panel panel-default gameInfoWin" id="qTextInfoWin">
                             <div class="panel-body">
@@ -121,21 +128,16 @@
                             </div>
     				    </div>
 				    </div>
+
 				</div>
+
 				<div id="endUI">
-                    <div class="row" style="min-height: 500px;">
-                        <div class="col-md-6">
+                    <div class="row" style="min-height: 350px; padding-top: 150px;">
+                        <div class="col-md-6  col-md-offset-3">
                             <h1>Rank: <span id="rankVal">#1</span></h1>
                             <h1>Final Score: <span id="finalScoreVal">8,000</span></h1>
                         </div>
                         <div class="col-md-6">
-                            <h2 style="text-align: center; color: rgb(85, 85, 85)">Statistics</h2>
-                            <div class="table-responsive" style="background:white; min-height:">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead><tr><th>#</th><th>Time</th><th>Attempts</th><th>Score</th></tr></thead>
-                                    <tbody id="qStats"></tbody>
-                                </table>
-                            </div>
                         </div>
                     </div>
                     <div  class="row">
@@ -151,7 +153,7 @@
         <div class="container">
         <hr>
         <footer>
-            <p>© University of Delaware 2013 - Global Computing Lab</p>
+            <p>&copy; University of Delaware 2013 - Global Computing Lab</p>
         </footer>
         
         </div><!--container-->
@@ -160,10 +162,10 @@
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
         
         <!-- Login form -->
-        <script type="text/javascript" src="/src/js/cookies.js" language="javascript"></script>
-        <script type="text/javascript" src="/src/js/LoginForm.js" language="javascript"></script>
+        <script type="text/javascript" src="../src/js/cookies.js" language="javascript"></script>
+        <script type="text/javascript" src="../src/js/LoginForm.js" language="javascript"></script>
 	</body>
 </html>

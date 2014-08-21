@@ -4,6 +4,7 @@
 	require_once("../src/php/database.inc");
 	require_once("../src/php/template.php");
 	require_once("../BOINC/main.inc");
+	$CALLING_PREFIX = "../";
 	
 	$user = get_user($_COOKIE['auth']);
 	if( !isAdmin( $user->name ) ){
@@ -65,9 +66,9 @@
 		<!--<link href="./mailingList/cerulean.min.css" rel="stylesheet">
 		<link href="./mailingList/custom.css" rel="stylesheet">-->
 		
-		<link href="/bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
-		<link href="/src/css/custom.css" rel="stylesheet" media="screen">
-		<link href="/src/css/homepage.css" rel="stylesheet">
+		<link href="../bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
+		<link href="../src/css/custom.css" rel="stylesheet" media="screen">
+		<link href="../src/css/homepage.css" rel="stylesheet">
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>

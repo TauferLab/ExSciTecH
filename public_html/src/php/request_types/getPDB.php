@@ -12,19 +12,16 @@
 
 		$ID = getMolID($compoundName);
 
-		if($ID > 0){
+		if($ID > 0) {
     	    
     	    $SDF = getSDF($ID);
     	    
-    	    if( isset($SDF) ){
+    	    if( isset($SDF) ) {
     	        header("Content-Type:chemical/x-mdl-sdfile");
     	        echo $SDF;
-    	        die();        	    
+    	        die();       	    
     	    }
-
-    	   
 		}
-		
 		
     	$response_object['success'] = "false";
 		
@@ -41,7 +38,7 @@
 		$stmt->store_result();
 		$stmt->bind_result($sdfFile,$unavailable);
     	
-    	if( $stmt->num_rows > 0 ){
+    	if($stmt->num_rows > 0){
         	
         	$stmt->fetch();
         	
@@ -60,9 +57,6 @@
     	        $mysqli_gamedb->close();
         	    return -2;
     	    }
-            
         }
-        
-        
 	}
 ?>

@@ -49,7 +49,15 @@ function initPage(){
         default:
             $("#redirectMsg").html("Please "+verb+" to gain access.");
     }
-    
+
+    $("#loginScreenBtn").click(function(){
+        LoginRegForm.submitLogin($('#loginScreenEmail').val(), $('#loginScreenPass').val());
+        return false;
+    });
+    $("#regScreenBtn").click(function(){
+        LoginRegForm.submitReg();
+        return false;
+    });
 }
 
 initPage();

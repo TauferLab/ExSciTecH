@@ -1,6 +1,7 @@
 <?php
-    require_once("../src/php/template.php");
+    require_once('../src/php/template.php');
     
+    $CALLING_PREFIX = "../";
     printHeader("ExSciTecH - Contact Us");
 ?>
 
@@ -13,7 +14,7 @@
 	<div class="row">
 		<br><br>
 		<div class="col-lg-4 col-lg-offset-1 centered">
-			<img src="./phone.png" alt="">
+			<img src="phone.png" alt="">
 		</div><!-- col-lg-6 -->
 		<div class="col-lg-6">
 			<h4>Contact</h4>

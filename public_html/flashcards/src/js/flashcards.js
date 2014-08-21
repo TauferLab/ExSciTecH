@@ -476,7 +476,7 @@ function register(){
 		}		
 	}
 	else{
-		$("#reg_error").text("Passwords don't match.");
+	    $("#reg_error").text("Passwords don't match.");
 	    $("#reg_error").css({opacity:1});
 		
 	}
@@ -502,36 +502,36 @@ function handle_login(username, authenticator){
 	demo_glmol = null;
 	
 	var rowSelector = null;
-    var rowCount = 0;
+        var rowCount = 0;
 
 	for(i in available_games){
 	
 	    if( i % 4 == 0 ){
 	        var rowHTML = '<div class="row tileRow" id=gr_' + rowCount + '></div>';
 	        $("#tileList").append(rowHTML);
-    	    rowSelector = '#gr_' + rowCount++;
+    	    	rowSelector = '#gr_' + rowCount++;
 	    }
 	
-		add_tile(rowSelector,available_games[i]);
+	    add_tile(rowSelector, available_games[i]);
 
 	}
 
 	$(".module-game-tile").hover(
-						//In Handler
-						function(){
-							var j_this = $(this);
-							j_this.find(".game-image-overlay").css({ display: "block" });
-							j_this.find(".play-btn-wrapper").clearQueue();
-							j_this.find(".play-btn-wrapper").animate( {opacity: 1,top: '-180'} );
-						},
-						//Out Handler
-						function(){
-							var j_this = $(this);
-							j_this.find(".game-image-overlay").css({ display: "none" });
-							j_this.find(".play-btn-wrapper").clearQueue();
-							j_this.find(".play-btn-wrapper").animate( {opacity: 0,top: '0'} );
-						});
-}
+		//In Handler
+		function(){
+			var j_this = $(this);
+			j_this.find(".game-image-overlay").css({ display: "block" });
+			j_this.find(".play-btn-wrapper").clearQueue();
+			j_this.find(".play-btn-wrapper").animate( {opacity: 1,top: '-180'} );
+		},
+		//Out Handler
+		function(){
+			var j_this = $(this);
+			j_this.find(".game-image-overlay").css({ display: "none" });
+			j_this.find(".play-btn-wrapper").clearQueue();
+			j_this.find(".play-btn-wrapper").animate( {opacity: 0,top: '0'} );
+		});
+	}
 
 function go_to_tile_screen(page_num){
 	if(tile_page_count>1){

@@ -1,3 +1,4 @@
+
 <?php
     require_once("./src/php/template.php");
     require_once("./src/php/config.inc");
@@ -45,8 +46,8 @@
     }
     
     $newsItems = getNews();
-    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -59,11 +60,11 @@
     <title>Welcome to ExSciTecH!</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./bootstrap/css/cerulean.min.css" rel="stylesheet">
+    <link href="bootstrap/css/cerulean.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./src/css/homepage.css" rel="stylesheet">
-    <link href="./src/css/custom.css" rel="stylesheet">
+    <link href="src/css/homepage.css" rel="stylesheet">
+    <link href="src/css/custom.css" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
@@ -77,23 +78,24 @@
 
   <body>
 
-      <?php printNavBar(); ?>
+    <?php printNavBar(); ?>
 
 	<div id="headerwrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2" style="text-align: right">
-					<h1>Welcome to ExSciTecH<br>Molecule Flashcards</h1>
-					<a href="https://exscitech.org/flashcards" class="btn btn-success btn-lg playNow">Play Now!</a>
-					<p id="homepageOr">or</p>
-					<a href="http://bit.ly/1xuXkLu">
-                        <img alt="Get it on Google Play" src="/assets/homepage/en_generic_rgb_wo_45.png" />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2" style="text-align: right">
+                    <h1>Welcome to ExSciTecH<br>Molecule Flashcards</h1>
+                    <a href="https://exscitech.org/flashcards" class="btn btn-success btn-lg playNow">Play Now!</a>
+                    <p id="homepageOr">or</p>
+                    <a href="http://bit.ly/1xuXkLu">
+                        <img alt="Get it on Google Play" src="assets/homepage/en_generic_rgb_wo_45.png" />
                     </a>
-				</div><!-- /col-lg-12 -->
-				
-			</div><!-- /row -->
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
+                </div><!-- /col-lg-12 -->
+                
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /headerwrap -->
+
 	
 	
 	<div id="explanation" class="container">

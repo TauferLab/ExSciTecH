@@ -12,7 +12,7 @@
 		//Create a new Session ID
 		$response_object['game_session_id'] = uniqid();
 		$response_object['questions'] = Array();
-
+	
 		$user = get_user($request_object["authenticator"]);
 		$user_id = $user->id;
 		
@@ -38,7 +38,7 @@
 		foreach($temp_array as $row){
 			$answers = explode("|", $row["answers"]);
 			array_push($response_object['questions'], build_question($id,$row["text"],$answers));
-			store_mapping($response_object['game_session_id'],$row["question_id"],$id++);
+			store_mapping($response_object['game_session_id'], $row["question_id"],$id++);
 		}
 
         $result = $mysqli_gamedb->query("SELECT * FROM questionSet WHERE id=".$game_id);
@@ -46,13 +46,13 @@
             $response_object['name'] = $row['name'];
             $response_object['time_limit'] = $row['time_limit'];
             $response_object['description'] = $row['description'];
-            $response_object['imageURL'] = $row['image'];
-            $response_object['highres_image'] = $row['image'];
+            $response_object['imageURL'] = '..' . $row['image'];
+            $response_object['highres_image'] = '..' . $row['image'];
         }
         
         $response_object['high_scores'] = get_high_scores( $game_id );
 
-		$response_object['success'] = "true";
+		$response_object['success'] = true;
 		
 		$mysqli_gamedb->close();
 		return $response_object;

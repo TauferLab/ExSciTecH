@@ -14,7 +14,7 @@ LoadingScreen.prototype.getGameInfo = function(gameID){
     var screen = this;
     
     $.ajax({
-		    url: "/request_handler.php",
+		    url: "../request_handler.php",
 		    type: 'POST',
 		    data: JSON.stringify(reqObj),
 		    success: function(data){
@@ -43,12 +43,15 @@ LoadingScreen.prototype.pdbAJAXrequest = function(count,total,data){
 
 	if( count < total ){
 	    var screen = this;
-	    var URL = "/get_media.php?mt=0&gsi="+this.questionSession.sessionID+"&qid="+this.questionSession.questionSet[count].id;
+	    var URL = "../get_media.php?mt=0&gsi="+this.questionSession.sessionID+"&qid="+this.questionSession.questionSet[count].id;
 	    	
 		$.ajax({
 			url: URL, 
 			success: function(data){
-				screen.pdbAJAXrequest(count+1,total,data);		
+				screen.pdbAJAXrequest(count+1,total,data);	
+			},
+			error: function(data) {
+				console.log(data);
 			}
 		});	
 	}
@@ -65,7 +68,6 @@ LoadingScreen.prototype.pdbAJAXrequest = function(count,total,data){
 
 LoadingScreen.prototype.populateLoadingScreen = function(data){
     console.log(data);
-    
     
     $('#qSetImage').attr("src",data.imageURL);
     $('#qSetTitleVal').html( data.name );

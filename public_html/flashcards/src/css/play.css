@@ -25,14 +25,15 @@
     display: none;
 }
 
-.gameInfoWin{
+.gameInfoWin {
     background-color: #2D2D33;
     color: white;
     width: 95%;
     margin: 10px auto;
+    margin-top: 5px;
 }
 
-.gameInfoWin h2{
+.gameInfoWin h2 {
     color: white;
     margin:0;
 }
@@ -165,4 +166,14 @@
 
 #hsWrapper .table-responsive{
     margin: 0px 10px;
+}
+
+#qProgressWrapper {
+    width: 95%;
+    margin: auto;
+    margin-bottom: 2px;
+}
+
+#qProgressBar {
+    width: 100%;
 }

@@ -2,6 +2,7 @@
 	require_once("../src/php/config.inc");
 	require_once("../src/php/database.inc");
 	require_once("../BOINC/main.inc");
+	$CALLING_PREFIX = "../";
 	
     $user = get_user($_COOKIE['auth']);
 	if( !isAdmin( $user->name ) ){

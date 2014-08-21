@@ -215,7 +215,8 @@ MoleculeSearch.downloadCallbackSuccess = function (data, ID) {
     // So when the the parseJSON fails we catch the exception and handle the pdb file.
     try{
         var response = jQuery.parseJSON( data );
-        console.log(response);
+        console.log(response);	
+      console.log(data);
         $( "#lm_" + ID ).html("Unfortunately that molecule is unavailable. <br> Please try another.");
         $( "#lm_" + ID ).css( {display : "block", background: "red"} );
 

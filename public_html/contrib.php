@@ -22,10 +22,11 @@
             
             <li>Eddie Kimmel</li>
             <li>Lindsey Young</li>
-            <li>Will Gervasio</li>
-            <li>Connor Mahaffey</li>
+            <li><a href="https://github.com/GameGeezer">Will Gervasio</a></li>
+            <li><a href="http://connormahaffey.com/">Connor Mahaffey</a></li>
+            <li><a href="https://github.com/kbroskie">Kimberlyn Broskie</a></li>
             
-            <h4>Contact and Project Lead at Millersville University:  Dr. Gary Zoppetti</h4>
+            <h4>Contact and Project Lead at Millersville University: <a href="http://cs.millersville.edu/fs/gzoppetti/"> Dr. Gary Zoppetti </a></h4>
             
             
             <h3>Other Project Contributors:</h3>

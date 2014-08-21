@@ -23,12 +23,7 @@
 		$time = $mysqli_gamedb->real_escape_string($request_object["game_time"]);
 		
 		//check to see if it's correct
-		if( is_answer_correct($original_q_id,$answer,$game_session_id) ){
-			$response['correct'] = "true";
-		}
-		else{
-			$response['correct'] = "false";
-		}
+		$response['correct'] = is_answer_correct($original_q_id,$answer,$game_session_id);
 		
 		//insert the new answer
 		insert_answer($game_session_id,$mapped_q_id,$original_q_id,$answer,$time,$response['correct']);
@@ -37,7 +32,7 @@
 		$response['score'] = calculate_score($request_object["game_session_id"]);
 		$response['ansID'] = $answer;
 		
-		$response['success'] = "true";
+		$response['success'] = true;
 		
 		$mysqli_gamedb->close();
 		return $response;
@@ -89,7 +84,7 @@
 	function insert_answer($session_id,$mapped_q_id,$original_q_id,$answer,$game_time,$correct){
 		$mysqli_gamedb = connectToMysql();
 		
-		if($correct =="true")
+		if($correct) 
 			$correct = 1;
 		else
 			$correct = 0;

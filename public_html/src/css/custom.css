@@ -75,7 +75,7 @@
     margin-bottom: 0px;
 }
 
-.headerLogin{
+.form-control{
     width: 250px;
 }
 
@@ -103,8 +103,4 @@
 #dismissMsg{
     font-size: 10px;
     color: #8AB68A;
-}
-
-.adminPanel{
-    margin-top: 30px;
 }

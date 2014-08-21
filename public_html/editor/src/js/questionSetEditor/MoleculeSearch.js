@@ -12,7 +12,7 @@ MoleculeSearch = function (parentSelector, preloadName ) {
         select: function(event, ui){ molSearch.search( event, ui, ID ) }
     });
     
-    if( typeof preloadName != "undefined" ){
+    if(typeof preloadName != "undefined"){
         this.downloadSDF(preloadName);
         $("#mn_" + this.ID).val(preloadName);
     }

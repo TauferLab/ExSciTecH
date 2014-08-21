@@ -86,7 +86,7 @@
 
 	function build_error_response( $message ){
 		$response = array();
-		$response['success'] = "false";
+		$response['success'] = false;
 		$response['error'] = $message;
 		return $response;
 	}

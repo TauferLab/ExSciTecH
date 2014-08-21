@@ -10,11 +10,10 @@
 	function handle_loadQuestionSet_request($request_object){
 	    $response_object = array();
 	    
-	    if( userHasPermission($request_object["qSetID"], $request_object["authenticator"]) ){
+	    if(userHasPermission($request_object["qSetID"], $request_object["authenticator"])){
     	    $response_object["settings"] = getQsetSettings($request_object["qSetID"]);
     	    $response_object["questions"] = getQsetQuestions($request_object["qSetID"]);
-	    }
-	    else{
+	    } else {
     	    $response_object["success"] = false;
 	    } 
 	    
@@ -22,7 +21,7 @@
 	    return $response_object;
 	}
 	
-	function getQsetSettings($qSetID){
+	function getQsetSettings($qSetID) {
     	$mysqli_gamedb = connectToMysql();
 	    $retVal = array();
 	    
@@ -32,7 +31,7 @@
     	
     	$result = $mysqli_gamedb->query($query);
     	
-    	if( $result && $result->num_rows > 0 ){
+    	if($result && $result->num_rows > 0){
         	
         	$row = $result->fetch_array();
         	
@@ -44,16 +43,12 @@
         	$retVal["private"] = $row["private"];
         	
     	}
-        else{
-            $mysqli_gamedb->close();
-            return false;
-        }    	
 
         $mysqli_gamedb->close();
     	return $retVal;
 	}
 	
-	function userHasPermission($qSetID,$auth){
+	function userHasPermission($qSetID,$auth) {
     	$mysqli_gamedb = connectToMysql();
     	
     	$qSetID = $mysqli_gamedb->escape_string($qSetID);
@@ -63,15 +58,9 @@
     	$query = "SELECT * FROM `questionSet` WHERE `id` = $qSetID AND `ownerID` = ".$user->id;
 
     	$result = $mysqli_gamedb->query($query);
-    	
-    	if( $result && $result->num_rows > 0 ){
-    	    $mysqli_gamedb->close();
-    	    return true;
-        }
-        else{
-            $mysqli_gamedb->close();
-            return false;
-        }
+    	$mysqli_gamedb->close();
+
+        return $result && $result->num_rows > 0;
 	}
 
 	function getQsetQuestions($qSetID){
@@ -85,7 +74,7 @@
     	
     	$result = $mysqli_gamedb->query($query);
     	
-    	while( $row = $result->fetch_array() ){
+    	while($row = $result->fetch_array()){
     	
     	    $retVal[] = buildLoadQuestion(
             	$row["question_id"],
@@ -110,8 +99,7 @@
     	
     	$temp = $retVal["answerChoices"][0];
     	$retVal["answerChoices"][0] = $retVal["answerChoices"][$answer-1];
-    	$retVal["answerChoices"][$answer-1] = $temp;
-    	
+    	$retVal["answerChoices"][$answer - 1] = $temp;
     	
     	return $retVal;
 	}

@@ -22,7 +22,7 @@
 			
 		}
 
-		$response_object['success'] = "true";
+		$response_object['success'] = true;
 		
 		$mysqli_gamedb->close();
 		return $response_object;

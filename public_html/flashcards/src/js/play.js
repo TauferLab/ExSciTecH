@@ -35,11 +35,14 @@ getURLParameter = function(name) {
 handleWinResize = function(){
     if( window.innerWidth < 992){
         $("#qTextInfoWin").insertBefore( "#answerBtns" );
+        $("#qProgressWrapper").insertBefore ( "#qTextInfoWin" );
         $("#scoreInfoWinWrapper").insertBefore( "#GLMolFrame" );
     }
     else{
         $("#qTextInfoWin").appendTo( $("#qTextInfoWinWrapper") );
         $("#scoreInfoWinWrapper").insertBefore( "#answerBtns" );
+        $("#qProgressWrapper").insertBefore("#qTextInfoWinWrapper");
+
     }
 }
 

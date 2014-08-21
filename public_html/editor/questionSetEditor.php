@@ -1,6 +1,7 @@
 <?php
-    require_once("/var/www/ExSciTecH/public_html/src/php/template.php");
-    require_once("/var/www/ExSciTecH/public_html/BOINC/main.inc");
+    require_once("../src/php/template.php");
+    require_once("../BOINC/main.inc");
+    $CALLING_PREFIX = "../";
     
     if( !isset($_COOKIE["auth"]) ){
         header("Location: https://exscitech.org");
@@ -15,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
 
-    <link href="/bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
+    <link href="../bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
     
-    <link href="/src/css/custom.css" rel="stylesheet" media="screen">
+    <link href="../src/css/custom.css" rel="stylesheet" media="screen">
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

@@ -19,16 +19,22 @@
 		
 		//calculate base score
 		$base_score = calculate_score($game_session_id);
-		
-		//calculate final score
-		$final_score = $base_score + $remaining_time/200;
-		
-		//if the player finished the game 
-		// ie if num_questions_answered == num_questions or time == time_limit 		
-		if(are_all_questions_answered($game_session_id) || $remaining_time == $max_time){
+
+		//give the client an extra minute to load the molecule models before
+		//their game begins
+		if(are_all_questions_answered($game_session_id) || $remaining_time > -60000){
+			$response_object["success"] = true;
+
+			//ensure score is not negative even if time is negative
+			if($remaining_time < 0) {
+				$remaining_time = 0;
+			}
+
+			$final_score = $base_score + $remaining_time / 200;
+
 			//store score
 			if( isset($user->name) && !scoreStoredPreviously($game_session_id) ){
-    			store_score($user, $game_session_id,$final_score);
+    			store_score($user, $game_session_id, $final_score);
             }
 		
 			//return score rank
@@ -39,10 +45,9 @@
 		}
 		//else purge the game session from the database
 		else{
-			
+			$response_object["success"] = false;
 		}
 		
-		$response_object["success"] = "true";
 		
 		$mysqli_gamedb->close();
 		return $response_object;
@@ -68,10 +73,6 @@
 		    $mysqli_gamedb->close();
 			return true;
 		}
-		
-		$mysqli_gamedb->close();
-    	return true;
-    	return false;
 	}
 	
 	function are_all_questions_answered($game_session_id){
@@ -81,6 +82,7 @@
                 
         $result = $mysqli_gamedb->query($query);
         
+        // Ugly code used to grab the first index of the last row
         while($row = $result->fetch_array()){
                 $answered = $row[0];
         }
@@ -121,17 +123,15 @@
 	}
 	
 	function get_rank($score, $game_session_id){
+
 		$mysqli_gamedb = connectToMysql();
-		$query = "SELECT COUNT(*) FROM `scores` WHERE `score` > '".$score."' AND `game_id`=(SELECT game_id  FROM `answers` WHERE `game_session_id` = '".$game_session_id."' LIMIT 1)";
-		
+		$query = "SELECT COUNT(*) FROM `scores` WHERE `score` > '".$score."' AND `game_id`=(SELECT game_id  FROM `game_sessions` WHERE `session_id` = '".$game_session_id."' LIMIT 1)";
 		$result = $mysqli_gamedb->query($query);
 		
 		if($row = $result->fetch_array()){
-		    $mysqli_gamedb->close();
 			$rank = $row[0] + 1;
 		}
 		else{
-		    $mysqli_gamedb->close();
 			$rank = null;
 		}
 		
@@ -141,7 +141,7 @@
 	
 	function get_time_limit($game_session_id){
 		$mysqli_gamedb = connectToMysql();
-		$query = "SELECT time_limit FROM `questionSet` WHERE `id` = (SELECT game_id  FROM `answers` WHERE `game_session_id` = '".$game_session_id."' LIMIT 1)";
+		$query = "SELECT time_limit FROM `questionSet` WHERE `id` = (SELECT game_id  FROM `game_sessions` WHERE `session_id` = '".$game_session_id."' LIMIT 1)";
 		
 		$result = $mysqli_gamedb->query($query);
 		

@@ -14,13 +14,13 @@
 		$start = $mysqli_gamedb->real_escape_string($request_object["starting_rank"]);
 		$range = $mysqli_gamedb->real_escape_string($request_object["range"]);
 	
-		$query = "SELECT * FROM `scores` where game_id = ". $game_id ." ORDER BY score DESC LIMIT ". ($start-1) .",". $range;
+		$query = "SELECT * FROM `scores` WHERE game_id = ". $game_id ." ORDER BY score DESC LIMIT ". ($start-1) .",". $range;
 	
 		$result = $mysqli_gamedb->query($query);
 	
 		$response_object["scores"] = array();
 		
-		$rank = $start;
+		$rank = intval($start);
 		
 		while($row = $result->fetch_array()){
 			$score = array();

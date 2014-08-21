@@ -7,7 +7,6 @@ GameScreen = function( questionSessObj ){
     this.stats = new StatManager();
     
     this.timer = new Timer(questionSessObj.timeLimit);
-    
     this.initGLmol();
 }
 
@@ -16,8 +15,10 @@ GameScreen.prototype.start = function(){
     $("#gameUI").css({display:"block"});
     $("#endUI").css({display:"none"});
 
+    $("#qProgressBar").css({width: '0%'});
+   
     this.timer.start($.proxy(this.endGame, this));
-    
+
     this.loadNextQuestion();
 }
 
@@ -26,7 +27,7 @@ GameScreen.prototype.initGLmol = function ( ){
     this.gameGLmol.doSpin = true;
 }
 
-GameScreen.prototype.loadNextQuestion = function(){
+GameScreen.prototype.loadNextQuestion = function() {
     this.currentQuestion++;
     
     if( this.currentQuestion == this.questions.length ){
@@ -34,14 +35,16 @@ GameScreen.prototype.loadNextQuestion = function(){
         return;
     }
 
-    var question = this.questions[this.currentQuestion];
+    var currentProgress = ((this.currentQuestion + 1) / this.questions.length) * 100;
+    this.updateProgressBar (currentProgress);
 
+    var question = this.questions[this.currentQuestion];
     this.updateButtons(question.answers);
 
     this.gameGLmol.loadMoleculeStr(false, question.PDBtext );
     this.gameGLmol.x = 1;
-	this.gameGLmol.y = 1;
-	this.gameGLmol.rebuildScene();
+    this.gameGLmol.y = 1;
+    this.gameGLmol.rebuildScene();
     if( this.currentQuestion == 0 ){
         this.gameGLmol.spin();
     }
@@ -65,8 +68,12 @@ GameScreen.prototype.loadNextQuestion = function(){
     self.rebuildScene();
 } 
 
+GameScreen.prototype.updateProgressBar = function ( currentProgress ) {    
+    var progressPercentage = parseInt(currentProgress, 10) + '%';
+    $("#qProgressBar").css({width: progressPercentage});
+}
+
 GameScreen.prototype.updateButtons = function( answers ){
-    
     $("#answerBtns").html("");
     
     for( var i = 0; i < answers.length;i++){
@@ -80,42 +87,41 @@ GameScreen.prototype.updateButtons = function( answers ){
             var ansID = ($(this).attr('id')).split("_")[1];
             
             if( ansID == undefined ){
-        		console.log("error");
-        		return;
-        	}
+                console.log("error");
+                return;
+            }
             screen.submitAnswer( ansID );
         });
     }
 }
 
 GameScreen.prototype.submitAnswer = function( ansID ){
-	var reqObj = new Object();
-	reqObj.request_type = "submit_flashcard_answer";
-	reqObj.game_session_id = this.sessionID;
-	reqObj.authenticator = window.sessionInfo.auth;
-	reqObj.question_id = this.questions[this.currentQuestion].id;
-	reqObj.answer = ansID;
-	reqObj.game_time = this.timer.maxTime - this.timer.getVal();
-	
-	var screen = this;
+
+    var reqObj = new Object();
+    reqObj.request_type = "submit_flashcard_answer";
+    reqObj.game_session_id = this.sessionID;
+    reqObj.authenticator = window.sessionInfo.auth;
+    reqObj.question_id = this.questions[this.currentQuestion].id;
+    reqObj.answer = ansID;
+    reqObj.game_time = this.timer.maxTime - this.timer.getVal();
+    
+    var screen = this;
     
     $.ajax({
-		    url: "/request_handler.php",
-		    type: 'POST',
-		    data: JSON.stringify(reqObj),
-		    success: function(data){
-		        data = JSON.parse(data);
-    		    screen.submitAnswerCallback(data);
-		    }
+            url: "../request_handler.php",
+            type: 'POST',
+            data: JSON.stringify(reqObj),
+            success: function(data){
+                data = JSON.parse(data);
+                screen.submitAnswerCallback(data);
+            }
         });
-
 }
 
 GameScreen.prototype.submitAnswerCallback = function(data){
 
     $( '#ansBtn_' + data.ansID ).removeClass("btn-default");
-    
-    if(data.correct == "true" ){
+    if(data.correct){
         $( '#ansBtn_' + data.ansID ).addClass("btn-success");
     }
     else{
@@ -126,11 +132,12 @@ GameScreen.prototype.submitAnswerCallback = function(data){
     
     this.updateScore(data.score);
     
-    if(data.correct == "false")
+    if(!data.correct)
         $('.questionBtn').prop("disabled",false);
 }
 
 GameScreen.prototype.updateScore = function( score ){
+
     var scoreDiff = score - this.score;
     this.score = score;
     
@@ -144,7 +151,6 @@ GameScreen.prototype.updateScore = function( score ){
     else{
         $('#scoreVal').css({color: 'white'});        
     }
-    
     
     $('#scoreDiff').finish();
     $('#scoreDiff').css({"opacity":"1"});
@@ -181,13 +187,13 @@ GameScreen.prototype.endGame = function( ){
     var screen = this;
 
     $.ajax({
-	    url: "/request_handler.php",
-	    type: 'POST',
-	    data: JSON.stringify(reqObj),
-	    success: function(data){
-	        data = JSON.parse(data);
-		    screen.endGameCallback(data);
-	    }
+        url: "../request_handler.php",
+        type: 'POST',
+        data: JSON.stringify(reqObj),
+        success: function(data){
+            data = JSON.parse(data);
+            screen.endGameCallback(data);
+        }
     });
 }
 

@@ -11,7 +11,7 @@
 		$cats = getCategories();
 		
 		$response_object = array();
-		$response_object['success'] = "true";
+		$response_object['success'] = true;
 		$response_object['categories'] = $cats;
 		$response_object['available_games'] = Array();
 		
@@ -89,7 +89,7 @@
         
         if($result){
 			while($obj = $result->fetch_object() ) {
-				$ret[] = $obj;
+				$ret = $obj;
 			}
 		}
 		

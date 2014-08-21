@@ -15,7 +15,6 @@ function init(){
 }
 
 function handleLogin(username, authenticator){
-	
 	session_info = new Object();
 	session_info.username = username;
 	session_info.authenticator = authenticator;
@@ -23,41 +22,41 @@ function handleLogin(username, authenticator){
 	available_games = getAvailableGames();
 
 	var parent_element = "tile_pages";
-	var image_url = "./media/images/flashcard_games/vitamins.jpg";
+	var image_url = "../media/images/flashcard_games/vitamins.jpg";
 	var title = "Vitamins";
 	
 	demo_glmol = null;
 	
 	var rowSelector = null;
-    var rowCount = 0;
+        var rowCount = 0;
 
 	for(i in available_games){
 	
 	    if( i % 4 == 0 ){
 	        var rowHTML = '<div class="row tileRow" id=gr_' + rowCount + '></div>';
 	        $("#tileList").append(rowHTML);
-    	    rowSelector = '#gr_' + rowCount++;
+    	    	rowSelector = '#gr_' + rowCount++;
 	    }
 	
-		addTile(rowSelector,available_games[i]);
+	    addTile(rowSelector,available_games[i]);
 
 	}
 
 	$(".module-game-tile").hover(
-						//In Handler
-						function(){
-							var j_this = $(this);
-							j_this.find(".game-image-overlay").css({ display: "block" });
-							j_this.find(".play-btn-wrapper").clearQueue();
-							j_this.find(".play-btn-wrapper").animate( {opacity: 1,top: '-180'} );
-						},
-						//Out Handler
-						function(){
-							var j_this = $(this);
-							j_this.find(".game-image-overlay").css({ display: "none" });
-							j_this.find(".play-btn-wrapper").clearQueue();
-							j_this.find(".play-btn-wrapper").animate( {opacity: 0,top: '0'} );
-						});
+		//In Handler
+		function(){
+			var j_this = $(this);
+			j_this.find(".game-image-overlay").css({ display: "block" });
+			j_this.find(".play-btn-wrapper").clearQueue();
+			j_this.find(".play-btn-wrapper").animate( {opacity: 1,top: '-180'} );
+		},
+		//Out Handler
+		function(){
+			var j_this = $(this);
+			j_this.find(".game-image-overlay").css({ display: "none" });
+			j_this.find(".play-btn-wrapper").clearQueue();
+			j_this.find(".play-btn-wrapper").animate( {opacity: 0,top: '0'} );
+		});
 }
 
 function getAvailableGames(){
@@ -68,6 +67,7 @@ function getAvailableGames(){
 		request_object.user = loadname;	
 	}
 	
+	
 	var response_obj = comm_manager.send_request(request_object);
 	
 	console.log(response_obj);
@@ -75,10 +75,10 @@ function getAvailableGames(){
 	return response_obj.available_games;
 }
 
-function addTile(parentSelector,game){
+function addTile(parentSelector, game){
 
         var gameID = game.id;
-        var imageURL = game.image;
+        var imageURL = "../" + game.image;
         var gameTitle = game.name;
 
 		var new_tile = '<div class="col-md-3">'+
