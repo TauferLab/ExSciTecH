@@ -1,6 +1,6 @@
 LoginRegForm = function(){
-    var DOMAIN = 'http://localhost/~exscitech/';
-    //var DOMAIN = 'https://exscitech.org/';
+    //var DOMAIN = 'http://localhost/~exscitech/';
+    var DOMAIN = 'https://exscitech.org/';
     this.loginURL = DOMAIN + 'request_handler.php';
     
     var username = get_cookie('username');

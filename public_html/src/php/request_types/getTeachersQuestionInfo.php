@@ -73,7 +73,7 @@
         $scores = array();
     
         $mysqli_gamedb = connectToMysql();
-        $query = "SELECT * FROM scores WHERE game_id = $qSetID";
+        $query = "SELECT * FROM scores WHERE game_id = $qSetID ORDER BY score DESC";
         $result = $mysqli_gamedb->query($query);
     
         while($obj = $result->fetch_object() ) {

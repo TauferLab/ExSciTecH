@@ -179,7 +179,7 @@ TeacherDashboard.prototype.getQuestionsSetInfoCallback = function( data, qSetID 
     scoreArray.sort();
     
     //console.log( Math.round(scoreArray.length*0.25) );
-    
+    //console.log(scoreArray);
     var min = scoreArray[0];
     var firstQuarter = scoreArray[Math.round(scoreArray.length*0.25)];
     var mid = scoreArray[scoreArray.length*0.50];

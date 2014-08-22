@@ -83,7 +83,7 @@ GameScreen.prototype.updateButtons = function( answers ){
         
         $('#ansBtn_'+answers[i].id).click( function(){
 
-            $('.questionBtn').prop("disabled",true);
+            $('.questionBtn').prop("disabled", true);
             var ansID = ($(this).attr('id')).split("_")[1];
             
             if( ansID == undefined ){

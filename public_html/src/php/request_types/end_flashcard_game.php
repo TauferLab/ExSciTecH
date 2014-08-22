@@ -30,17 +30,17 @@
 				$remaining_time = 0;
 			}
 
-			$final_score = $base_score + $remaining_time / 200;
-
-			//store score
-			if( isset($user->name) && !scoreStoredPreviously($game_session_id) ){
-    			store_score($user, $game_session_id, $final_score);
-            }
+			$final_score = round($base_score + $remaining_time / 200);
 		
 			//return score rank
 			$response_object["rank"] = get_rank($final_score, $game_session_id);
 			
 			$response_object["final_score"] = $final_score;
+
+			//store score
+			if( isset($user->name) && !scoreStoredPreviously($game_session_id) ){
+    			store_score($user, $game_session_id, $final_score);
+            }
 			
 		}
 		//else purge the game session from the database
@@ -123,16 +123,15 @@
 	}
 	
 	function get_rank($score, $game_session_id){
-
 		$mysqli_gamedb = connectToMysql();
-		$query = "SELECT COUNT(*) FROM `scores` WHERE `score` > '".$score."' AND `game_id`=(SELECT game_id  FROM `game_sessions` WHERE `session_id` = '".$game_session_id."' LIMIT 1)";
+		$query = "SELECT COUNT(*) FROM `scores` WHERE `score` >= '".$score."' AND `game_id`=(SELECT game_id  FROM `game_sessions` WHERE `session_id` = '".$game_session_id."' LIMIT 1)";
 		$result = $mysqli_gamedb->query($query);
-		
+
 		if($row = $result->fetch_array()){
 			$rank = $row[0] + 1;
 		}
 		else{
-			$rank = null;
+			$rank = 1;
 		}
 		
 		$mysqli_gamedb->close();
