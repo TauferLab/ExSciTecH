@@ -7,7 +7,7 @@
 
 */
 function Communication_Manager(){
-	    this.request_URL = "/request_handler.php";
+	    this.request_URL = "../request_handler.php";
 	    this.login_request = login_request;
 	    this.send_request = send_request;
 	    this.get_user_request = get_user_request;

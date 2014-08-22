@@ -17,7 +17,7 @@ TeacherDashboard.prototype.getQuestionSets = function(){
     reqObj.auth = this.auth;
 
     $.ajax({
-            url: '/request_handler.php',
+            url: '../request_handler.php',
             data:JSON.stringify(reqObj),
             dataType: 'text',
             type: 'POST',
@@ -111,7 +111,7 @@ TeacherDashboard.prototype.getQuestionSetInfo = function(qSetID){
 
 
     $.ajax({
-            url: '/request_handler.php',
+            url: '../request_handler.php',
             data:JSON.stringify(reqObj),
             dataType: 'text',
             type: 'POST',
@@ -125,8 +125,6 @@ TeacherDashboard.prototype.getQuestionSetInfo = function(qSetID){
 TeacherDashboard.prototype.getQuestionsSetInfoCallback = function( data, qSetID ){
     
     data = $.parseJSON(data);
-    
-    console.log(data);
     
     var questions = data.questions;
         
@@ -213,7 +211,7 @@ TeacherDashboard.prototype.getQuestionsSetInfoCallback = function( data, qSetID 
 	    reqObj.questionSetID = qSetID;
 	
 	    $.ajax({
-	            url: '/request_handler.php',
+	            url: '../request_handler.php',
 	            data:JSON.stringify(reqObj),
 	            dataType: 'text',
 	            type: 'POST',
@@ -226,11 +224,17 @@ TeacherDashboard.prototype.getQuestionsSetInfoCallback = function( data, qSetID 
     $("#chartsContainer").show();
     $("#loadingIcon").hide();
 
+    $("#genTab").click();
+
 }
 
 TeacherDashboard.prototype.generateSettingsHTML = function(data,minScore,avgScore,maxScore,qSetID,reviewStatus){
 
     var numPlays = data.scores.length;
+
+    var highScore = maxScore ? maxScore : "N/A";
+    var averageScore = avgScore ? Math.round(avgScore) : "N/A";
+    var lowScore = minScore ? minScore : "N/A";
 
     var HTML = "";
     HTML += "       <table id='genStatTable' style=''>";
@@ -244,15 +248,15 @@ TeacherDashboard.prototype.generateSettingsHTML = function(data,minScore,avgScor
     HTML += "           </tr>";
     HTML += "           <tr>";
     HTML += "               <td>High Score</td>";
-    HTML += "               <td style='text-align: right'>"+maxScore+"</td>";
+    HTML += "               <td style='text-align: right'>"+highScore+"</td>";
     HTML += "           </tr>";
     HTML += "           <tr>";
     HTML += "               <td>Average Score</td>";
-    HTML += "               <td style='text-align: right'>"+Math.round(avgScore)+"</td>";
+    HTML += "               <td style='text-align: right'>"+averageScore+"</td>";
     HTML += "           </tr>";
     HTML += "           <tr>";
     HTML += "               <td>Low Score</td>";
-    HTML += "               <td style='text-align: right'>"+minScore+"</td>";
+    HTML += "               <td style='text-align: right'>"+lowScore+"</td>";
     HTML += "           </tr>";
     
     switch(reviewStatus){

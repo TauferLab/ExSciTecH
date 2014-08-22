@@ -42,14 +42,17 @@
         	
         	$stmt->fetch();
         	
-        	echo $stmt->error;
+        	//echo $stmt->error;
     	
         	if( $unavailable == "1" ){
         	    $mysqli_gamedb->close();
             	return -1;
         	}
-        	
-        	if( file_exists($sdfFile) ){
+            
+        	$sdfFile = str_replace("/var/www/ExSciTecH/public_html/", "", $sdfFile);
+            //$sdfFile = str_replace("/var/www/ExSciTecH/public_html/", "../", $sdfFile);
+
+        	if(file_exists($sdfFile)){
         	    $mysqli_gamedb->close();
                 return file_get_contents($sdfFile);	
         	}

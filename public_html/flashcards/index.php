@@ -1,13 +1,12 @@
 <?php
     require_once("../src/php/template.php");
     require_once("../BOINC/main.inc");
+
     $CALLING_PREFIX = "../";
     
     if( !isset($_COOKIE["auth"]) && !isset($_COOKIE["username"]) ){
         //header("Location: https://exscitech.org/login#flashcards");
-        
-    }
-    
+    }  
 ?>
 
 <html>

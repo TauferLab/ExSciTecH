@@ -45,7 +45,7 @@ QuestionSetEditor.prototype.downloadQSet = function(){
     var qSetEditor = this;
 
     $.ajax({
-        url: "/request_handler.php",
+        url: "../request_handler.php",
         data:JSON.stringify(reqObj),
         dataType: "text",
         type: 'POST',
@@ -56,6 +56,7 @@ QuestionSetEditor.prototype.downloadQSet = function(){
 }
 
 QuestionSetEditor.prototype.downloadQSetCallback = function(data) {
+    console.log(data);
     var preloadObj = jQuery.parseJSON( data );
     this.loadSavedSettings( preloadObj.settings );
     this.questionPages = this.loadSavedQuestions( preloadObj.questions );
@@ -92,7 +93,9 @@ QuestionSetEditor.prototype.loadSavedSettings = function (settings) {
 
     $("#qsn").val( settings.name );
     $("#qsd").val( settings.description );
-    $("#qstl").val( settings.timeLimit );
+    $('#timeLimitSlider').slider('value', settings.timeLimit / 1000 );
+    $("#timeLimit").html(QuestionSetEditor.prettyPrintTime(settings.timeLimit / 1000));
+    $("#qstl").val(settings.timeLimit);
     $("#selectedImg").attr("src", settings.image );
 };
 
@@ -174,21 +177,6 @@ QuestionSetEditor.prototype.addGenSettingPage = function( parentSelector ){
     HTML += '                   <div id="timeLimitSlider" style="width:85%; float:right;"></div>';
     HTML += '               </td>';
     HTML += "           </tr>";
-    /*
-    HTML += "           <tr>";
-    HTML += "               <td>Public</td>";
-    HTML += "               <td><input class='form-control' type='checkbox' id='qspub'></td>";
-    HTML += "           </tr>";
-    HTML += "           <tr>";
-    HTML += "               <td>Render Method</td>";
-    HTML += "               <td>";
-    HTML += "                   <select class='form-control' id='rndMthd'>";
-    HTML += "                       <option value='3D'>3D</option>";
-    HTML += "                       <option value='2D'>2D</option>";
-    HTML += "                   </select>";
-    HTML += "               </td>";
-    HTML += "           </tr>";
-    */
     HTML += "       </table>";
     HTML +='    </div>';
     HTML +='</div>';
@@ -205,6 +193,7 @@ QuestionSetEditor.prototype.addGenSettingPage = function( parentSelector ){
             $("#qstl").val(ui.value*1000);
         }
     });
+    console.log("slider");
 };
 
 QuestionSetEditor.prettyPrintTime = function(time){
@@ -248,7 +237,7 @@ QuestionSetEditor.prototype.setUpListeners = function (){
     });
     
     $("#backBtn").click( function(){
-        window.location = "/editor";
+        window.location = "../editor";
     });
     
     $("#nextQuestSelBtn").click( function(){
@@ -264,19 +253,21 @@ QuestionSetEditor.openImageSelect = function(){
     var imgArray = [];
     
 
-        imgArray.push("/data/flashcardImages/apples.jpg");
-        imgArray.push("/data/flashcardImages/biochem.png");
-        imgArray.push("/data/flashcardImages/functional_groups.png");
-        imgArray.push("/data/flashcardImages/hydrocarbons.png");
-        imgArray.push("/data/flashcardImages/vitamins.jpg");
+        imgArray.push("../data/flashcardImages/apples.jpg");
+        imgArray.push("../data/flashcardImages/biochem.png");
+        imgArray.push("../data/flashcardImages/functional_groups.png");
+        imgArray.push("../data/flashcardImages/hydrocarbons.png");
+        imgArray.push("../data/flashcardImages/vitamins.jpg");
         for(var j =1; j< 25;j++){
-            imgArray.push("/data/flashcardImages/"+j+".png");
+            imgArray.push("../data/flashcardImages/"+j+".png");
         } 
 
     
     $("#imgSelBody").html("");
 
     for(i in imgArray){
+        //error_log(mgArray[i]);
+
         $("#imgSelBody").append('<img class="topicImage img-thumbnail imgSelImg" src="'+imgArray[i]+'">');
     }
 
@@ -313,16 +304,17 @@ QuestionSetEditor.selectPage = function( pageNum ){
 };
 
 QuestionSetEditor.save = function( ){
-
     var qSetObj = QuestionSetEditor.instace.toObj();
-    
+
     qSetObj.request_type = "saveQuestionSet";
+
     qSetObj.authenticator = QuestionSetEditor.instace.auth;
+
     
     var qSetEditor = QuestionSetEditor.instace;
     
     $.ajax({
-        url: "/request_handler.php",
+        url: "../request_handler.php",
         data:JSON.stringify(qSetObj),
         dataType: "text",
         type: 'POST',
@@ -335,7 +327,7 @@ QuestionSetEditor.save = function( ){
 
 QuestionSetEditor.prototype.saveCallback = function(data){
     var result = jQuery.parseJSON( data );
-    
+
     this.ID = result.ID;
     
     window.history.pushState("object or string", "Title", "./questionSetEditor.php?ID="+this.ID );

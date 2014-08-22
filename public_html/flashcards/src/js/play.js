@@ -1,4 +1,5 @@
 init = function(){
+
     window.commManager = new Communication_Manager();
 
     $( window ).resize( handleWinResize );

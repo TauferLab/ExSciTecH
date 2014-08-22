@@ -17,11 +17,11 @@
 
 		
 		while($obj = $result->fetch_object() ) {
-            $response_object["questionSets"][] = $obj;    
+			$obj->image = ".." . $obj->image;
+            $response_object["questionSets"][] = $obj;
         }
         		
 		$response_object["success"] = "true";
 		return $response_object;
-    }
-		
+    }		
 ?>

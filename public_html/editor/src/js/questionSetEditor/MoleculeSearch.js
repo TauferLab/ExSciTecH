@@ -1,4 +1,3 @@
-
 MoleculeSearch = function (parentSelector, preloadName ) {
     this.ID = MoleculeSearch.counter++;
     
@@ -51,6 +50,7 @@ MoleculeSearch.prototype.generateHTML = function (){
 
 
 MoleculeSearch.prototype.autocp = function (request, response) {
+
     var input = request.term;    
     var time = (new Date).getTime();
     
@@ -91,7 +91,7 @@ MoleculeSearch.prototype.search = function ( event, ui , ID) {
 MoleculeSearch.prototype.downloadSDF = function ( compoundName ){
     //var URL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + compoundName + "/SDF?record_type=3d";
 
-    var URL = "/request_handler.php";
+    var URL = "../request_handler.php";
 
     var reqObj = Object.create(null);
     reqObj.compoundName = compoundName;
@@ -107,21 +107,23 @@ MoleculeSearch.prototype.downloadSDF = function ( compoundName ){
             success: function (data){
                 MoleculeSearch.downloadCallbackSuccess(data, ID);
             },
-            error: function(){
+            error: function(e){
+                console.log("big fat error");
+                console.log(e);
                 MoleculeSearch.downloadCallbackFailure();
             }
         }); 
 };
 
+//returns -1 or -2 on error, so it parsing succeeds there was an error
+//returns SDF text otherwise - SDF will not parse, so load it in error statement
 MoleculeSearch.downloadCallbackSuccess = function (data, ID) {
     $("#lm_" + ID ).css( {opacity : 0} );
     
     try{
         var response = jQuery.parseJSON( data );
-        console.log(response);
         $( "#lm_" + ID ).html("Unfortunately that molecule is unavailable. <br> Please try another.");
         $( "#lm_" + ID ).css( {opacity : 1, background: "red"} );
-
     }
     catch(err){
         $("#glmol_" + ID +"_src").val(data);

@@ -39,7 +39,7 @@
         	$retVal["name"] = $row["name"];
         	$retVal["description"] = $row["description"];
         	$retVal["timeLimit"] = $row["time_limit"];
-        	$retVal["image"] = $row["image"];
+        	$retVal["image"] = ".." . $row["image"];
         	$retVal["private"] = $row["private"];
         	
     	}
@@ -75,7 +75,7 @@
     	$result = $mysqli_gamedb->query($query);
     	
     	while($row = $result->fetch_array()){
-    	
+
     	    $retVal[] = buildLoadQuestion(
             	$row["question_id"],
             	$row["text"],

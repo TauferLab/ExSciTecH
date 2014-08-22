@@ -6,6 +6,7 @@
 	$request_structures["load_flashcard_game"]["game_id"] = "";
 	
 	function handle_load_flashcard_game_request($request_object){
+
 		$mysqli_gamedb = connectToMysql();
 		$response_object = array();
 

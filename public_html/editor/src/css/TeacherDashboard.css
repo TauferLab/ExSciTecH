@@ -70,15 +70,15 @@
     display: block;
 }
 #guessChart{
-    display: none;    
+    display: block; 
 
 }
 #scoreChart{
-    display: none;
+    display: block;
 }
 
 #chartsContainer{
-    display: none;
+    display: block;
 }
 
 #genStatTable{

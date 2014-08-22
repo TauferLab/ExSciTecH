@@ -8,8 +8,6 @@ LoadingScreen.prototype.getGameInfo = function(gameID){
 	reqObj.request_type = "load_flashcard_game";
 	reqObj.authenticator = window.sessionInfo.auth;
 	reqObj.game_id = gameID;
-	
-	question_obj = window.commManager.send_request(reqObj);
 
     var screen = this;
     
@@ -67,7 +65,6 @@ LoadingScreen.prototype.pdbAJAXrequest = function(count,total,data){
 }
 
 LoadingScreen.prototype.populateLoadingScreen = function(data){
-    console.log(data);
     
     $('#qSetImage').attr("src",data.imageURL);
     $('#qSetTitleVal').html( data.name );

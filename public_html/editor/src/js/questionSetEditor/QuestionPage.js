@@ -46,7 +46,7 @@ QuestionPage.selectQuestBtnPage = function(ID){
     }
     
     
-    $("#questSelPageInd").html(QuestionPage.selectedButtonPage+"/"+QuestionPage.currentButtonPage)
+    $("#questSelPageInd").html(QuestionPage.selectedButtonPage+"/"+QuestionPage.currentButtonPage);
 }
 
 QuestionPage.prototype.generateHTML = function(){

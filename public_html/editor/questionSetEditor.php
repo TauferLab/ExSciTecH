@@ -1,13 +1,13 @@
 <?php
     require_once("../src/php/template.php");
     require_once("../BOINC/main.inc");
-    $CALLING_PREFIX = "../";
     
+    $CALLING_PREFIX = "../";
+
     if( !isset($_COOKIE["auth"]) ){
         header("Location: https://exscitech.org");
     }
 ?>
-
 
 <html>
 <head>
@@ -36,16 +36,16 @@
     <!-- <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
 
     <!-- GLmol -->
-  	<script type="text/javascript" src="src/js/libs/Three49custom.js"></script>
-	<script type="text/javascript" src="src/js/libs/GLmol.js"></script>
+  	<script type="text/javascript" src="./src/js/libs/Three49custom.js"></script>
+	<script type="text/javascript" src="./src/js/libs/GLmol.js"></script>
 
 
     <!-- Our JS -->
-    <script type="text/javascript" src="src/js/Communication_Manager.js"></script>
+    <script type="text/javascript" src="./src/js/Communication_Manager.js"></script>
     <script type="text/javascript" src="../src/js/cookies.js"></script>
-    <script type="text/javascript" src="src/js/questionSetEditor/QuestionPage.js"></script>
-    <script type="text/javascript" src="src/js/questionSetEditor/QuestionSetEditor.js"></script>
-	<script type="text/javascript" src="src/js/questionSetEditor/MoleculeSearch.js"></script>
+    <script type="text/javascript" src="./src/js/questionSetEditor/QuestionPage.js"></script>
+    <script type="text/javascript" src="./src/js/questionSetEditor/QuestionSetEditor.js"></script>
+	<script type="text/javascript" src="./src/js/questionSetEditor/MoleculeSearch.js"></script>
 
   <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
 

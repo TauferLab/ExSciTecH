@@ -1,4 +1,4 @@
-<?php
+ <?php
 
     require_once("simple_html_dom.php");
 
@@ -11,7 +11,7 @@
 	
 		$out = file_get_contents( $URL );
 	
-        $wikiObj = json_decode($out,true);
+        $wikiObj = json_decode($out, true);
         
         $printing = false;
 	

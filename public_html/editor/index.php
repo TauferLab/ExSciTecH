@@ -1,13 +1,13 @@
 <?php
     require_once("../src/php/template.php");
     require_once("../BOINC/main.inc");
+
     $CALLING_PREFIX = "../";
-    
+
     if( !isset($_COOKIE["auth"]) ){
         header("Location: https://exscitech.org");
     }
 ?>
-
 
 <html>
 <head>
@@ -16,9 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
 
-    <link href="/bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
+    <link href="../bootstrap/css/cerulean.min.css" rel="stylesheet" media="screen">
     
-    <link href="/src/css/custom.css" rel="stylesheet" media="screen">
+    <link href="../src/css/custom.css" rel="stylesheet" media="screen">
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,13 +28,13 @@
 
     
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="src/css/TeacherDashboard.css" />
+	<link rel="stylesheet" type="text/css" href="./src/css/TeacherDashboard.css" />
   
 </head>
 
 <body>
 
-    <?php printHeader(); ?>
+    <?php printHeader(""); ?>
     <div class="container">
         <div id="loadingContainer" class="well well-sm row">
             <h1>Loading...</h1>
@@ -83,7 +83,7 @@
     
     <!-- Our JS -->
     <script type="text/javascript" src="../src/js/cookies.js"></script>
-    <script type="text/javascript" src="src/js/TeacherDashboard.js"></script>
+    <script type="text/javascript" src="./src/js/TeacherDashboard.js"></script>
 
 </body>
 </html>

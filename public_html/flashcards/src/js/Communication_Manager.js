@@ -35,8 +35,6 @@ function Communication_Manager(){
 
     function send_request(request_object){
 
-	    console.log(request_object);
-
 		if(this.request_URL ==null){
 		    console.log("this.request==null");
 		}

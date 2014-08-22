@@ -44,7 +44,7 @@
             	return;
         	}
         	
-		$row[0] = str_replace("/var/www/ExSciTecH/public_html", "..", $row[0]);
+		    $row[0] = str_replace("/var/www/ExSciTecH/public_html/", "../", $row[0]);
 
         	if( file_exists($row[0]) ){
                 	return file_get_contents($row[0]);	
@@ -63,8 +63,8 @@
     	
             $sdfURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/SDF?record_type=3d";
             $pngURL = "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/". rawurlencode($molName) ."/PNG";
-	    error_log($sdfURL);
-	    error_log($pngURL);
+
+
             file_put_contents($pngFilename, fopen($pngURL, 'r'));
 	    
             if( 

@@ -51,6 +51,8 @@
             if( $image =="" ){
                 $image = "/data/flashcardImages/functional_groups.png";
             }
+
+            $image = str_replace("..", "", $image);
             
             $query = "UPDATE `questionSet` SET
                         `name`         = \"$name\",
@@ -80,7 +82,14 @@
 	
 	function updateQuestion($question, $questionSetID){
 	    $mysqli_gamedb = connectToMysql();
-	
+	 /*  
+       error_log("###############################################");
+        error_log($question);
+        error_log($question[molName]);
+        error_log($question[answerChoices]);
+        error_log($question[questionText]);
+*/
+
     	//Check if question exists
     	if( questionExists($question["ID"], $questionSetID) ){
     	    $questionID = $mysqli_gamedb->escape_string($question["ID"]);
@@ -141,13 +150,15 @@
         $auth         = $mysqli_gamedb->escape_string($request_object["authenticator"]);
 
         if( $image =="" ){
-                $image = "/data/flashcardImages/functional_groups.png";
+                $image = "../data/flashcardImages/functional_groups.png";
             }
             
         $user = get_user($auth);
         
         if( ($timeLimit > 2400000) || ($timeLimit < 1000) ){
             $timeLimit = 120000;
+        }else{
+            
         }
         
         $query = "INSERT INTO `questionSet`(
