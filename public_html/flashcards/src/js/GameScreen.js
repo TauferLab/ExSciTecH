@@ -83,7 +83,7 @@ GameScreen.prototype.updateButtons = function( answers ){
         
         $('#ansBtn_'+answers[i].id).click( function(){
 
-            $('.questionBtn').prop("disabled", true);
+            //$('.questionBtn').prop("disabled", true);
             var ansID = ($(this).attr('id')).split("_")[1];
             
             if( ansID == undefined ){
@@ -133,7 +133,10 @@ GameScreen.prototype.submitAnswerCallback = function(data){
     this.updateScore(data.score);
     
     if(!data.correct)
-        $('.questionBtn').prop("disabled",false);
+    {
+        //$('.questionBtn').prop("disabled",false);
+        $( '#ansBtn_' + data.ansID ).prop("disabled",true);
+    }
 }
 
 GameScreen.prototype.updateScore = function( score ){
