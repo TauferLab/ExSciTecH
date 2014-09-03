@@ -8,6 +8,8 @@ GameScreen = function( questionSessObj ){
     
     this.timer = new Timer(questionSessObj.timeLimit);
     this.initGLmol();
+
+    this.lockResponses = false;
 }
 
 GameScreen.prototype.start = function(){
@@ -66,6 +68,8 @@ GameScreen.prototype.loadNextQuestion = function() {
     self.camera.updateProjectionMatrix();
     self.show();
     self.rebuildScene();
+
+    this.lockResponses = false;
 } 
 
 GameScreen.prototype.updateProgressBar = function ( currentProgress ) {    
@@ -75,22 +79,24 @@ GameScreen.prototype.updateProgressBar = function ( currentProgress ) {
 
 GameScreen.prototype.updateButtons = function( answers ){
     $("#answerBtns").html("");
-    
+
+    var parent = this;
     for( var i = 0; i < answers.length;i++){
-        $("#answerBtns").append('<button type="button" class="questionBtn btn btn-default btn-block" id="ansBtn_'+answers[i].id+'">'+answers[i].text+'</button>');
-        
-        var screen = this;
+         $("#answerBtns").append('<button type="button" class="questionBtn btn btn-default btn-block" id="ansBtn_'+answers[i].id+'">'+answers[i].text+'</button>');
+
+        $( '#ansBtn_' + i).prop("disabled", false);
         
         $('#ansBtn_'+answers[i].id).click( function(){
-
-            //$('.questionBtn').prop("disabled", true);
-            var ansID = ($(this).attr('id')).split("_")[1];
-            
-            if( ansID == undefined ){
-                console.log("error");
-                return;
+            if(parent.lockResponses == false) {
+                parent.lockResponses = true;
+                var ansID = ($(this).attr('id')).split("_")[1];
+                
+                if( ansID == undefined ){
+                    console.log("error");
+                    return;
+                }
+                parent.submitAnswer( ansID );
             }
-            screen.submitAnswer( ansID );
         });
     }
 }
@@ -105,7 +111,7 @@ GameScreen.prototype.submitAnswer = function( ansID ){
     reqObj.answer = ansID;
     reqObj.game_time = this.timer.maxTime - this.timer.getVal();
     
-    var screen = this;
+    var parent = this;
     
     $.ajax({
             url: "../request_handler.php",
@@ -113,9 +119,10 @@ GameScreen.prototype.submitAnswer = function( ansID ){
             data: JSON.stringify(reqObj),
             success: function(data){
                 data = JSON.parse(data);
-                screen.submitAnswerCallback(data);
+                parent.lockResponses = false;
+                parent.submitAnswerCallback(data);
             }
-        });
+    });
 }
 
 GameScreen.prototype.submitAnswerCallback = function(data){
@@ -132,10 +139,15 @@ GameScreen.prototype.submitAnswerCallback = function(data){
     
     this.updateScore(data.score);
     
-    if(!data.correct)
-    {
-        //$('.questionBtn').prop("disabled",false);
-        $( '#ansBtn_' + data.ansID ).prop("disabled",true);
+    if(!data.correct) {
+        $( '#ansBtn_' + data.ansID ).prop("disabled", true);
+    } else {
+        this.lockResponses = true;
+        for(var i = 0; i < this.questions[this.currentQuestion].answers.length; i++) {
+            if(i != data.ansID) {
+                $( '#ansBtn_' + this.questions[this.currentQuestion].answers[i].id ).prop("disabled", true);
+            }
+        }
     }
 }
 
@@ -144,7 +156,7 @@ GameScreen.prototype.updateScore = function( score ){
     var scoreDiff = score - this.score;
     this.score = score;
     
-    var screen = this;
+    var parent = this;
     
     $('#scoreVal').html( commaSeparateNumber( score ) );
     
@@ -166,7 +178,7 @@ GameScreen.prototype.updateScore = function( score ){
                         500,
                         "swing",
                         function(){
-                            screen.loadNextQuestion();
+                            parent.loadNextQuestion();
                         });
     }
     else{
@@ -187,7 +199,7 @@ GameScreen.prototype.endGame = function( ){
     reqObj.authenticator = window.sessionInfo.auth;
     reqObj.game_session_id = this.sessionID;
 
-    var screen = this;
+    var parent = this;
 
     $.ajax({
         url: "../request_handler.php",
@@ -195,7 +207,7 @@ GameScreen.prototype.endGame = function( ){
         data: JSON.stringify(reqObj),
         success: function(data){
             data = JSON.parse(data);
-            screen.endGameCallback(data);
+            parent.endGameCallback(data);
         }
     });
 }
