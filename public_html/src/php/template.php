@@ -121,6 +121,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
               <ul class="dropdown-menu">
                   <li><a href="'.$CALLING_PREFIX.'contrib.php">Contributors</a></li>
+                  <li><a href="'.$CALLING_PREFIX.'privacy/">Privacy Policy</a></li>
                   <li><a href="'.$CALLING_PREFIX.'contact/">Contact Us</a></li>
                   <li><a href="http://docking.cis.udel.edu">Docking@Home</a></li>
               </ul>
